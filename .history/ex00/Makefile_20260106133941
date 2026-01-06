@@ -1,0 +1,31 @@
+# definitions
+NAME			=	megaphone
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98
+
+# sources and objects
+SRCS			=	megaphone.cpp
+OBJS			=	$(SRCS:.cpp=.o)
+
+# compilation rule
+%.o: %.cpp
+					$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# default target
+all: $(NAME)
+
+# linking
+$(NAME): $(OBJS)
+					$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+# cleaning
+clean:
+					rm -rf $(OBJS)
+
+fclean: clean
+					rm -rf $(NAME)
+
+re: fclean all
+
+# phony targets
+.PHONY: all clean fclean re

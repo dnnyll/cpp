@@ -1,0 +1,115 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/01/06 12:54:16 by daniefe2          #+#    #+#              #
+#    Updated: 2026/01/06 13:37:53 by daniefe2         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# ===========================
+# DEFINITIONS / VARIABLES
+# ===========================
+
+# NAME is the name of the final executable file
+# After linking, this is the file that will be created
+NAME            =   megaphone
+
+# CXX is the C++ compiler to use
+# Using the standard Make variable name allows easy overriding
+CXX             =   c++
+
+# CXXFLAGS are the flags passed to the compiler when compiling C++ files
+# -Wall -Wextra -Werror : strict warnings
+# -std=c++98          : enforce C++98 standard
+CXXFLAGS        =   -Wall -Wextra -Werror -std=c++98
+
+
+# ===========================
+# SOURCES AND OBJECT FILES
+# ===========================
+
+# SRCS lists all .cpp source files in the project
+# In this exercise, there is only one source file
+SRCS			=   megaphone.cpp
+
+# OBJS lists all .o object files
+# This line automatically converts:
+# megaphone.cpp -> megaphone.o
+OBJS            =   $(SRCS:.cpp=.o)
+
+
+# ===========================
+# COMPILATION RULE
+# ===========================
+
+# This is a pattern rule:
+# Any .o file depends on a .cpp file with the same name
+#
+# Example:
+# megaphone.o depends on megaphone.cpp
+#
+# $< = the source file (.cpp)
+# $@ = the target file (.o)
+#
+# This rule tells make HOW to compile a .cpp into a .o
+%.o: %.cpp
+					$(CXX) $(CXXFLAGS) -c $< -o $@
+
+
+# ===========================
+# DEFAULT TARGET
+# ===========================
+
+# "all" is the default target
+# This is what runs when you type just `make`
+#
+# all depends on $(NAME), meaning:
+# "To build all, build the executable"
+all: $(NAME)
+
+
+# ===========================
+# LINKING
+# ===========================
+
+# This rule creates the final executable
+#
+# $(NAME) depends on $(OBJS), meaning:
+# "To build the executable, all object files must exist"
+#
+# This step is called LINKING:
+# it combines all .o files into one executable binary
+$(NAME): $(OBJS)
+					$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+
+# ===========================
+# CLEANING RULES
+# ===========================
+
+# clean removes intermediate build files
+# Object files can always be rebuilt, so they are safe to delete
+clean:
+					rm -rf $(OBJS)
+
+# fclean removes EVERYTHING that was generated
+# It first runs clean, then deletes the executable
+fclean: clean
+					rm -rf $(NAME)
+
+# re means "rebuild"
+# It forces a full clean and then rebuilds everything from scratch
+re: fclean all
+
+
+# ===========================
+# PHONY TARGETS
+# ===========================
+
+# .PHONY tells make that these targets are NOT files
+# This prevents conflicts if files named "clean", "all", etc. exist
+.PHONY: all clean fclean re
