@@ -1,0 +1,46 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/01/06 13:39:43 by daniefe2          #+#    #+#              #
+#    Updated: 2026/01/09 12:47:35 by daniefe2         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# definitions
+NAME			=	phonebook
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98
+
+# sources and objects
+SRC_DIR			=	source
+INC_DIR			=	include
+SRCS			=	$(phonebook.cpp
+					
+OBJS			=	$(SRCS:.cpp=.o)
+
+# compilation rule
+%.o: %.cpp
+					$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# default target
+all: $(NAME)
+
+# linking
+$(NAME): $(OBJS)
+					$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+# cleaning
+clean:
+					rm -rf $(OBJS)
+
+fclean: clean
+					rm -rf $(NAME)
+
+re: fclean all
+
+# phony targets
+.PHONY: all clean fclean re
