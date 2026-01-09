@@ -6,7 +6,7 @@
 #    By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/06 13:39:43 by daniefe2          #+#    #+#              #
-#    Updated: 2026/01/09 13:00:31 by daniefe2         ###   ########.fr        #
+#    Updated: 2026/01/09 17:12:16 by daniefe2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ CXX				=		c++
 CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -I$(INC_DIR)
 
 # sources and objects
-SRCS			=		phonebook.cpp
+SRCS			=		main.cpp \
+						phonebook.cpp \
+						contact.cpp
 					
 OBJS			=		$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
