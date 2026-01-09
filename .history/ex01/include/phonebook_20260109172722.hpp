@@ -6,26 +6,26 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 12:39:28 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/09 17:33:02 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:27:22 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+	#ifndef PHONEBOOK_HPP
+	# define PHONEBOOK_HPP
 
-#include <iostream>
-#include <cctype>
-#include <string>
+	#include <iostream>
+	#include <cctype>
+	#include <string>
 
-class phonebook
-{
+	class phonebook
+	{
 	private:
 		// contact	contacts[id];
 		int		index;
 		int		completed;
 	public:
 		phonebook();
-		void add_contact();
+		void add_ontact();
 		void search() const;
 };
 

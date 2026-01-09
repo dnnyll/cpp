@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 12:39:28 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/09 17:33:02 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:32:45 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <cctype>
 #include <string>
 
-class phonebook
-{
+	class phonebook
+	{
 	private:
 		// contact	contacts[id];
 		int		index;

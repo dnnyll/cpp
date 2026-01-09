@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 12:39:28 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/09 17:33:02 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/06 15:36:53 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/09 16:47:17 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#include "phonebook.hpp"
 
-#include <iostream>
-#include <cctype>
-#include <string>
-
-class phonebook
+std::string	phonebook::get_first_name(int id)
 {
-	private:
-		// contact	contacts[id];
-		int		index;
-		int		completed;
-	public:
-		phonebook();
-		void add_contact();
-		void search() const;
-};
+	return (contacts[id].get_first_name());
+}
 
-#endif
+
+

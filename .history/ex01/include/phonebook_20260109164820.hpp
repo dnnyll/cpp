@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 12:39:28 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/09 17:33:02 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/01/09 16:48:21 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@
 
 class phonebook
 {
-	private:
-		// contact	contacts[id];
-		int		index;
-		int		completed;
-	public:
-		phonebook();
-		void add_contact();
-		void search() const;
+private:
+	// contact	contacts[id];
+	int		index;
+	int		completed;
+public:
+
 };
 
 #endif
