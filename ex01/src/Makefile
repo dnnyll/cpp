@@ -6,7 +6,7 @@
 #    By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/06 13:39:43 by daniefe2          #+#    #+#              #
-#    Updated: 2026/01/14 12:40:49 by daniefe2         ###   ########.fr        #
+#    Updated: 2026/01/14 13:48:53 by daniefe2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,23 +31,28 @@ $(OBJ_DIR)/%.o: %.cpp
 						$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # default target
-all: $(NAME) link
+all: $(BIN_DIR)/$(NAME)
 
-# linking
-$(NAME): $(OBJS)
+# linking binary
+$(BIN_DIR)/$(NAME): $(OBJS)
 						mkdir -p $(BIN_DIR)
-						$(CXX) $(CXXFLAGS) $(OBJS) -o $(BIN_DIR)/$(NAME)
+						$(CXX) $(CXXFLAGS) $(OBJS) -o $@
+						ln -sf $@ ./$(NAME)
 
-# create symlink in sources/ to acees bin/phonebook (binary)
-link:
+# create symlink in sources/ to access binary
+link:					$(BIN_DIR)/$(NAME)
 						ln -sf $(BIN_DIR)/$(NAME) ./$(NAME)
 
 # cleaning
+#removes content of /bin and /obj directories
 clean:
-						rm -rf $(OBJ_DIR)
-
+						rm -rf $(OBJ_DIR)/*
+						rm -rf $(BIN_DIR)/*
+						
+#removes content and directories /bin and /obj
 fclean: clean
-						rm -rf $(BIN_DIR)/$(NAME)
+						rm -rf $(OBJ_DIR)
+						rm -rf $(BIN_DIR)
 						rm -rf $(NAME)
 
 re: fclean all
