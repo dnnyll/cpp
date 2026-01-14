@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 12:39:28 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/14 16:00:03 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/14 15:56:23 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/14 16:01:19 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
 #include <string>
-#include "contact.hpp"
+#include <iostream>
+#include <cctype>
 
-class	PhoneBook
+class	Zombie
 {
 	private:
-		Contact		contacts[8];
-		int			index;
-		int			count;
-		
-		std::string	truncate(std::string str) const;
-		
+		std::string	name;
+
 	public:
-		PhoneBook();
-		void		add_contact();
-		int			search() const;
-};
+		void		announce
+}
 
 #endif
