@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:23:45 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/14 17:26:50 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:25:33 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	
+	Zombie	A("Terrence");
+	Zombie	B("Phillip");
+	Zombie	C = newZombie("Manbearpig");
+
+	B.announce();
+	randomChump("Timmy");
+	A.announce();
+	delete C;
 }

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:56:23 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/14 17:21:07 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:27:54 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 class	Zombie
 {
 	public:
+		Zombie(std::string name);
+		~Zombie(void);
+		
 		void		announce(void);
 
 	private:
