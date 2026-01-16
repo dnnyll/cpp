@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 16:02:24 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/14 17:18:43 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/16 13:18:50 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/16 13:34:22 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "zombie.hpp"
 
-void	Zombie::announce(void)
+Zombie	*zombieHorde(int N, std::string name)
 {
-	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	Zombie	*zombie_array;
+	int	i;
+	
+	zombie_array = new Zombie[N];
+	i = 0;
+	while (i < N)
+	{
+		zombie_array[i].zombie(name)
+		i++;
+	}
+	return (zombie_array);
 }
-
-
