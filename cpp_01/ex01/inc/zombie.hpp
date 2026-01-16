@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:56:23 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/16 15:06:41 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:28:57 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 class	Zombie
 {
 	public:
-
-	
 		Zombie(void);
 		~Zombie(void);
 		
