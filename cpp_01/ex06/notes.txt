@@ -1,0 +1,120 @@
+
+Class  = blueprint (definition)
+
+class Harl
+{
+private:
+	void debug(void);
+	void info(void);
+	void warning(void);
+	void error(void);
+
+public:
+	Harl(void);
+	~Harl(void);
+
+	void complain(std::string level);
+};
+
+
+Object = instance (real thing in memory)
+
+
+Creating an object ≠ running its methods
+Creating an object = preparing it to run methods later
+
+Harl harl;
+│
+├─ Compiler finds class
+├─ Memory allocated for 'harl'
+├─ Constructor Harl::Harl() runs
+└─ Object ready for use
+...
+Scope ends
+├─ Destructor Harl::~Harl() runs
+└─ Memory freed
+
+┌───────────────────────────┐
+│         main() starts     │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│  Line: Harl harl;         │
+│                           │
+│  1) Compiler looks up     │
+│     class Harl            │
+│  2) Determines size/layout│
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│  Memory allocated for     │
+│  object 'harl'            │
+│  (stack memory)           │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│  Constructor called:      │
+│  Harl::Harl()             │
+│  Initializes object       │
+│  (sets up any members)    │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│  Object 'harl' is alive   │
+│  Methods available:       │
+│   - private: debug/info/..│
+│   - public: complain()    │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌────────────────────────────┐
+│  Call method:              │
+│  harl.complain("DEBUG");   │
+│  Dispatcher chooses correct│
+│  private method & executes │
+└─────────────┬──────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│  End of scope (main ends) │
+│  Destructor called:       │
+│  Harl::~Harl()            │
+│  Cleans up object         │
+│  Memory freed             │
+└───────────────────────────┘
+
++----------------------+------------------------------------------------------+
+| Element              | Function / Role                                     |
++----------------------+------------------------------------------------------+
+| class Harl           | Blueprint defining the structure and behavior of    |
+|                      | the object.                                         |
++----------------------+------------------------------------------------------+
+| private methods      | debug(), info(), warning(), error(): internal       |
+|                      | actions only callable from within the class.        |
++----------------------+------------------------------------------------------+
+| public methods       | complain(): interface callable from outside code    |
+|                      | (main) to trigger appropriate private method.       |
++----------------------+------------------------------------------------------+
+| Harl::Harl()         | Constructor: runs automatically when an object is   |
+|                      | created. Initializes object state and members.      |
++----------------------+------------------------------------------------------+
+| Harl::~Harl()        | Destructor: runs automatically when object goes     |
+|                      | out of scope. Cleans up resources.                  |
++----------------------+------------------------------------------------------+
+| Harl harl;           | Object instantiation. Allocates memory for object   |
+|                      | and triggers constructor.                           |
++----------------------+------------------------------------------------------+
+| harl.complain(...)   | Public method call. Chooses which private method    |
+|                      | to execute based on input string.                   |
++----------------------+------------------------------------------------------+
+| Memory allocation    | C++ automatically reserves stack or heap space      |
+|                      | for the object when it is instantiated.             |
++----------------------+------------------------------------------------------+
+| Scope ending         | Destructor is called automatically, memory is       |
+|                      | freed, object ceases to exist.                      |
++----------------------+------------------------------------------------------+
+

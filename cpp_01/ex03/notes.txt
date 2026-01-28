@@ -1,0 +1,20 @@
++------------+----------------------+------------------------------+
+| Object     | Member(s)            | Behavior / Notes             |
++------------+----------------------+------------------------------+
+| Weapon     | std::string type     | Stores weapon type           |
+|            |                      | get_type() → returns type    |
+|            |                      | set_type(new) → changes type |
++------------+----------------------+------------------------------+
+| HumanA     | std::string name     | Must have a weapon (ref)    |
+|            | Weapon& weapon       | attack() prints:             |
+|            |                      | "<name> attacks with <type>"|
++------------+----------------------+------------------------------+
+| HumanB     | std::string name     | Weapon optional (pointer)    |
+|            | Weapon* weapon       | set_weapon() → assign weapon |
+|            |                      | attack() prints type if set  |
++------------+----------------------+------------------------------+
+| main()     | N/A                  | 1. Creates Weapon & Humans   |
+|            |                      | 2. Calls attack()            |
+|            |                      | 3. Modifies Weapon type      |
+|            |                      | 4. Calls attack() again      |
++------------+----------------------+------------------------------+
