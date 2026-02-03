@@ -6,12 +6,12 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:42:41 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/03 12:50:30 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:24:25 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "Fixed.hpp"
+#include "../inc/Fixed.hpp"
 
 int	main( void )
 {
@@ -33,6 +33,7 @@ int	main( void )
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
+	
 	return (0);
 }
 
