@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:52:34 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/03 12:40:40 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/03 12:58:17 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,15 @@ Fixed::Fixed(const Fixed &other)
 	*this = other;
 }
 
+/*	
+notes:
+
+operator= is both the function name and the mechanism that defines
+how the equal sign behaves for your class.
+when we call c = b in the main, this kicks in.
+*/
+
 //	copy assignment operator
-//	note:	=operator= is both the function name and the mechanism that defines
-//	how the equal sign behaves for your class.
 Fixed &Fixed::operator=(const Fixed &other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;

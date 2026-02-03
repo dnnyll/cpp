@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:42:41 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/03 12:40:31 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/03 12:50:30 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	main( void )
 {
+	//	create 3 objects
 	Fixed a;		// Default constructor called → a._rawBits = 0
 	Fixed b(a);		// Copy constructor called    → b._rawBits = a._rawBits
 	Fixed c;		// Default constructor called → c._rawBits = 0
@@ -34,3 +35,19 @@ int	main( void )
 	std::cout << c.getRawBits() << std::endl;
 	return (0);
 }
+
+/*
+	Start of main:
+
+	a created → Default constructor
+	b created → Copy constructor (calls copy assignment inside)
+	c created → Default constructor
+
+	c = b      → Copy assignment operator
+
+	End of main:
+	c destroyed → Destructor
+	b destroyed → Destructor
+	a destroyed → Destructor
+
+*/
