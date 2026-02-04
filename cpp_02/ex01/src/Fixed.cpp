@@ -6,44 +6,58 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:43:05 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 10:01:52 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:22:52 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Fixed.hpp"
 
-// Default constructor
+//	default constructor
 Fixed::Fixed() : _rawBits(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-// Copy constructor
+//	int constructor
+Fixed::Fixed(int n)
+{
+	_rawBits = n << _fractionalBits;
+	std::cout << "Int constructer called" << std::endl;
+}
+
+//	float constructor
+Fixed::Fixed(float n)
+{
+	_rawBits = roundf(n * (1 << _fractionalBits));
+	std::cout << "Float constructor called" << std::endl;
+}
+
+//	copy constructor
 Fixed::Fixed(const Fixed &other) : _rawBits(other._rawBits)
 {
 	std::cout << "Copy constructor called" << std::endl;
 }
 
-// Copy assignment operator
+//	copy assignment operator
 Fixed &Fixed::operator=(const Fixed &other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 		this->_rawBits = other.getRawBits();
-	return *this;
+	return (*this);
 }
 
-// Destructor
+//	destructor
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
 }
 
-// Accessors
+//	accessors
 int	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
-	return this->_rawBits;
+	return (this->_rawBits);
 }
 
 void	Fixed::setRawBits(int const raw)
@@ -51,22 +65,10 @@ void	Fixed::setRawBits(int const raw)
 	this->_rawBits = raw;
 }
 
-Fixed::Fixed(int n)
-{
-	_rawBits = n << _fractionalBits;
-	std::cout << "Int constructer called" << std::endl;
-}
-
-Fixed::Fixed(float n)
-{
-	_rawBits = roundf(n * (1 << _fractionalBits));
-	std::cout << "Float constructor called" << std::endl;
-}
-
-// Converters
+//	converters
 int	Fixed::toInt(void) const
 {
-	return _rawBits >> _fractionalBits;
+	return (_rawBits >> _fractionalBits);
 }
 
 float	Fixed::toFloat(void) const
@@ -74,9 +76,10 @@ float	Fixed::toFloat(void) const
 	return static_cast<float>(_rawBits) / (1 << _fractionalBits);
 }
 
-// Stream insertion operator
+//	stream insertion operator
+//overloads the << operator for your the class Fixed
 std::ostream &operator<<(std::ostream &out, const Fixed &value)
 {
-	out << value.toFloat();
-	return out;
+	out << value.toFloat();		//converts Fixed → float
+	return (out);
 }

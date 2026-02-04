@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:41:35 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 12:44:33 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:02:11 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 #include <cmath>
 
-class Fixed
+class	Fixed
 {
 private:
 	int					_rawBits;
@@ -38,6 +38,38 @@ public:
 	//	converters
 	int		toInt(void) const;
 	float	toFloat(void) const;
+
+	//	comparison operator
+	bool	operator>(const Fixed &other) const;
+	bool	operator<(const Fixed &other) const;
+	bool	operator>=(const Fixed &other) const;
+	bool	operator<=(const Fixed &other) const;
+	bool	operator==(const Fixed &other) const;
+	bool	operator!=(const Fixed &other) const;
+	
+	//	arithmetic operator
+	Fixed	operator+(const Fixed &other) const;
+	Fixed	operator-(const Fixed &other) const;
+	Fixed	operator*(const Fixed &other) const;
+	Fixed	operator/(const Fixed &other) const;
+
+	//	increment/decrement operators
+	Fixed	&operator++();
+	Fixed	operator++(int);
+	Fixed	&operator--();
+	Fixed	operator--(int);
+
+	//	overload static members
+	/*
+		compare two Fixed objects
+		select the smaller (min) or larger (max)
+		return a reference to the selected object
+		avoid copying
+	*/
+	static			Fixed &min(Fixed &a, Fixed &b);
+	static const	Fixed &min(const Fixed &a, const Fixed &b);
+	static			Fixed &max(Fixed &a, Fixed &b);
+	static const	Fixed &max(const Fixed &a, const Fixed &b);
 };
 
 // Stream insertion operator
