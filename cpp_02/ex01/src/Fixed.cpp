@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:43:05 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/03 16:23:20 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/04 10:01:52 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,19 @@ void	Fixed::setRawBits(int const raw)
 	this->_rawBits = raw;
 }
 
-// Converters
+Fixed::Fixed(int n)
+{
+	_rawBits = n << _fractionalBits;
+	std::cout << "Int constructer called" << std::endl;
+}
 
+Fixed::Fixed(float n)
+{
+	_rawBits = roundf(n * (1 << _fractionalBits));
+	std::cout << "Float constructor called" << std::endl;
+}
+
+// Converters
 int	Fixed::toInt(void) const
 {
 	return _rawBits >> _fractionalBits;
