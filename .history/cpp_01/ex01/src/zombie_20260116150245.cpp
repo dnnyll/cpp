@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.hpp                                           :+:      :+:    :+:   */
+/*   zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 17:19:06 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:30:31 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/14 16:02:24 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/16 15:02:46 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#include "zombie.hpp"
 
-#include "../inc/zombie.hpp"
+void	Zombie::announce(void)
+{
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
 
-#endif
+void	Zombie::set_name(std::string n)
+{
+	this->name = n;
+}
+
+//	constructor
+Zombie::Zombie() {}
+
+//	destructor
+Zombie::~Zombie(void)
+{
+	std::cout << name << ": has been wiped." << std::endl;
+}

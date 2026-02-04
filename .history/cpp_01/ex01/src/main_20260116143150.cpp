@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 17:19:06 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:30:31 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/14 17:23:45 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/16 14:31:51 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#include "main.hpp"
 
-#include "../inc/zombie.hpp"
+int	main(int argc, char **argv)
+{
+	(void)argv;
+	if (argc > 1)
+	{
+		std::cerr << "Please run the program without arguments." << std::endl;
+		return (1);
+	}
 
-#endif
+	Zombie	*zombies = zombieHorde(7, "Zombie");
+	zombies[0].announce();
+	zombies[1].announce();
+	zombies[2].announce();
+	zombies[3].announce();
+	zombies[4].announce();
+	zombies[5].announce();
+	zombies[6].announce();
+	delete[] zombies;
+}

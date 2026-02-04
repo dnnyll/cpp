@@ -5,34 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 06:41:53 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:34:45 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/14 17:23:45 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/04 17:31:56 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Weapon.hpp"
-#include "../inc/HumanA.hpp"
-#include "../inc/HumanB.hpp"
+#include "../incmain.hpp"
 
-int main()
+int	main(int argc, char **argv)
 {
+	(void)argv;
+	if (argc > 1)
 	{
-		Weapon club("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.set_type("some other type of club");
-		bob.attack();
+		std::cerr << "Please run the program without arguments." << std::endl;
+		return (1);
 	}
 
-	{
-		Weapon club("crude spiked club");
-		HumanB jim("Jim");
-		jim.set_weapon(club);
-		jim.attack();
-		club.set_type("some other type of club");
-		jim.attack();
-	}
-
-	return (0);
+	Zombie	*zombies = zombieHorde(7, "Zombie");
+	zombies[0].announce();
+	zombies[1].announce();
+	zombies[2].announce();
+	zombies[3].announce();
+	zombies[4].announce();
+	zombies[5].announce();
+	zombies[6].announce();
+	delete[] zombies;
 }
-

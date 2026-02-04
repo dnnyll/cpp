@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.hpp                                           :+:      :+:    :+:   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 17:19:06 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:30:31 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/16 13:18:50 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/16 15:12:11 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#include "zombie.hpp"
 
-#include "../inc/zombie.hpp"
-
-#endif
+Zombie	*zombieHorde(int N, std::string name)
+{
+	Zombie	*zombie_array;
+	int	i;
+	
+	zombie_array = new Zombie[N];
+	i = 0;
+	while (i < N)
+	{
+		zombie_array[i].set_name(name);
+		i++;
+	}
+	return (zombie_array);
+}

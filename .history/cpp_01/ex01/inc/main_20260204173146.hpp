@@ -6,13 +6,13 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:19:06 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:30:31 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:31:46 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_HPP
 # define MAIN_HPP
 
-#include "../inc/zombie.hpp"
+#include "../inc/"
 
 #endif

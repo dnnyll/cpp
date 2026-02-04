@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:36:53 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/14 12:21:12 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:22:00 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ PhoneBook::PhoneBook()
 //	----------== add_contact ==----------
 //	prompts the user to enter contact information
 //	stores the input value
-void PhoneBook::add_contact()
+void	PhoneBook::add_contact()
 {
 	std::string	input;
 
@@ -59,8 +59,8 @@ void PhoneBook::add_contact()
 std::string PhoneBook::truncate(std::string str) const
 {
 	if (str.length() > 10)
-		return str.substr(0, 9) + ".";
-	return str;
+		return (str.substr(0, 9) + ".");
+	return (str);
 }
 
 //	----------== search ==----------

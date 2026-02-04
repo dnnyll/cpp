@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 15:56:23 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/03 09:51:51 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/26 11:26:17 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/26 11:42:06 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
-
-#include <string>
+#include "HumanB.hpp"
 #include <iostream>
-#include <cctype>
 
-class	Zombie
+//	constructor weapon
+HumanB::HumanB(const std::string &name)
+	: name(name), weapon(NULL) {}
+
+//	set weapon
+void	HumanB::set_weapon(Weapon &w)
 {
-	public:
-		Zombie(std::string name);
-		~Zombie(void);
-		
-		void	announce(void);
+	weapon = &w;
+}
 
-	private:
-		std::string	name;
-};
-
-Zombie			*newZombie(std::string name );
-void			randomChump(std::string name);
-
-#endif
+//	attack method
+void HumanB::attack(void) const
+{
+	if (weapon)
+		std::cout << name << " attacks with their " << weapon->get_type() << std::endl;
+	else
+		std::cout << name << " has no weapon to attack with" << std::endl;
+}

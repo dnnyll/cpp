@@ -1,0 +1,196 @@
+program flow
+
+Main function execution flow
+------------------------------------------------------------
+Line: Fixed a;
+  |-- Fixed::Fixed()                   // default constructor
+  |   _rawBits = 0
+  V
+  Object 'a' created
+
+Line: Fixed const b(10);
+  |-- Fixed::Fixed(int n)              // int constructor
+  |   _rawBits = 10 << 8 = 2560
+  V
+  Object 'b' created
+
+Line: Fixed const c(42.42f);
+  |-- Fixed::Fixed(float n)            // float constructor
+  |   _rawBits = roundf(42.42 * 256) = 10851
+  V
+  Object 'c' created
+
+Line: Fixed const d(b);
+  |-- Fixed::Fixed(const Fixed &other) // copy constructor
+  |   _rawBits = b._rawBits = 2560
+  V
+  Object 'd' created
+
+Line: a = Fixed(1234.4321f);
+  |-- Fixed::Fixed(float n)            // temporary float constructor
+  |   _rawBits = roundf(1234.4321 * 256) = 316019
+  |-- Fixed::operator=(const Fixed &other)
+  |   a._rawBits = temporary._rawBits = 316019
+  |-- Fixed::~Fixed()                  // temporary destroyed
+
+Line: std::cout << "a is " << a << std::endl;
+  |-- operator<<(std::ostream &out, const Fixed &value)
+  |   |-- value.toFloat()             // returns 316019 / 256 = 1234.43
+  |   |-- std::ostream::operator<<(float)
+  V
+  "a is 1234.43" printed
+
+Line: std::cout << "b is " << b << std::endl;
+  |-- operator<< → b.toFloat() → ostream
+  V
+  "b is 10" printed
+
+Line: std::cout << "c is " << c << std::endl;
+  |-- operator<< → c.toFloat() → ostream
+  V
+  "c is 42.4219" printed
+
+Line: std::cout << "d is " << d << std::endl;
+  |-- operator<< → d.toFloat() → ostream
+  V
+  "d is 10" printed
+
+Line: std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+  |-- a.toInt()                        // returns 316019 >> 8 = 1234
+  |-- ostream inserts integer
+  V
+  "a is 1234 as integer" printed
+
+Line: std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+  |-- b.toInt()                        // returns 2560 >> 8 = 10
+  V
+  "b is 10 as integer" printed
+
+Line: std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+  |-- c.toInt()                        // returns 10851 >> 8 = 42
+  V
+  "c is 42 as integer" printed
+
+Line: std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+  |-- d.toInt()                        // returns 2560 >> 8 = 10
+  V
+  "d is 10 as integer" printed
+
+End of main:
+  |-- Destructors called in reverse order
+  |   Fixed::~Fixed() → d destroyed
+  |   Fixed::~Fixed() → c destroyed
+  |   Fixed::~Fixed() → b destroyed
+  |   Fixed::~Fixed() → a destroyed
+
+
+
+
+
+
+
+
+
+for:	main.cpp
+at:		Fixed a = Fixed(1234.4321f);
+step-by-step sequence with functions called:
+--------------------------------------------
+
+1. Fixed a;
+   - Function: Fixed::Fixed()                // default constructor
+   - Action: Initializes a._rawBits = 0
+
+2. a = Fixed(1234.4321f);
+   2a. Temporary object creation:
+       - Function: Fixed::Fixed(float n)     // float constructor
+       - Action: Initializes temporary._rawBits = roundf(1234.4321 * 256)
+   2b. Copy assignment:
+       - Function: Fixed::operator=(const Fixed &other)
+       - Action: Copies a._rawBits = temporary._rawBits
+   2c. Temporary destruction:
+       - Function: Fixed::~Fixed()           // destructor
+       - Action: Temporary object destroyed
+
+3. std::cout << "a is " << a << std::endl;
+   3a. Stream sees: ostream << Fixed
+       - Function: operator<<(std::ostream &out, const Fixed &value)
+       - Action: Calls value.toFloat()
+   3b. Convert Fixed to float:
+       - Function: Fixed::toFloat()          // member function
+       - Action: Returns a._rawBits / 256.0f
+   3c. Stream insertion:
+       - Function: std::ostream::operator<<(float)
+       - Action: Inserts float into std::cout
+
+
+
+
+
+Full function call sequence for the given main
+------------------------------------------------
+Line-by-line:
+
+1. Fixed a;
+   - Function: Fixed::Fixed()                 // default constructor
+   - Action: a._rawBits = 0
+
+2. Fixed const b(10);
+   - Function: Fixed::Fixed(int n)            // int constructor
+   - Action: b._rawBits = 10 << 8
+
+3. Fixed const c(42.42f);
+   - Function: Fixed::Fixed(float n)          // float constructor
+   - Action: c._rawBits = roundf(42.42 * 256)
+
+4. Fixed const d(b);
+   - Function: Fixed::Fixed(const Fixed &other)   // copy constructor
+   - Action: d._rawBits = b._rawBits
+   - Note: This **does not call copy assignment** because d is being created
+
+5. a = Fixed(1234.4321f);
+   5a. Temporary object creation:
+       - Function: Fixed::Fixed(float n)          // float constructor
+       - Action: temporary._rawBits = roundf(1234.4321 * 256)
+   5b. Copy assignment:
+       - Function: Fixed::operator=(const Fixed &other)
+       - Action: a._rawBits = temporary._rawBits
+   5c. Temporary destruction:
+       - Function: Fixed::~Fixed()
+       - Action: temporary destroyed
+
+6. std::cout << "a is " << a << std::endl;
+   6a. operator<< called:
+       - Function: operator<<(std::ostream &out, const Fixed &value)
+       - Action: calls value.toFloat()
+   6b. Convert to float:
+       - Function: Fixed::toFloat()
+       - Action: returns a._rawBits / 256.0f
+   6c. Stream inserts float into std::cout
+       - Function: std::ostream::operator<<(float)
+
+7. std::cout << "b is " << b << std::endl;
+   - Same as step 6 (operator<< → toFloat → ostream insertion)
+
+8. std::cout << "c is " << c << std::endl;
+   - Same as step 6
+
+9. std::cout << "d is " << d << std::endl;
+   - Same as step 6
+
+10. std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+    - Function: Fixed::toInt()                 // member function
+    - Action: returns a._rawBits >> 8
+    - Stream inserts int
+
+11. std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+    - Same as step 10
+
+12. std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+    - Same as step 10
+
+13. std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+    - Same as step 10
+
+14. End of main → destructors called in reverse order of creation:
+    - Function: Fixed::~Fixed()                 // destructor
+    - Order: d, c, b, a

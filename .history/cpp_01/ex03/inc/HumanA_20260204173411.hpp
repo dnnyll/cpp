@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.hpp                                           :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 17:19:06 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:30:31 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/19 07:05:02 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/04 17:34:11 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#ifndef		HUMAN_A
+# define	HUMAN_A
 
-#include "../inc/zombie.hpp"
+#include <string>
+#include "Weapon.hpp"
 
+class	HumanA
+{
+	private:
+		std::string name;
+		Weapon &weapon;
+
+	public:
+		HumanA(const std::string &game, Weapon &weapon);
+		~HumanA(void);
+		void	attack(void) const;
+};
+../inc/
 #endif

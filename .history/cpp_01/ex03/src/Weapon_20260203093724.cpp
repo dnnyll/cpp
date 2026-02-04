@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.hpp                                           :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 17:19:06 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:30:31 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/26 11:05:29 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/01/26 11:44:01 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#include "Weapon.hpp"
 
-#include "../inc/zombie.hpp"
+//	Constructor
+Weapon::Weapon(const std::string& type) : type(type) {}
 
-#endif
+//	Getter
+const	std::string& Weapon::get_type() const
+{
+	return (type);
+}
+
+//	Setter
+void	Weapon::set_type(const std::string& new_type)
+{
+	type = new_type;
+}
