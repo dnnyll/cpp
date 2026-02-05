@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 15:01:30 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 10:34:51 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/01/19 07:00:30 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class	Contact
 	public:
 		Contact();
 		
-		void		set_first_name(std::string first);
+		void		set_first_name( std::string first);
 		void		set_last_name(std::string last);
 		void		set_nickname(std::string nick);
 		void		set_phone_number(std::string number);
