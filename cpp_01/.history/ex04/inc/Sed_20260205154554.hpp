@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.hpp                                           :+:      :+:    :+:   */
+/*   Sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 17:19:06 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:31:48 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/01/26 12:38:21 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/05 15:45:54 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#ifndef SED_HPP
+# define SED_HPP
 
-#include "../inc/zombie.hpp"
+#include <string>
+
+class	Sed
+{
+	private:
+		std::string	filename;
+		std::string	s1;
+		std::string	s2;
+
+	public:
+		Sed(const std::string &fname, const std::string &search, const std::string &replace);
+		void	run() const;
+};
 
 #endif
