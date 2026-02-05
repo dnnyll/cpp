@@ -6,11 +6,13 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 16:47:07 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/01/26 17:58:01 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/05 09:50:22 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <main.hpp>
+#include <iostream>
+#include <string>
+#include "phonebook.hpp"
 
 void	print_intro(void)
 {
