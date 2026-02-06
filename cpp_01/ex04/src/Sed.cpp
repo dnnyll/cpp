@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 13:13:38 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 15:47:55 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:59:47 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include "Sed.hpp"
 
 Sed::Sed(const std::string &fname, const std::string &search, const std::string &replace)
-	: filename(fname), s1(search), s2(replace) {}
+	: filename(fname), ss1(search), rs2(replace) {}
 
 void	Sed::run() const
 {
-	if (s1.empty())
+	if (ss1.empty())
 	{
 		std::cerr << "Error: search string cannot be empty.\n";
 		return ;
@@ -48,12 +48,12 @@ void	Sed::run() const
 		size_t		pos = 0;	//	position of occurence
 		size_t		last = 0;	//	tracker for string
 
-		// finds all occurrences of s1 in the current line
-		while ((pos = line.find(s1, last)) != std::string::npos)
+		// finds all occurrences of ss1 in the current line
+		while ((pos = line.find(ss1, last)) != std::string::npos)
 		{
 			result += line.substr(last, pos - last);
-			result += s2;
-			last = pos + s1.length();
+			result += rs2;
+			last = pos + ss1.length();
 		}
 		result += line.substr(last);
 		outfile << result;	//	write processed line to output file

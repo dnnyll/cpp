@@ -6,21 +6,22 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 11:26:17 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 14:28:43 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:01:54 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/HumanB.hpp"
 #include <iostream>
+#include "../inc/HumanB.hpp"
 
-//	constructor weapon
-HumanB::HumanB(const std::string &name)
-	: name(name), weapon(NULL) {}
+//	constructor
+//	doesn't have a weapon, set to NULL
+HumanB::HumanB(const std::string &name):
+	name(name), weapon(NULL) {}
 
 //	set weapon
-void	HumanB::setWeapon(Weapon &w)
+void	HumanB::setWeapon(Weapon &newWeapon)
 {
-	weapon = &w;
+	weapon = &newWeapon;
 }
 
 //	attack method

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 06:41:53 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 14:31:01 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:07:30 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int main()
 {
 	//	curly brackets = different scopes
 	{
-		Weapon club("crude spiked club");
-		HumanA bob("Bob", club);
+		Weapon	club("crude spiked club");
+		HumanA	bob("Bob", club);
 		bob.attack();
 		club.setType("some other type of club");
 		bob.attack();
 	}
 
 	{
-		Weapon club("crude spiked club");
-		HumanB jim("Jim");
+		Weapon	club("crude spiked club");
+		HumanB	jim("Jim");
 		jim.setWeapon(club);
 		jim.attack();
 		club.setType("some other type of club");
@@ -36,4 +36,3 @@ int main()
 
 	return (0);
 }
-

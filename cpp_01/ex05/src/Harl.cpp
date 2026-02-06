@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:02:30 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 16:09:41 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:17:59 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ void Harl::error(void)
 		<< std::endl;
 }
 
-void Harl::complain(std::string level)
+void	Harl::complain(std::string level)
 {
 	int	i;
 
 	i = 0;
 	
-	//	create an array with string/keywords
+	//	creates array for comparison
 	std::string levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
-	//	adds adresses of functions from object Harl to each of the array's index
+	//	creates array with pointers to member functions
 	void (Harl::*funcs[4])(void) = 
 	{
 		&Harl::debug,
@@ -66,21 +66,13 @@ void Harl::complain(std::string level)
 		&Harl::warning,
 		&Harl::error
 	};
-
-/*	levels[ ]      funcs[ ] (pointers)
-	+-------+      +-----------------+
-	| "DEBUG"  | ↔ | &Harl::debug     |
-	| "INFO"   | ↔ | &Harl::info      |
-	| "WARNING"| ↔ | &Harl::warning   |
-	| "ERROR"  | ↔ | &Harl::error     |
-	+-------+      +-----------------+
-*/
+	
 	//	search mechanism
 	while (i < 4)
 	{
 		if (level == levels[i])
 		{
-			(this->*funcs[i])();
+			(this->*funcs[i])();	//	calls corresponding function stored in funcs[i]
 			return ;
 		}
 		i++;

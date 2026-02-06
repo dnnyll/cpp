@@ -6,16 +6,17 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:23:22 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 14:28:33 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:54:44 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/HumanA.hpp"
 #include <iostream>
+#include "../inc/HumanA.hpp"
 
-//	constructor takes reference to Weapon
-HumanA::HumanA(const std::string &name, Weapon &weapon)
-	: name(name), weapon(weapon) {}
+//	constructor
+//	always has a weapon passed as argument
+HumanA::HumanA(const std::string &name, Weapon &weapon):
+	name(name), weapon(weapon) {}
 
 //	destructor
 HumanA::~HumanA() {}

@@ -6,17 +6,18 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:06:45 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 15:55:26 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/06 11:43:34 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Harl.hpp"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
+		std::cout << "Allowed levels: DEBUG, INFO, WARNING, ERROR" << std::endl;
 		std::cerr << "Usage: ./harl <LEVEL>" << std::endl;
 		return (1);
 	}

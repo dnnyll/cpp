@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 12:38:21 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/05 15:52:02 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:37:58 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ class	Sed
 {
 	private:
 		std::string	filename;
-		std::string	s1;
-		std::string	s2;
+		std::string	ss1;
+		std::string	rs2;
 
 	public:
 		//	constructor
