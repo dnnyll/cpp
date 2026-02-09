@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:00:33 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/06 16:01:04 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:12:05 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ class	ClapTrap
 	public:
 
 	//	this is the orthodox canonical form - OCF
-	ClapTrap();								//	<--	default constructor
-	ClapTrap(const ClapTrap &other);		//	<--	copy constructor
-	~ClapTrap();							//	<--	destructor
+	ClapTrap();										//	<--	default constructor
+	ClapTrap(const ClapTrap &other);				//	<--	copy constructor
+	ClapTrap	&operator=(const ClapTrap &other);	//	copy assignment operator
+	~ClapTrap();									//	<--	destructor
 
 	//	accessors: functions that let you safely read or change a value inside an object
 	void	attack(const std::string& target);
