@@ -6,81 +6,126 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:00:26 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/07 22:47:37 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:20:51 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include <../inc/ClapTrap.hpp>
 
-ClapTrap::Claptrap()
+// default constructor
+ClapTrap::ClapTrap(const std::string &inputName):
+						_name(inputName),
+						_hitPoints(10),
+						_energyPoints(10),
+						_attackDamage(0)
 {
-	std::cout << "contructor called" << std::endl;
+	std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other)
+//	copy constructor
+ClapTrap::ClapTrap(const ClapTrap &copy)
 {
-	std::cout << "copy contrusctor called" << std::endl;
+	std::cout << "ClapTrap copy constructor called" << std::endl;
+	*this = copy;
 }
-ClapTrap	&ClapTrap::operator=(const ClapTrap &source);	//	copy assignment operator
+
+//	copy assignment operator
+ClapTrap	&ClapTrap::operator=(const ClapTrap &source)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &source)
 	{
-		this->name = source.name;
-		this->hitPoints = source.hitPoints;
-		this->energyPoints = source.energyPoints;
-		this->attackDamage = source.attackDamage;
+		this->_name = source._name;
+		this->_hitPoints = source._hitPoints;
+		this->_energyPoints = source._energyPoints;
+		this->_attackDamage = source._attackDamage;
 	}
 	return (*this);
 }
 
+//	default destructor
 ClapTrap::~ClapTrap()
 {
-	std::cout << "destructor called" << std::endl;
+	std::cout << "ClapTrap destructor called for: " << _name << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)
 {
-	std::cout	<< "ClapTrap"	<< name?getname?
-				<< "attacks"	<< target?gettarget?
-				<< ", causing"	<< damage?getdamage?
-				<< "points of damage!"	<< std::endl
-}
-
-
-void	ClapTrap::takeDamage(unsigned int amount)
-{
-	if (hitPoints == 0)
+	if (_hitPoints == 0)
 	{
-		std::cout	<< "ClapTrap" << name
-					<< " is already destroyed"
+		std::cout	<< "ClapTrap" << _name
+					<< " cannot attack because it's destroyed."
 					<< std::endl;
 		return ;
 	}
-	if (amount >= hitPoints)
-		hitPoints = 0;
+	if (_energyPoints == 0)
+	{
+		std::cout	<< "ClapTrap " << _name
+					<< " cannot attack because it's energy is depleted."
+					<< std::endl;
+		return ;
+	}
+	std::cout	<< "ClapTrap "	<< _name
+				<< " attacks "	<< target
+				<< std::endl;
+	_energyPoints--;
+}
+
+void	ClapTrap::takeDamage(unsigned int amount)
+{
+	if (_hitPoints == 0)
+	{
+		std::cout	<< "ClapTrap " << _name
+					<< " is already destroyed."
+					<< std::endl;
+		return ;
+	}
+	if ((int)amount >= _hitPoints)
+		_hitPoints = 0;
 	else
-		hitPoints -= amount;
+		_hitPoints -= amount;
 	
-	std::cout 	<< "ClapTrap"	<< name
+	std::cout 	<< "ClapTrap "	<< _name
 				<< " takes "	<< amount
 				<< " points of damage.\n"
-				<< "Current HP: " << hitPoints
+				<< "ClapTrap " << _name
+				<< "'s current HP is " << _hitPoints
 				<< std::endl;
 }
+
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (hitPoints == 10)
-		std::cout	<< "ClapTrap" << name
-					<< "is already fully repaired"
+	if (_hitPoints == 0)
+	{
+		std::cout	<< "ClapTrap" << _name
+					<< " cannot repair because it's destroyed."
 					<< std::endl;
-	if (amount >= hitPoints)
-		hitPoints = 10;
+		return ;
+	}
+	if (_energyPoints == 0)
+	{
+		std::cout	<< "ClapTrap " << _name
+					<< " cannot repair becuase it's energy is depleted."
+					<< std::endl;
+		return ;
+	}
+	if (_hitPoints >= 10)
+	{
+		std::cout	<< "ClapTrap" << _name
+					<< " is already fully repaired"
+					<< std::endl;
+		return ;
+	}
+	if ((int)amount >= _hitPoints)
+		_hitPoints = 10;
 	else
-		hitPoints += amount;
-	std::cout	<< "ClapTrap"	<< name
+		_hitPoints += amount;
+	std::cout	<< "ClapTrap "	<< _name
 				<< " repairs itself for " << amount
-				<< "life points.\n"
-				<< "Current HP: "	<< hitPoints
+				<< " life points.\n"
+				<< "ClapTrap " << _name
+				<< "'s current HP is "	<< _hitPoints
 				<< std::endl;
+	_energyPoints--;
 }
