@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:00:33 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/09 15:06:05 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:56:57 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class	ClapTrap
 {
-	private:
+	protected:
 
 	std::string	_name;
 	int			_hitPoints;
@@ -32,7 +32,7 @@ class	ClapTrap
 	ClapTrap	&operator=(const ClapTrap &source);	//	copy assignment operator
 	~ClapTrap();									//	<--	destructor
 
-	//	accessors: functions that let you safely read or change a value inside an object
+	//	member functions
 	void	attack(const std::string& target);
 	void	takeDamage(unsigned int amount);
 	void	beRepaired(unsigned int amount);

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:00:26 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/09 17:16:17 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:16:02 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 // default constructor
 ClapTrap::ClapTrap(const std::string &inputName):
 						_name(inputName),
-						_hitPoints(10),
-						_energyPoints(10),
-						_attackDamage(0)
+						_hitPoints(100),
+						_energyPoints(50),
+						_attackDamage(20)
 {
-	std::cout << "ClapTrap default constructor called" << std::endl;
+	std::cout << "ClapTrap default constructor called for: " << _name << std::endl;
 }
 
 //	copy constructor
 ClapTrap::ClapTrap(const ClapTrap &copy)
 {
-	std::cout << "ClapTrap copy constructor called" << std::endl;
+	std::cout << "ClapTrap copy constructor called for: " << _name << std::endl;
 	*this = copy;
 }
 

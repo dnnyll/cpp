@@ -6,52 +6,39 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:34:56 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/09 17:14:04 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:05:03 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "../inc/ClapTrap.hpp"
+#include "../inc/ScavTrap.hpp"
 
 int	main(void)
 {
 	std::cout << "\nLaunching ClapTrap Tournament..." << std::endl;
 	std::cout << "Constructing constestents...\n" << std::endl;
 
-	ClapTrap	Original("OG");
-	ClapTrap	Clone("Clone");
+	ClapTrap	ct("CT");
+	ScavTrap	st("ST");
 
 	std::cout << "\nEngaging in combat...\n" << std::endl;
-
-	// no energy test
-	Original.attack("Clone");
-	Clone.takeDamage(9);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.attack("OG");
-	Clone.beRepaired(1);
-
-	std::cout << "\nBattle concluded...\n" <<std::endl;
-
-	//	dead test
-	Original.attack("Clone");
-	Clone.takeDamage(5);
-	Clone.beRepaired(1);
-	Clone.attack("OG");
-	Original.takeDamage(3);
-	Original.attack("Clone");
-	Clone.takeDamage(7);
-	Clone.beRepaired(3);
-	Clone.attack("Clone");
 	
-	std::cout << "\nBattle concluded...\n" <<std::endl;
+	ct.attack("ST");
+	ct.takeDamage(11);
+	st.attack("CT");
+	st.takeDamage(4);
+	ct.attack("ST");
+	ct.takeDamage(20);
+	st.attack("CT");
+	st.takeDamage(13);
+	st.guardGate();
+	st.beRepaired(1);
+	st.beRepaired(1);
+	st.beRepaired(1);
+	st.beRepaired(1);
+	ct.beRepaired(1);
+	ct.beRepaired(1);
+	std::cout << "\nBattle concluded..." <<std::endl;
 	return (0);
 }
