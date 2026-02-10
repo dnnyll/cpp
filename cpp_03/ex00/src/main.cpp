@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:34:56 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/09 17:14:04 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/10 12:46:09 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,63 @@
 int	main(void)
 {
 	std::cout << "\nLaunching ClapTrap Tournament..." << std::endl;
-	std::cout << "Constructing constestents...\n" << std::endl;
-
-	ClapTrap	Original("OG");
-	ClapTrap	Clone("Clone");
-
-	std::cout << "\nEngaging in combat...\n" << std::endl;
-
-	// no energy test
-	Original.attack("Clone");
-	Clone.takeDamage(9);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.beRepaired(1);
-	Clone.attack("OG");
-	Clone.beRepaired(1);
-
-	std::cout << "\nBattle concluded...\n" <<std::endl;
-
-	//	dead test
-	Original.attack("Clone");
-	Clone.takeDamage(5);
-	Clone.beRepaired(1);
-	Clone.attack("OG");
-	Original.takeDamage(3);
-	Original.attack("Clone");
-	Clone.takeDamage(7);
-	Clone.beRepaired(3);
-	Clone.attack("Clone");
 	
-	std::cout << "\nBattle concluded...\n" <<std::endl;
+	//	Regular combat
+	{
+		std::cout << "Constructing constestents...\n" << std::endl;
+		
+		ClapTrap	Original("OG");
+		ClapTrap	CP("CP");
+		
+		std::cout << "\nRegular attack test\t\t======------\n" << std::endl;
+		Original.attack("CP");
+		CP.takeDamage(0);
+		CP.attack("OG");
+		Original.takeDamage(0);
+
+		std::cout << "\nDestroying constestents...\n" << std::endl;
+	}
+	std::cout << "\n------======Battle concluded...======------\n" <<std::endl;
+
+	//	Combat with different takeDamage values + repair max hitpoints
+	{
+		std::cout << "Constructing constestents...\n" << std::endl;
+
+		ClapTrap	Original("OG");
+		ClapTrap	CP("CP");
+
+		std::cout << "\nDifferent takeDamage test\t======------\n" << std::endl;
+		
+		Original.attack("CP");
+		CP.takeDamage(4);
+		CP.beRepaired(2);
+		CP.beRepaired(3);
+
+		std::cout << "\nDestroying constestents...\n" << std::endl;
+	}
+	std::cout << "\n------======Battle concluded...======------\n" <<std::endl;
+
+	//	Combat estroyed
+	{
+		std::cout << "Constructing constestents...\n" << std::endl;
+
+		ClapTrap	Original("OG");
+		ClapTrap	CP("CP");
+
+		std::cout << "\nDestroyed test\t======------\n" << std::endl;
+
+		CP.attack("OG");
+		Original.takeDamage(0);
+		CP.attack("OG");
+		Original.takeDamage(0);
+		Original.attack("CP");
+		CP.takeDamage(20);
+		CP.beRepaired(10);
+		CP.attack("OG");
+
+		std::cout << "\nDestroying constestents...\n" << std::endl;
+	}
+	std::cout << "\n------======Battle concluded...======------\n" <<std::endl;
+
 	return (0);
 }

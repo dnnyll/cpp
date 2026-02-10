@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:23:37 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/10 11:17:43 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:51:54 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	ScavTrap::guardGate(void)
 {
-	std::cout << "ScavTrap " << _name << " is now in Gatekeeper mode" << std::endl;
+	std::cout << "ScavTrap " << _name << " is now in Gatekeeper mode." << std::endl;
 }
 
 // default constructor
@@ -56,15 +56,15 @@ void	ScavTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0)
 	{
-		std::cout	<< "ScavTrap " << _name
-					<< " cannot attack because it's destroyed"
+		std::cout	<< "ScavTrap" << _name
+					<< " cannot attack because it's destroyed."
 					<< std::endl;
 		return ;
 	}
 	if (_energyPoints == 0)
 	{
 		std::cout	<< "ScavTrap " << _name
-					<< " cannot attack because it's energy is depleted"
+					<< " cannot attack because it's energy is depleted."
 					<< std::endl;
 		return ;
 	}

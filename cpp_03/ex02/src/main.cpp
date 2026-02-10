@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:34:56 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/10 11:22:24 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:05:03 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,14 @@ int	main(void)
 
 	std::cout << "\nEngaging in combat...\n" << std::endl;
 	
-	st.attack("CT");
-	ct.beRepaired(1);
-	
 	ct.attack("ST");
-	st.takeDamage(11);
+	ct.takeDamage(11);
 	st.attack("CT");
-	ct.takeDamage(20);
-	ct.beRepaired(10);
+	st.takeDamage(4);
 	ct.attack("ST");
 	ct.takeDamage(20);
 	st.attack("CT");
-	ct.takeDamage(13);
+	st.takeDamage(13);
 	st.guardGate();
 	st.beRepaired(1);
 	st.beRepaired(1);
@@ -43,7 +39,6 @@ int	main(void)
 	st.beRepaired(1);
 	ct.beRepaired(1);
 	ct.beRepaired(1);
-	
-	std::cout << "\nBattle concluded...\n" <<std::endl;
+	std::cout << "\nBattle concluded..." <<std::endl;
 	return (0);
 }

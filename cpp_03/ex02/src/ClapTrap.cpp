@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:00:26 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/10 12:45:24 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/10 10:56:21 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 // default constructor
 ClapTrap::ClapTrap(const std::string &inputName):
 						_name(inputName),
-						_hitPoints(10),
-						_energyPoints(10),
-						_attackDamage(0)
+						_hitPoints(100),
+						_energyPoints(100),
+						_attackDamage(30)
 {
 	std::cout << "ClapTrap default constructor called for: " << _name << std::endl;
 }
@@ -54,7 +54,7 @@ void	ClapTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0)
 	{
-		std::cout	<< "ClapTrap " << _name
+		std::cout	<< "ClapTrap" << _name
 					<< " cannot attack because it's destroyed"
 					<< std::endl;
 		return ;
@@ -66,15 +66,10 @@ void	ClapTrap::attack(const std::string& target)
 					<< std::endl;
 		return ;
 	}
-	_energyPoints--;
 	std::cout	<< "ClapTrap "	<< _name
 				<< " attacks "	<< target
-				<< " dealing " << _attackDamage
-				<< "\n"
-				<< "ClapTrap " << _name
-				<< " energy points left : " << _energyPoints
 				<< std::endl;
-				
+	_energyPoints--;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
@@ -93,9 +88,9 @@ void	ClapTrap::takeDamage(unsigned int amount)
 	
 	std::cout 	<< "ClapTrap "	<< _name
 				<< " takes "	<< amount
-				<< " points of damage\n"
+				<< " points of damage.\n"
 				<< "ClapTrap " << _name
-				<< " current hit points is " << _hitPoints
+				<< "'s current HP is " << _hitPoints
 				<< std::endl;
 }
 
@@ -103,7 +98,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_hitPoints == 0)
 	{
-		std::cout	<< "ClapTrap " << _name
+		std::cout	<< "ClapTrap" << _name
 					<< " cannot repair because it's destroyed"
 					<< std::endl;
 		return ;
@@ -115,16 +110,12 @@ void	ClapTrap::beRepaired(unsigned int amount)
 					<< std::endl;
 		return ;
 	}
-
 	_hitPoints += amount;
-	if (_hitPoints > 10)
-		_hitPoints = 10;
-	
 	std::cout	<< "ClapTrap "	<< _name
 				<< " repairs itself for " << amount
-				<< " hit points\n"
+				<< " life points.\n"
 				<< "ClapTrap " << _name
-				<< " current hit points is "	<< _hitPoints
+				<< "'s current HP is "	<< _hitPoints
 				<< std::endl;
 	_energyPoints--;
 }
