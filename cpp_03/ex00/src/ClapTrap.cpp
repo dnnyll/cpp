@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:00:26 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/10 12:45:15 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/10 15:37:55 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	}
 
 	_hitPoints += amount;
-	if (_hitPoints > 10)
-		_hitPoints = 10;
+	// if (_hitPoints > 10)
+	// 	_hitPoints = 10;
 	
 	std::cout	<< "ClapTrap "	<< _name
 				<< " repairs itself for " << amount

@@ -6,7 +6,7 @@
 #    By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/06 13:39:43 by daniefe2          #+#    #+#              #
-#    Updated: 2026/02/10 13:21:49 by daniefe2         ###   ########.fr        #
+#    Updated: 2026/02/10 15:10:45 by daniefe2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -I$(INC_DIR)
 
 # sources and objects
 SRCS			=		ClapTrap.cpp \
+						FragTrap.cpp \
 						main.cpp \
 						ScavTrap.cpp
 
