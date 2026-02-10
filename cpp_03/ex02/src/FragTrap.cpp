@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 15:23:37 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/10 12:56:27 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/02/10 13:24:21 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/10 13:28:23 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "../inc/ScavTrap.hpp"
+#include "../inc/FragTrap.hpp"
 #include "../inc/ClapTrap.hpp"
 
-void	ScavTrap::guardGate(void)
+
+void	FragTrap::highFivesGuys(void)
 {
-	std::cout << "ScavTrap " << _name << " is now in Gatekeeper mode" << std::endl;
+	std::cout << "FragTrap " << _name << ": let's high give guys!!" << std::endl;
 }
 
 // default constructor
-ScavTrap::ScavTrap(const std::string &name): ClapTrap(name)
+FragTrap::FragTrap(const std::string &name): ClapTrap(name)
 {
 	_hitPoints = 100;
-	_energyPoints = 50;
-	_attackDamage = 20;
+	_energyPoints = 100;
+	_attackDamage = 30;
 
-	std::cout << "ScavTrap default constructor called for: " << _name << std::endl;
+	std::cout << "FragTrap default constructor called for: " << _name << std::endl;
 }
 
 //	copy constructor
-ScavTrap::ScavTrap(const ScavTrap &copy): ClapTrap(copy)
+FragTrap::FragTrap(const FragTrap &copy): ClapTrap(copy)
 {
-	std::cout << "ScavTrap copy constructor called" << std::endl;
+	std::cout << "FragTrap copy constructor called" << std::endl;
 }
 
 //	copy assignment operator
-ScavTrap	&ScavTrap::operator=(const ScavTrap &source)
+FragTrap	&FragTrap::operator=(const FragTrap &source)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &source)
@@ -47,29 +48,29 @@ ScavTrap	&ScavTrap::operator=(const ScavTrap &source)
 }
 
 //default destructor
-ScavTrap::~ScavTrap()
+FragTrap::~FragTrap()
 {
-	std::cout << "ScavTrap " << _name << " destructor called for: " << _name << std::endl;
+	std::cout << "FragTrap " << _name << " destructor called for: " << _name << std::endl;
 }
 
-void	ScavTrap::attack(const std::string& target)
+void	FragTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0)
 	{
-		std::cout	<< "ScavTrap " << _name
+		std::cout	<< "FragTrap " << _name
 					<< " cannot attack because it's destroyed"
 					<< std::endl;
 		return ;
 	}
 	if (_energyPoints == 0)
 	{
-		std::cout	<< "ScavTrap " << _name
+		std::cout	<< "FragTrap " << _name
 					<< " cannot attack because it's energy is depleted"
 					<< std::endl;
 		return ;
 	}
 	_energyPoints--;
-	std::cout	<< "ScavTrap "	<< _name
+	std::cout	<< "FragTrap "	<< _name
 				<< " attacks "	<< target
 				<< " dealing " << _attackDamage
 				<< "\n"
