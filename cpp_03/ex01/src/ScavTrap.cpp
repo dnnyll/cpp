@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:23:37 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/10 11:17:43 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/10 12:56:27 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,13 @@ void	ScavTrap::attack(const std::string& target)
 					<< std::endl;
 		return ;
 	}
+	_energyPoints--;
 	std::cout	<< "ScavTrap "	<< _name
 				<< " attacks "	<< target
+				<< " dealing " << _attackDamage
+				<< "\n"
+				<< "ClapTrap " << _name
+				<< " energy points left : " << _energyPoints
 				<< std::endl;
-	_energyPoints--;
 }
 

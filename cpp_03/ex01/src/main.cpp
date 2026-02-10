@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:34:56 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/10 11:22:24 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:19:03 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,27 @@
 int	main(void)
 {
 	std::cout << "\nLaunching ClapTrap Tournament..." << std::endl;
-	std::cout << "Constructing constestents...\n" << std::endl;
+	{
+		std::cout << "Constructing constestents...\n" << std::endl;
+		
+		ClapTrap	CT("CT");
+		ScavTrap	ST("ST");
 
-	ClapTrap	ct("CT");
-	ScavTrap	st("ST");
+		std::cout << "\nEngaging in combat...\n" << std::endl;
 
-	std::cout << "\nEngaging in combat...\n" << std::endl;
+		CT.attack("ST");
+		ST.takeDamage(0);
+		CT.attack("ST");
+		ST.takeDamage(0);
+		ST.attack("CT");
+		CT.takeDamage(20);
+		ST.guardGate();
+		CT.attack("ST");
+		CT.beRepaired(1);
+		
+		std::cout << "\nDestroying constestents...\n" << std::endl;
+	}
+	std::cout << "\n------======Battle concluded...======------\n" <<std::endl;
 	
-	st.attack("CT");
-	ct.beRepaired(1);
-	
-	ct.attack("ST");
-	st.takeDamage(11);
-	st.attack("CT");
-	ct.takeDamage(20);
-	ct.beRepaired(10);
-	ct.attack("ST");
-	ct.takeDamage(20);
-	st.attack("CT");
-	ct.takeDamage(13);
-	st.guardGate();
-	st.beRepaired(1);
-	st.beRepaired(1);
-	st.beRepaired(1);
-	st.beRepaired(1);
-	ct.beRepaired(1);
-	ct.beRepaired(1);
-	
-	std::cout << "\nBattle concluded...\n" <<std::endl;
 	return (0);
 }
