@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:43:05 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 17:10:28 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:13:38 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ Fixed	Fixed::operator/(const Fixed &other) const
 	
 	numerator = static_cast<long long>(this->_rawBits) << _fractionalBits;
 	//	convert _rawBits to long long to avoid overflow and shift left by _fractionalBits (× 2^fractionalBits)
+	//	this allows not to lose the fractional part.
 	//	prepares for int division while keeping the fractional precision
 	result.setRawBits(static_cast<int>(numerator / other._rawBits));
 	//	divide, convert back to int and stores the result in _raw_bits

@@ -6,12 +6,12 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:41:35 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/04 16:02:11 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:02:49 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+#ifndef		FIXED_HPP
+# define	FIXED_HPP
 
 #include <iostream>
 #include <cmath>
