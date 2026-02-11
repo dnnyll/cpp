@@ -6,49 +6,31 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:42:41 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/03 16:24:25 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/11 10:58:14 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/Fixed.hpp"
 
-int	main( void )
+int	main(void)
 {
-	//	create 3 objects
-	Fixed a;		// Default constructor called → a._rawBits = 0
-	Fixed b(a);		// Copy constructor called    → b._rawBits = a._rawBits
-	Fixed c;		// Default constructor called → c._rawBits = 0
+	// Create objects using different constructors
+	Fixed	a;		// default constructor → a._rawBits = 0
+	Fixed	b(a);	// copy constructor → b._rawBits = a._rawBits
+	Fixed	c;		// default constructor → c._rawBits = 0
 
-	c = b;			// Copy assignment operator called → this = c, other = b, copies _rawBits
+	c = b;			// Copy assignment → copies b._rawBits into c._rawBits
+					// Steps inside operator=:
+					// 1. 'this' refers to c, 'source' refers to b
+					// 2. Check for self-assignment (this != &source)
+					// 3. Copy _rawBits from source to *this
+					// 4. Return *this for chained assignments
 
-	/*	when the code hits this equal sign, it will look and call the
-	//	function: Fixed &Fixed::operator=(const Fixed &other)
-	//	within this function, the keyword "this" will get the value
-	//	stored in c and other will get the value stored in b
-	//	it will then check if this != &other to avoid self-assignment
-	//	and copy the internal _rawBits from other into this
-	//	finally it will return *this so that chained assignments would work */
-	
-	std::cout << a.getRawBits() << std::endl;
-	std::cout << b.getRawBits() << std::endl;
-	std::cout << c.getRawBits() << std::endl;
-	
+	// Access internal state using getters
+	std::cout << a.getRawBits() << std::endl; // prints a._rawBits
+	std::cout << b.getRawBits() << std::endl; // prints b._rawBits
+	std::cout << c.getRawBits() << std::endl; // prints c._rawBits
+
 	return (0);
 }
-
-/*
-	Start of main:
-
-	a created → Default constructor
-	b created → Copy constructor (calls copy assignment inside)
-	c created → Default constructor
-
-	c = b      → Copy assignment operator
-
-	End of main:
-	c destroyed → Destructor
-	b destroyed → Destructor
-	a destroyed → Destructor
-
-*/
+// End of main: destructors called for c, b, a in reverse order of creation
