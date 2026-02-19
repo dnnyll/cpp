@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:14:00 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 15:40:00 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/17 12:14:20 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		ANIMAL_HPP
-# define	ANIMAL_HPP
+#ifndef		WRONGANIMAL_HPP
+# define	WRONGANIMAL_HPP
 
 #include <iostream>
 #include <string>
 
-class	Animal
+class	WrongAnimal
 {
 	protected:
 
@@ -25,24 +25,13 @@ class	Animal
 	public:
 
 	//OCF
-	Animal();
-	Animal(const Animal &copy);
-	Animal	&operator=(const Animal &source);
-	virtual	~Animal();
+	WrongAnimal();
+	WrongAnimal(const WrongAnimal &copy);
+	WrongAnimal	&operator=(const WrongAnimal &source);
+	~WrongAnimal();
 
-	virtual void		makeSound() const;
-	std::string			getType() const;
-	// optional virtual methods for Brain support
-	virtual void		setIdea(int index, const std::string& idea)
-	{
-		(void)index;
-		(void)idea;
-	};
-	virtual std::string	getIdea(int index) const
-	{
-		(void)index;
-		return "";
-	};
+	void	makeSound() const;
+	std::string		getType() const;
 };
 
 #endif

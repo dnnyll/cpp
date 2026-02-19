@@ -1,54 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/17 11:50:37 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 10:44:34 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/02/17 10:12:50 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/19 11:50:09 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "../inc/WrongAnimal.hpp"
+#include "../inc/Animal.hpp"
 
 // default constructor
-WrongAnimal::WrongAnimal()
+Animal::Animal()
 {
-	type = "WrongAnimal";
-	std::cout << "[WrongAnimal]\tdefault constructor called" << std::endl;
+	type = "Animal";
+	std::cout << "[Animal]\tdefault constructor called" << std::endl;
 }
 
 // copy constructor
-WrongAnimal::WrongAnimal(const WrongAnimal &copy)
+Animal::Animal(const Animal &copy)
 {
-	std::cout << "[WrongAnimal]\tcopy constructor called" << std::endl;
+	std::cout << "[Animal]\tcopy constructor called" << std::endl;
 	*this = copy;
 }
 
 // copy assignment operator
-WrongAnimal	&WrongAnimal::operator=(const WrongAnimal &source)
+Animal	&Animal::operator=(const Animal &source)
 {
-	std::cout << "[WrongAnimal]\tcopy assignment operator called" << std::endl;
+	std::cout << "[Animal]\tcopy assignment operator called" << std::endl;
 	if (this != &source)
 		type = source.type;
 	return (*this);
 }
 
 // destructor
-WrongAnimal::~WrongAnimal()
+Animal::~Animal()
 {
-	std::cout << "[WrongAnimal]\tdestructor called" << std::endl;
+	std::cout << "[Animal]\tdestructor called" << std::endl;
 }
 
 // default sound
-void	WrongAnimal::makeSound() const
+void	Animal::makeSound() const
 {
 	std::cout << "============\tsome generic animal sound\t============" << std::endl;
 }
 
-std::string WrongAnimal::getType() const
+//	getType
+std::string Animal::getType() const
 {
 	return (type);
 }

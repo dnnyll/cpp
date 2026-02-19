@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:14:00 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 15:40:00 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:51:55 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ class	Animal
 	Animal	&operator=(const Animal &source);
 	virtual	~Animal();
 
-	virtual void		makeSound() const;
+	// makes Animal abstract: cannot be instantiated
+	virtual void		makeSound() const = 0;	// = NULL -> makes object abstract
 	std::string			getType() const;
+	
 	// optional virtual methods for Brain support
 	virtual void		setIdea(int index, const std::string& idea)
 	{

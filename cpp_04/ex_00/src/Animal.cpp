@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 10:12:50 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/17 12:04:55 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 10:44:16 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ Animal::Animal(const Animal &copy)
 	*this = copy;
 }
 
-// assignment operator
+// copy assignment operator
 Animal	&Animal::operator=(const Animal &source)
 {
-	std::cout << "[Animal]\tassignment operator called" << std::endl;
+	std::cout << "[Animal]\tcopy assignment operator called" << std::endl;
 	if (this != &source)
 		type = source.type;
 	return (*this);

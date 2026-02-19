@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 10:35:13 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 12:18:19 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:05:41 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ Cat::Cat()
 //	copy constructor
 Cat::Cat(const Cat &copy): Animal(copy)
 {
+	brain = new Brain(*copy.brain);	// deep copy Brain
 	std::cout << "[Cat]\t\tcopy constructor called" << std::endl;
 }
 
@@ -34,7 +35,9 @@ Cat	&Cat::operator=(const Cat &source)
 	std::cout << "[Cat]\t\tcopy assignment operator called" << std::endl;
 	if (this != &source)
 	{
-		Animal::operator=(source);
+		Animal::operator=(source);			// copy base members
+		delete brain;						// free old Brain
+		brain = new Brain(*source.brain);	// deep copy
 	}
 	return (*this);
 }

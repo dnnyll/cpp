@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:57:12 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 10:44:39 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:55:03 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../inc/WrongAnimal.hpp"
 #include "../inc/WrongCat.hpp"
 
-// default constructor
+//	default constructor
 WrongCat::WrongCat()
 {
 	type = "WrongCat";
@@ -38,7 +38,7 @@ WrongCat	&WrongCat::operator=(const WrongCat &source)
 	return (*this);
 }
 
-//default destructor
+//	default destructor
 WrongCat::~WrongCat()
 {
 	std::cout << "[WrongCat]\tdestructor called" << std::endl;
