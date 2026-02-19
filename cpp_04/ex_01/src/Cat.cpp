@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 10:35:13 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/17 12:05:32 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:18:19 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 Cat::Cat()
 {
 	type = "Cat";
+	brain = new Brain();
 	std::cout << "[Cat]\t\tdefault constructor called" << std::endl;
 }
 
@@ -30,7 +31,7 @@ Cat::Cat(const Cat &copy): Animal(copy)
 //	copy assignment operator
 Cat	&Cat::operator=(const Cat &source)
 {
-	std::cout << "[Cat]\t\tassignment operator called" << std::endl;
+	std::cout << "[Cat]\t\tcopy assignment operator called" << std::endl;
 	if (this != &source)
 	{
 		Animal::operator=(source);
@@ -38,13 +39,27 @@ Cat	&Cat::operator=(const Cat &source)
 	return (*this);
 }
 
-//default destructor
+//	default destructor
 Cat::~Cat()
 {
+	delete brain;
 	std::cout << "[Cat]\t\tdestructor called" << std::endl;
 }
 
+//	print function
 void	Cat::makeSound() const
 {
 	std::cout << "============\tMeow\t\t\t\t============" << std::endl;
+}
+
+//	set
+void Cat::setIdea(int index, const std::string& idea)
+{
+	brain->setIdea(index, idea);
+}
+
+//	get
+std::string Cat::getIdea(int index) const
+{
+	return brain->getIdea(index);
 }

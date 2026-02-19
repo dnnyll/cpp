@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:14:00 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/17 11:17:16 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 11:52:22 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,18 @@ class	Animal
 	Animal	&operator=(const Animal &source);
 	virtual	~Animal();
 
-	virtual void	makeSound() const;
-	std::string		getType() const;
+	virtual void		makeSound() const;
+	std::string			getType() const;
+	virtual void		setIdea(int index, const std::string& idea)
+	{
+		(void)index;
+		(void)idea;
+	};
+	virtual std::string	getIdea(int index) const
+	{
+		(void)index;
+		return "";
+	};
 };
 
 #endif

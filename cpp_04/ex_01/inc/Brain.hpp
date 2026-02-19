@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/17 10:30:32 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 10:49:32 by daniefe2         ###   ########.fr       */
+/*   Created: 2026/02/19 10:12:40 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/19 10:28:31 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		CAT_HPP
-# define	CAT_HPP
+#ifndef		BRAIN_HPP
+# define	BRAIN_HPP
 
 #include <string>
-#include "../inc/Animal.hpp"
-#include "../inc/Brain.hpp"
+#include <iostream>
 
-class	Cat : public Animal
+class Brain
 {
 	private:
-
-	Brain	*brain;
-
+	
+	std::string	ideas[100];
+	
 	public:
 	
 	//OCF
-	Cat();
-	Cat(const Cat &copy);
-	Cat	&operator=(const Cat &source);
-	virtual	~Cat();
+	Brain();
+	Brain(const Brain &copy);
+	Brain	&operator=(const Brain &source);
+	virtual	~Brain();
 
-	void		makeSound() const;
-	void		setIdea(int index, const std::string& idea);
+	void		setIdea(int index, const std::string &idea);
 	std::string	getIdea(int index) const;
+
 };
 
 #endif

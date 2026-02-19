@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 09:28:52 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:26:59 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,127 @@
 
 int main()
 {
-	std::cout << "============\tANIMAL POLYMORPHISM\t\t============\n" << std::endl;
-	const Animal	*animal = new Animal();
-	animal->makeSound();			//	generic Animal
-	delete animal;
-	std::cout << "============================================================" << std::endl;
+	int		nAnimals = 4;
+	int		iAnimals = 0;
+	int		jAnimals = 0;
+	Animal	*animals[nAnimals];
+	
+	std::cout << "============\tCREATING ANIMALS\t\t============\n" << std::endl;
+	//	first half are cats
+	while (iAnimals < nAnimals / 2)
+	{
+		animals[iAnimals] = new Cat();
+		animals[iAnimals]->makeSound();
+		iAnimals++;
+	}
+	jAnimals = iAnimals;
+	//	second half are dogs
+	while (jAnimals < nAnimals)
+	{
+		animals[jAnimals] = new Dog();
+		animals[jAnimals]->makeSound();
+		jAnimals++;
+	}
 
-	const Animal	*cat = new Cat();
-	cat->makeSound();
-	delete cat;						//	Meow
-	std::cout << "============================================================" << std::endl;
+	// std::cout << "============\tSETTING IDEAS\t============\n" << std::endl;
+	// iAnimals = 0;
+	// while (iAnimals < nAnimals)
+	// {
+	// 	std::string type = animals[iAnimals]->getType();
 
-	const Animal	*dog = new Dog();
-	dog->makeSound();
-	delete dog;						//	Woof
-	std::cout << "============================================================\n" << std::endl;
-	
-	
-	std::cout << "============\tWRONGANIMAL POLYMORPHISM\t============\n" << std::endl;
-	const WrongAnimal	*wrongAnimal = new WrongAnimal();
-	wrongAnimal->makeSound();		//	generic WrongAnimal
-	delete wrongAnimal;
-	std::cout << "============================================================" << std::endl;
-	
-	const WrongCat	*wrongCatDirect = new WrongCat();
-	wrongCatDirect->makeSound();	//	calls WrongCat::makeSound		(direct pointer)
-	delete wrongCatDirect;
-	std::cout << "============================================================" << std::endl;
-	
-	const WrongAnimal	*wrongCatBase = new WrongCat();
-	wrongCatBase->makeSound();		//	calls WrongAnimal::makeSound	(base pointer)
-	delete wrongCatBase;
-	std::cout << "============================================================\n" << std::endl;
-	/*
-	“I am accessing this WrongCat object through a WrongAnimal interface.”
-	this is called upcasting, converting WrongCat to WrongAnimal
-	this is ok because WrongCat is a Wrong Animal
+	// 	std::cout << "[DEBUG] Setting ideas for " << type
+	// 			<< " at index " << iAnimals << std::endl;
 
-	step by step
-	- the pointer type is WrongAnimal*.
-	- makeSound() is non-virtual.
-	- the compiler decides at compile time which function to call.
-	- it sees the pointer type is WrongAnimal*.
-	- it generates a direct call to: WrongAnimal::makeSound()
-	*/
+	// 	if (type == "Cat")
+	// 	{
+	// 		animals[iAnimals]->setIdea(0, "I am cool therefore humans feed me..");
+	// 		std::cout << "[DEBUG] Cat idea[0] set" << std::endl;
+	// 	}
+	// 	else if (type == "Dog")
+	// 	{
+	// 		animals[iAnimals]->setIdea(0, "Humans are cool because they feed me..");
+	// 		std::cout << "[DEBUG] Dog idea[0] set" << std::endl;
+	// 	}
+
+	// 	iAnimals++;
+	// }
+	// std::cout << "[DEBUG] Finished setting ideas for all animals\n" << std::endl;
+
+	std::cout << "============\tSETTING IDEAS\t============\n" << std::endl;
+
+	iAnimals = 0;
+
+	while (iAnimals < nAnimals)
+	{
+		std::string	type = animals[iAnimals]->getType();
+		if (type == "Cat")
+			animals[iAnimals]->setIdea(0, "I am cool therefore humans feed me..");
+		else if (type == "Dog")
+			animals[iAnimals]->setIdea(0, "Humans are cool because they feed me..");
+		iAnimals++;
+	}
+
+	std::cout << "============\tPRINTING IDEAS\t============\n" << std::endl;
+	
+	iAnimals = 0;
+	
+	while (iAnimals < nAnimals)
+	{
+		std::string type = animals[iAnimals]->getType();
+		std::cout << type << " idea[0]: " << animals[iAnimals]->getIdea(0) << std::endl;
+		iAnimals++;
+	}
+	
+	std::cout << "============\tSETTING IDEAS\t============\n" << std::endl;
+	
+	iAnimals = 0;
+	
+	while (iAnimals < nAnimals)
+	{
+		std::string	type = animals[iAnimals]->getType();
+		animals[iAnimals]->setIdea(0, type == "Cat" ? "Feed me NOW!" : "Please feed me!");
+		animals[iAnimals]->setIdea(1, type == "Cat" ? "I am the best." : "You are the best");
+		iAnimals++;
+	}
+	
+	std::cout << "============\tIDEAS AFTER SECOND LOOP\t============\n" << std::endl;
+	iAnimals = 0;
+	while (iAnimals < nAnimals)
+	{
+		std::string type = animals[iAnimals]->getType();
+		std::cout << type << " idea[0]: " << animals[iAnimals]->getIdea(0) << std::endl;
+		std::cout << type << " idea[1]: " << animals[iAnimals]->getIdea(1) << std::endl;
+		iAnimals++;
+	}
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:03:30 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/17 11:18:03 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 10:55:21 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 
 #include <string>
 #include "../inc/Animal.hpp"
+#include "../inc/Brain.hpp"
 
 class	Dog : public Animal
 {
+	private:
+	
+	Brain	*brain;
+
 	public:
 	
 	//OCF
@@ -26,7 +31,9 @@ class	Dog : public Animal
 	Dog	&operator=(const Dog &source);
 	virtual	~Dog();
 
-	void	makeSound() const;
+	void		makeSound() const;
+	void		setIdea(int index, const std::string& idea);
+	std::string	getIdea(int index) const;
 };
 
 #endif
