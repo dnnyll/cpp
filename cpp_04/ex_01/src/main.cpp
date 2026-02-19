@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 09:34:01 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/19 09:28:52 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,6 @@ int main()
 	- the compiler decides at compile time which function to call.
 	- it sees the pointer type is WrongAnimal*.
 	- it generates a direct call to: WrongAnimal::makeSound()
-
-	Clean Rule
-
-	Non-virtual function call through base pointer →
-	→ Uses pointer type only (compile-time decision)
-
-	Virtual function call through base pointer →
-	→ Uses actual object type (runtime decision)
-	
 	*/
 	return (0);
 }
