@@ -1,0 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/17 10:30:32 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/17 10:58:57 by daniefe2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef		CAT_HPP
+# define	CAT_HPP
+
+#include <string>
+#include "../inc/Animal.hpp"
+
+class	Cat : public Animal
+{
+	public:
+	
+	//OCF
+	Cat();
+	Cat(const Cat &copy);
+	Cat	&operator=(const Cat &source);
+	~Cat();
+
+	void	makeSound() const;
+};
+
+#endif

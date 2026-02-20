@@ -1,0 +1,98 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/03 15:43:05 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/11 11:21:13 by daniefe2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/Fixed.hpp"
+
+//	default constructor
+Fixed::Fixed() : _rawBits(0)
+{
+	std::cout << "Default constructor called" << std::endl;
+}
+
+//	int constructor
+Fixed::Fixed(int n)
+{
+	_rawBits = n << _fractionalBits;
+	std::cout << "Int constructer called" << std::endl;
+}
+
+//	float constructor
+Fixed::Fixed(float n)
+{
+	_rawBits = roundf(n * (1 << _fractionalBits));
+	std::cout << "Float constructor called" << std::endl;
+}
+
+//	copy constructor
+Fixed::Fixed(const Fixed &other) : _rawBits(other._rawBits)
+{
+	std::cout << "Copy constructor called" << std::endl;
+}
+
+//	copy assignment operator
+Fixed	&Fixed::operator=(const Fixed &other)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &other)
+		this->_rawBits = other.getRawBits();
+	return (*this);
+}
+
+//	destructor
+Fixed::~Fixed()
+{
+	std::cout << "Destructor called" << std::endl;
+}
+
+//	accessors
+int	Fixed::getRawBits(void) const
+{
+	std::cout << "getRawBits member function called" << std::endl;
+	return (this->_rawBits);
+}
+
+void	Fixed::setRawBits(int const raw)
+{
+	this->_rawBits = raw;
+}
+
+//	converters
+//	converts Fixed-point number to integer by dropping the fractional part
+/*
+	_rawBits =	1025
+	Binary:		00000100 00000001
+	toInt() →	00000100 (4(drops fraction))
+*/
+int	Fixed::toInt(void) const
+{
+	return (_rawBits >> _fractionalBits);
+}
+
+//	onverts Fixed-point number to float, including the fractional part
+float	Fixed::toFloat(void) const
+{
+	return (static_cast<float>(_rawBits) / (1 << _fractionalBits));
+}
+/*
+	_rawBits =	1025
+	Binary:		00000100 00000001
+	toFloat() →	00000100 00000001 (4.00390625 (keeps fraction))
+*/
+
+
+//	stream insertion operator
+//overloads operator<< = tells C++ how to print your class objects
+std::ostream	&operator<<(std::ostream &out, const Fixed &value)
+{
+	out << value.toFloat();	//	convert Fixed → float, then print
+	return (out);
+}

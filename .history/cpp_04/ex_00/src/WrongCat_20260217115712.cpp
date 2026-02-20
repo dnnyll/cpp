@@ -1,0 +1,39 @@
+
+#include <iostream>
+#include "../inc/Animal.hpp"
+#include "../inc/WrongCat.hpp"
+
+// default constructor
+WrongCat::WrongCat()
+{
+	type = "WrongCat";
+	std::cout << "[WrongCat]\t\tdefault constructor called" << std::endl;
+}
+
+//	copy constructor
+WrongCat::WrongCat(const WrongCat &copy): Animal(copy)
+{
+	std::cout << "[WrongCat]\t\tcopy constructor called" << std::endl;
+}
+
+//	copy assignment operator
+WrongCat	&WrongCat::operator=(const WrongCat &source)
+{
+	std::cout << "[WrongCat]\t\tassignment operator called" << std::endl;
+	if (this != &source)
+	{
+		Animal::operator=(source);
+	}
+	return (*this);
+}
+
+//default destructor
+WrongCat::~WrongCat()
+{
+	std::cout << "[WrongCat]\t\tdestructor called" << std::endl;
+}
+
+void	WrongCat::makeSound() const
+{
+	std::cout << "Meow" << std::endl;
+}

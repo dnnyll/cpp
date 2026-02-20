@@ -1,0 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 11:34:56 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/02/09 12:26:07 by daniefe2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <iostream>
+#include "inc/ClapTrap.hpp"
+
+int	main(void)
+{
+	std::cout << "Launching ClapTrap Tournament..." << std::endl;
+	std::cout << "Constructing constesten"
+	ClapTrap	a;
+	ClapTrap	b;
+	
+	
+	return (0);
+}
