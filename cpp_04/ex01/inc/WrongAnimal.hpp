@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:14:00 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/17 12:14:20 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:06:05 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class	WrongAnimal
 	WrongAnimal	&operator=(const WrongAnimal &source);
 	~WrongAnimal();
 
-	void	makeSound() const;
+	void			makeSound() const;
 	std::string		getType() const;
 };
 

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 10:36:58 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 15:15:54 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:09:33 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,17 @@ Brain::Brain()
 // copy constructor
 Brain::Brain(const Brain &copy)
 {
-	// int	i;
+	int	i;
 
-	// i = 0;
-	// std::cout << "[Brain]\t\tcopy constructor called" << std::endl;
-	// while (i < 100)
-	// {
-	// 	ideas[i] = copy.ideas[i];
-	// 	i++;
-	// }
+	i = 0;
 	std::cout << "[Brain]\t\tcopy constructor called" << std::endl;
-	*this = copy;
-
+	while (i < 100)
+	{
+		ideas[i] = copy.ideas[i];
+		i++;
+	}
+	// std::cout << "[Brain]\t\tcopy constructor called" << std::endl;
+	// *this = copy;
 }
 
 // copy assignment operator

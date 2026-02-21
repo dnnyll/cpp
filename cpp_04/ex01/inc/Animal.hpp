@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:14:00 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/21 17:35:44 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:07:39 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ class	Animal
 
 	virtual void		makeSound() const;
 	std::string			getType() const;
+
 	// virtual methods for Brain support
 	virtual void		setIdea(int index, const std::string& idea);
 	virtual std::string	getIdea(int index) const;

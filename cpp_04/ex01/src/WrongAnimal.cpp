@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:50:37 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 10:43:32 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:08:18 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 // default constructor
 WrongAnimal::WrongAnimal()
 {
-	type = "WrongAnimal";
 	std::cout << "[WrongAnimal]\tdefault constructor called" << std::endl;
+	type = "WrongAnimal";
 }
 
 // copy constructor
