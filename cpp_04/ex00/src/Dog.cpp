@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:04:20 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 10:44:27 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:07:11 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 //	default constructor
 Dog::Dog()
 {
-	type = "Dog";
 	std::cout << "[Dog]\t\tdefault constructor called" << std::endl;
+	type = "Dog";
 }
 
 //	copy constructor

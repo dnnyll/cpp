@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 10:35:13 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 13:59:21 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:07:06 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // default constructor
 Cat::Cat()
 {
-	type = "Cat";
 	std::cout << "[Cat]\t\tdefault constructor called" << std::endl;
+	type = "Cat";
 }
 
 //	copy constructor
