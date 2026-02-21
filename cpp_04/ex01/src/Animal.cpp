@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 10:12:50 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/19 11:50:09 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 17:27:58 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,17 @@ void	Animal::makeSound() const
 std::string Animal::getType() const
 {
 	return (type);
+}
+
+//	the following functions are not necessary if we declare their value as NULL in the Animal class
+//	for the purpose of the exercise we will do it this way
+void	Animal::setIdea(int index, const std::string& idea)
+{
+	(void)index;
+	(void)idea;
+}
+std::string	Animal::getIdea(int index) const
+{
+	(void)index;
+	return "";
 }

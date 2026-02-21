@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/20 12:46:24 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/21 15:59:09 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 int main()
 {
+	//dynamic (run-time) binding
 	std::cout << "============\tANIMAL POLYMORPHISM\t\t============\n" << std::endl;
 	const Animal	*animal = new Animal();
 	animal->makeSound();			//	generic Animal
@@ -40,7 +41,7 @@ int main()
 	cat or dog->makeSound() calls the override in Cat or Dog, not the base function. 
 	this is polymorphism.
 	*/
-
+	//	static (compile-time) binding
 	std::cout << "============\tWRONGANIMAL POLYMORPHISM\t============\n" << std::endl;
 	const WrongAnimal	*wrongAnimal = new WrongAnimal();
 	wrongAnimal->makeSound();		//	generic WrongAnimal
@@ -56,6 +57,9 @@ int main()
 	wrongCatBase->makeSound();		//	calls WrongAnimal::makeSound	(base pointer)
 	delete wrongCatBase;
 	std::cout << "============================================================\n" << std::endl;
+
+	return (0);
+}
 
 	/*
 		the derived class (WrongCat) overrides makeSound(),
@@ -82,6 +86,3 @@ int main()
 	|		- C++ uses STATIC BINDING → calls base function  |
 	|		- Output: "some generic animal sound"            |
 	*/
-
-	return (0);
-}
