@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/21 17:15:42 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:50:33 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,6 @@
 #include "../inc/Dog.hpp"
 #include "../inc/WrongAnimal.hpp"
 #include "../inc/WrongCat.hpp"
-
-/*
-	quick note:
-	1. base class Animal constructor
-	2. constructor body of Dog starts
-		- Brain is created with new Brain() --> Brain constructor runs
-	3. rest of Dog constructor executes
-	this explains the debug order
-
-	[Animal]        default constructor called
-	[Brain]         default constructor called
-	[Dog]           default constructor called
-
-	note that destruction happens in reverse, however Brain is first, then Dog and finally Animal
-*/
 
 int main()
 {
@@ -68,11 +53,6 @@ int main()
 	animals[1]->setIdea(0, "Dogs like bones.");
 	animals[2]->setIdea(0, "Cats tolerate humans.");
 	animals[3]->setIdea(0, "Cats like fish.");
-
-	std::cout << "animals[0]->setIdea(0, \"Dogs worship humans.\");" << std::endl;
-	std::cout << "animals[1]->setIdea(0, \"Dogs like bones.\");" << std::endl;
-	std::cout << "animals[2]->setIdea(0, \"Cats tolerate humans.\");" << std::endl;
-	std::cout << "animals[3]->setIdea(0, \"Cats like fish.\");" << std::endl;
 
 	std::cout << "\n==========\tREADING IDEAS\t\t==========\n" << std::endl;
 

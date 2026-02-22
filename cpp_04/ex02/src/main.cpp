@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/21 18:10:15 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/22 15:20:50 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,15 @@
 int	main()
 {
 	// Animal a;	//	in C++98, abstract classes cannot be instantiated
+	{
+		std::cout << "\n============\tASSIGN OPERATOR\t============\n" << std::endl;
 
+		Cat	theoriginalCat;
+		Cat	anotherCat;
+
+		anotherCat = theoriginalCat;
+	}
+	
 	Animal		*animals[2];
 	int			iAnimals = 0;
 	const int	nAnimals = 2;
@@ -51,7 +59,7 @@ int	main()
 
 	Cat	originalCat;
 	originalCat.setIdea(0, "avoid water");
-
+	
 	Cat	copyCat = originalCat;
 	copyCat.setIdea(0, "manipulate humans");
 
