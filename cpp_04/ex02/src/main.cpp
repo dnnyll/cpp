@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/22 15:20:50 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:24:08 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 int	main()
 {
 	// Animal a;	//	in C++98, abstract classes cannot be instantiated
+	
+	const int	nAnimals = 4;
+	
 	{
 		std::cout << "\n============\tASSIGN OPERATOR\t============\n" << std::endl;
 
@@ -27,19 +30,17 @@ int	main()
 		Cat	anotherCat;
 
 		anotherCat = theoriginalCat;
+		std::cout << std::endl;
 	}
 	
-	Animal		*animals[2];
+	std::cout << "\n============\tARRAY OF ANIMALS\t============\n" << std::endl;
+	
+	Animal	**animals = new Animal*[nAnimals];
 	int			iAnimals = 0;
-	const int	nAnimals = 2;
-
-	std::cout << "\n============\tCREATING ANIMALS\t============\n" << std::endl;
-
-	//	here create Dog and Cat dynamically
-	iAnimals = 0;
+	
 	while (iAnimals < nAnimals)
 	{
-		if (iAnimals == 0)
+		if (iAnimals < nAnimals / 2)
 			animals[iAnimals] = new Dog();
 		else
 			animals[iAnimals] = new Cat();
@@ -66,7 +67,7 @@ int	main()
 	std::cout << "orig idea[0]:\t" << originalCat.getIdea(0) << std::endl;
 	std::cout << "copy idea[0]:\t" << copyCat.getIdea(0) << std::endl;
 
-	std::cout << "\n============\tDELETING ANIMALS\t============\n" << std::endl;
+	std::cout << "\n============\tARRAY CLEANUP\t============\n" << std::endl;
 
 	iAnimals = 0;
 	while (iAnimals < nAnimals)
@@ -74,6 +75,7 @@ int	main()
 		delete animals[iAnimals];
 		iAnimals++;
 	}
+	delete[] animals;
 
 	return (0);
 }

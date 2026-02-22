@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/22 18:50:33 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:16:42 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int main()
 {
-	int	n = 4;
+	const int	nAnimals = 4;
 
 	std::cout << "\n==========\tBASIC POLYMORPHIC TEST\t==========\n" << std::endl;
 
@@ -35,12 +35,12 @@ int main()
 
 	std::cout << "\n==========\tARRAY OF ANIMALS\t==========\n" << std::endl;
 
-	Animal	**animals = new Animal*[n];
-
+	Animal	**animals = new Animal*[nAnimals];
 	int	iAnimals = 0;
-	while (iAnimals < n)
+	
+	while (iAnimals < nAnimals)
 	{
-		if (iAnimals < n / 2)
+		if (iAnimals < nAnimals / 2)
 			animals[iAnimals] = new Dog();
 		else
 			animals[iAnimals] = new Cat();
@@ -57,7 +57,7 @@ int main()
 	std::cout << "\n==========\tREADING IDEAS\t\t==========\n" << std::endl;
 
 	iAnimals = 0;
-	while (iAnimals < n)
+	while (iAnimals < nAnimals)
 	{
 		std::cout	<< animals[iAnimals]->getType()
 					<< " idea: "
@@ -69,7 +69,7 @@ int main()
 	std::cout << "\n==========\tARRAY CLEANUP\t\t\t==========\n" << std::endl;
 
 	iAnimals = 0;
-	while (iAnimals < n)
+	while (iAnimals < nAnimals)
 	{
 		delete animals[iAnimals];
 		iAnimals++;

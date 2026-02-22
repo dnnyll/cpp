@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:14:00 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/21 17:32:07 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:27:07 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,3 @@ class	Animal
 };
 
 #endif
-
-/*
-		Memory layout:
-
-	Animal* a = new Dog();
-	+-------------------------+
-	|      Dog object         |
-	|-------------------------|
-	| Animal part             |
-	|  vtable pointer --------+--> [vtable]
-	|  type = "Dog"           |
-	|-------------------------|
-	| Dog part                |
-	|  Brain* brain ----------+--> [Brain object]
-	+-------------------------+
-
-	Virtual call flow:
-
-	a->setIdea(0, "Bone");
-	│
-	▼ (a is Animal*, vtable lookup)
-	[Dog::setIdea] runs
-	│
-	▼
-	brain->setIdea(0, "Bone")
-*/
