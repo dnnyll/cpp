@@ -7,19 +7,40 @@
 
 class	Bureaucrat
 {
-	protected:
+	private:
 
 	std::string	const name;
 	int			grade;
 
 	public:
 
-	//OCF
-	Bureaucrat();
-	Bureaucrat(const Bureaucrat &copy);
-	Bureaucrat	&operator=(const Bureaucrat &source);
-	virtual	~Bureaucrat();
+	//	OCF
+	Bureaucrat(const std::string& name, int grade);
+	Bureaucrat(const Bureaucrat& other);
+	Bureaucrat& operator=(const Bureaucrat& other);
+	~Bureaucrat();
 
+	//	accessors
+	const	std::string& getName() const;
+	int		getGrade() const;
+	void	incrementGrade();
+	void	decrementGrade();
+
+	// exceptions
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			const char* what() const throw();
+	};
+
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			const char* what() const throw();
+	};	
 };
+
+//	operator overload
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
 
 #endif

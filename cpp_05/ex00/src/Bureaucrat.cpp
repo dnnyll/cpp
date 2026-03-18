@@ -1,31 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/18 09:14:29 by daniefe2          #+#    #+#             */
+/*   Updated: 2026/03/18 10:40:05 by daniefe2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "iostream"
 #include "../inc/Bureaucrat.hpp"
 
-//	default constructor
-Bureaucrat::Bureaucrat(std::string input_name, int input_grade)
+//	constructor
+Bureaucrat::Bureaucrat(const std::string& name, int grade)
+	:name(name)
 {
-	std::cout << "[Bureaucrat]\t default constructor call" << std::endl;
-	name = input_name;
-	grade = input_grade;
+	std::cout << "[Bureaucrat]\tconstructor called" << std::endl;
+	if (grade < 1)
+		throw GradeTooHighException();
+	if (grade > 150)
+		throw GradeTooLowException();
+	this->grade = grade;
 }
 
-// copy constructor
+//	copy constructor
 Bureaucrat::Bureaucrat(const Bureaucrat &copy)
+	: name(copy.name), grade(copy.grade)
 {
 	std::cout << "[Bureaucrat]\tcopy constructor called" << std::endl;
-	*this = copy;
 }
 
-// copy assignment operator
+
+//	copy assignment operator
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &source)
 {
 	std::cout << "[Bureaucrat]\tcopy assignment operator called" << std::endl;
 	if (this != &source)
-		type = source.type;
+		grade = source.grade;
 	return (*this);
 }
 
-// destructor
+//	destructor
 Bureaucrat::~Bureaucrat()
 {
 	std::cout << "[Bureaucrat]\tdestructor called" << std::endl;
+}
+
+//	accessors
+const	std::string& Bureaucrat::getName() const
+{
+	// std::cout << "[Bureaucrat]\tgetName called" << std::endl;
+	return (this->name);
+}
+
+int	Bureaucrat::getGrade() const
+{
+	// std::cout << "[Bureaucrat]\tgetGrade called" << std::endl;
+	return (this->grade);
+}
+
+void	Bureaucrat::incrementGrade()
+{
+	std::cout << "[Bureaucrat]\tincrementGrade called" << std::endl;
+	if (this->grade <= 1)
+		throw GradeTooHighException();
+	this->grade--;
+}
+
+void	Bureaucrat::decrementGrade()
+{
+	std::cout << "[Bureaucrat]\tdecrementGrade called" << std::endl;
+	if (this->grade >= 150)
+		throw GradeTooHighException();
+	this->grade++;
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade is too high");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade is too low");
+}
+
+std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
+{
+	out << b.getName() << ", bureaucrat grade " << b.getGrade();
+	return (out);
 }

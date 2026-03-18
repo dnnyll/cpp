@@ -1,4 +1,4 @@
-# **************************************************************************** #
+ # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -15,7 +15,7 @@ INC_DIR			=		inc
 SRC_DIR			=		src
 OBJ_DIR			=		obj
 BIN_DIR			=		bin
-NAME			=		Animal
+NAME			=		Bureaucrats
 CXX				=		c++
 CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -I$(INC_DIR)
 
