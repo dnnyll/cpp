@@ -6,13 +6,12 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 09:14:29 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 15:25:59 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/19 16:39:12 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "iostream"
 #include "../inc/Bureaucrat.hpp"
-// #include "../inc/AForm.hpp"
 
 //	constructor
 Bureaucrat::Bureaucrat(const std::string& name, int grade)

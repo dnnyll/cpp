@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:26:15 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 15:31:14 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/19 16:52:27 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class	ShrubberyCreationForm : public AForm
 	
 	//	OCF
 	ShrubberyCreationForm(std::string target);
-	ShrubberyCreationForm(const ShrubberyCreationForm& other);
-	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
+	ShrubberyCreationForm(const ShrubberyCreationForm& copy);
+	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& copy);
 	virtual	~ShrubberyCreationForm();
 
 	//	actions

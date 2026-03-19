@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:04:20 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/21 17:58:16 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/22 20:16:14 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ Dog::Dog()
 //	copy constructor
 Dog::Dog(const Dog &copy): Animal(copy)
 {
-	brain = new Brain(*copy.brain);	// deep copy Brain
 	std::cout << "[Dog]\t\tcopy constructor called" << std::endl;
+	brain = new Brain(*copy.brain);	// deep copy Brain
 }
 
 //	copy assignment operator

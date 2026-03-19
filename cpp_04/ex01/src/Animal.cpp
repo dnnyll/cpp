@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 10:12:50 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/21 18:07:58 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/22 21:35:55 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ std::string Animal::getType() const
 //	for the purpose of the exercise we will do it this way
 void	Animal::setIdea(int index, const std::string& idea)
 {
+	std::cout << "SETIDEA NOT" << std::endl;
 	(void)index;
 	(void)idea;
 }
 std::string	Animal::getIdea(int index) const
 {
+	std::cout << "GETIDEA NOT" << std::endl;
 	(void)index;
 	return "";
 }

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:05:40 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 15:25:28 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/19 16:53:54 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ class	AForm
 	
 	//	OCF
 	AForm(const std::string& name, int const authzSign, int const authzExec);
-	AForm(const AForm& other);
-	AForm& operator=(const AForm& other);
+	AForm(const AForm& copy);
+	AForm& operator=(const AForm& copy);
 	virtual	~AForm();
 
 	//	accessors

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:31:04 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 15:33:21 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:07:33 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy)
 {
 	std::cout << "[ShrubberyCreationForm]\tcopy constructor called" << std::endl;
 }
-
 
 //	copy assignment operator
 ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationForm &source)

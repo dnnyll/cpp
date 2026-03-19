@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 10:49:21 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 15:29:41 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:12:47 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 int	main()
 {
-	std::cout << "test" << std::endl;
+	Bureaucrat	b1("Coy", 45);
+	ShrubberyCreationForm a ("home");
+	b1.incrementGrade();
+	b1.executeForm(a);
+	b1.signForm(a);
+	b1.executeForm(a);
 	return (0);
 }

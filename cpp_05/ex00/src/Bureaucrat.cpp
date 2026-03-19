@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 09:14:29 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/18 10:40:05 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/18 13:46:03 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 //	constructor
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
-	:name(name)
+	:_name(name)
 {
 	std::cout << "[Bureaucrat]\tconstructor called" << std::endl;
 	if (grade < 1)
 		throw GradeTooHighException();
 	if (grade > 150)
 		throw GradeTooLowException();
-	this->grade = grade;
+	this->_grade = grade;
 }
 
 //	copy constructor
 Bureaucrat::Bureaucrat(const Bureaucrat &copy)
-	: name(copy.name), grade(copy.grade)
+	: _name(copy._name), _grade(copy._grade)
 {
 	std::cout << "[Bureaucrat]\tcopy constructor called" << std::endl;
 }
@@ -38,7 +38,7 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &source)
 {
 	std::cout << "[Bureaucrat]\tcopy assignment operator called" << std::endl;
 	if (this != &source)
-		grade = source.grade;
+		_grade = source._grade;
 	return (*this);
 }
 
@@ -52,29 +52,29 @@ Bureaucrat::~Bureaucrat()
 const	std::string& Bureaucrat::getName() const
 {
 	// std::cout << "[Bureaucrat]\tgetName called" << std::endl;
-	return (this->name);
+	return (this->_name);
 }
 
 int	Bureaucrat::getGrade() const
 {
 	// std::cout << "[Bureaucrat]\tgetGrade called" << std::endl;
-	return (this->grade);
+	return (this->_grade);
 }
 
 void	Bureaucrat::incrementGrade()
 {
 	std::cout << "[Bureaucrat]\tincrementGrade called" << std::endl;
-	if (this->grade <= 1)
+	if (this->_grade <= 1)
 		throw GradeTooHighException();
-	this->grade--;
+	this->_grade--;
 }
 
 void	Bureaucrat::decrementGrade()
 {
 	std::cout << "[Bureaucrat]\tdecrementGrade called" << std::endl;
-	if (this->grade >= 150)
+	if (this->_grade >= 150)
 		throw GradeTooHighException();
-	this->grade++;
+	this->_grade++;
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()

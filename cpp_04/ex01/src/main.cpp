@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:12:03 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/02/22 19:16:42 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/02/23 11:21:36 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 int main()
 {
+
 	const int	nAnimals = 4;
 
 	std::cout << "\n==========\tBASIC POLYMORPHIC TEST\t==========\n" << std::endl;

@@ -6,12 +6,12 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:30:19 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 15:21:31 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/19 16:53:08 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		Bureaucrat_HPP
-# define	Bureaucrat_HPP
+#ifndef		BUREAUCRAT_HPP
+# define	BUREAUCRAT_HPP
 
 #include "../inc/AForm.hpp"
 #include <iostream>
@@ -28,8 +28,8 @@ class	Bureaucrat
 
 	//	OCF
 	Bureaucrat(const std::string& name, int grade);
-	Bureaucrat(const Bureaucrat& other);
-	Bureaucrat& operator=(const Bureaucrat& other);
+	Bureaucrat(const Bureaucrat& copy);
+	Bureaucrat& operator=(const Bureaucrat& copy);
 	~Bureaucrat();
 
 	//	accessors
