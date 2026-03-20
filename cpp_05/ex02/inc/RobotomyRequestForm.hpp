@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:39:48 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 16:58:23 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/20 10:33:54 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define	ROBOTOMYREQUESTFORM
 
 #include "../inc/AForm.hpp"
-#include "../inc/Bureacrat.hpp"
+#include "../inc/Bureaucrat.hpp"
 #include <iostream>
 #include <string>
 
@@ -28,7 +28,7 @@ class	RobotomyRequestForm : AForm
 {
 	private:
 	
-	std::string const	_target;
+	std::string		_target;
 	
 	public:
 	
@@ -41,6 +41,6 @@ class	RobotomyRequestForm : AForm
 	//	actions
 	virtual void	execute(Bureaucrat const& executor) const;
 	
-}
+};
 
 #endif

@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 
 //	constructor
 RobotomyRequestForm::RobotomyRequestForm(std::string target)

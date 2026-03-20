@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:31:04 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/19 17:07:33 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/20 10:19:15 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 		return ;
 	}
 	
+	std::cout << "[ShrubberyCreationForm]\tcreate form called" << std::endl;
+
 	outfile << "       _-_" << std::endl;
 	outfile << "    /~~   ~~\\" << std::endl;
 	outfile << " /~~         ~~\\" << std::endl;
