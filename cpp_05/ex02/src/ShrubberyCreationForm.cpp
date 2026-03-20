@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:31:04 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/20 10:19:15 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/20 11:33:35 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 		
 	if (executor.getGrade() > getAuthzExec())
 		throw AForm::GradeTooLowException();
-		
-	std::ofstream outfile((_target + "_Shrubbery").c_str());
 	
+	std::string	filename = _target  + "_shrubbery";
+	std::ofstream outfile(filename.c_str());
+	std::cout << "[ShrubberyCreationForm]\toutfile: " << filename << " created" << std::endl;
+
 	if (!outfile)
 	{
 		std::cerr << "Failed to open file." << std::endl;
 		return ;
 	}
 	
-	std::cout << "[ShrubberyCreationForm]\tcreate form called" << std::endl;
-
 	outfile << "       _-_" << std::endl;
 	outfile << "    /~~   ~~\\" << std::endl;
 	outfile << " /~~         ~~\\" << std::endl;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.cpp                          :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@
 
 //	constructor
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-	: AForm("Shrubbery", 145, 137), _target(target)
+	: AForm("Robotomy", 72, 45), _target(target)
 {
 	std::cout << "[RobotomyRequestForm]\t constructor called" << std::endl;
 }

@@ -23,8 +23,9 @@ CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -I$(INC_DIR)
 SRCS			=		AForm.cpp \
 						Bureaucrat.cpp \
 						main.cpp \
+						PresidentialPardonForm.cpp \
 						RobotomyRequestForm.cpp \
-						ShrubberyCreationForm.cpp
+						ShrubberyCreationForm.cpp \
 
 OBJS			=		$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 

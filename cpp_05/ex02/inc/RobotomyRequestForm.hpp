@@ -6,15 +6,9 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:39:48 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/20 10:33:54 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/20 11:21:57 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-	RobotomyRequestForm: Required grades: sign 72, exec 45
-	Makes some drilling noises, then informs that <target> has been robotomized
-	successfully 50% of the time. Otherwise, it informs that the robotomy failed.
-*/
 
 #ifndef		ROBOTOMYREQUESTFORM
 # define	ROBOTOMYREQUESTFORM
@@ -24,7 +18,7 @@
 #include <iostream>
 #include <string>
 
-class	RobotomyRequestForm : AForm
+class	RobotomyRequestForm : public AForm
 {
 	private:
 	
