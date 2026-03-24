@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:44:10 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/24 12:55:26 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/24 14:44:03 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,39 +43,39 @@ bool	isInt(const std::string& input)
 	{
 		if (!std::isdigit(input[i]))
 			return (false);
-	i++;
+		i++;
 	}
 	return (true);
 
 }
-
 bool	isFloat(const std::string& input)
 {
-	size_t	i = 0;
-	size_t	n
-	bool	dotFound = false;
+	size_t		i = 0;
+	bool dotFound = false;
 
-	if (input.back() != 'f')
-		return (false);
-
-	//	removes 'f' from input (example: 0.0f = 0.0)
-	std::string	input = input.substr(0, input.size() - 1);
-	
 	if (input.empty())
 		return (false);
 
-	if (input[0] == '+' || input[0] == '-')
+	if (input[input.size() - 1] != 'f')
+		return (false);
+
+	std::string number = input.substr(0, input.size() - 1);
+
+	if (number.empty())
+		return (false);
+
+	if (number[0] == '+' || number[0] == '-')
 		i++;
 
-	while (i < input.size)
+	while (i < number.size())
 	{
-		if (input[i] == '.')
+		if (number[i] == '.')
 		{
-			if (dotFound) 
+			if (dotFound)
 				return (false);
 			dotFound = true;
 		}
-		else if (!std::isdigit(input[i]))
+		else if (!std::isdigit(number[i]))
 			return (false);
 		i++;
 	}
@@ -86,8 +86,11 @@ bool	isDouble(const std::string& input)
 {
 	size_t	i = 0;
 	bool	dotFound = false;
-	
-	if (input.back() == 'f')
+
+	if (input.empty())
+		return (false);
+
+	if (input[input.size() - 1] == 'f')
 		return (false);
 
 	if (input[0] == '+' || input[0] == '-')
@@ -97,7 +100,7 @@ bool	isDouble(const std::string& input)
 	{
 		if (input[i] == '.')
 		{
-			if (dotFound) 
+			if (dotFound)
 				return (false);
 			dotFound = true;
 		}
@@ -105,6 +108,7 @@ bool	isDouble(const std::string& input)
 			return (false);
 		i++;
 	}
+
 	return (dotFound);
 }
 

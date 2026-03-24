@@ -21,6 +21,7 @@ CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -I$(INC_DIR)
 
 # sources and objects
 SRCS			=		ParseInputType.cpp \
+						PrintConversion.cpp \
 						ScalarConverter.cpp \
 						main.cpp
 

@@ -6,12 +6,12 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:39:48 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/20 11:21:57 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/20 14:22:39 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		ROBOTOMYREQUESTFORM
-# define	ROBOTOMYREQUESTFORM
+#ifndef		ROBOTOMYREQUESTFORM_HPP
+# define	ROBOTOMYREQUESTFORM_HPP
 
 #include "../inc/AForm.hpp"
 #include "../inc/Bureaucrat.hpp"
