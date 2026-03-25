@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:23:42 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/24 15:53:19 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 08:05:09 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ ScalarConverter::~ScalarConverter()
 	std::cout << "[ScalarConverter]\tdestructor called" << std::endl;
 }
 
-
-
-double convertToDouble(const std::string& input, InputType type)
+double	convertToDouble(const std::string& input, InputType type)
 {
 	switch (type)
 	{
@@ -67,13 +65,16 @@ double convertToDouble(const std::string& input, InputType type)
 		case PSEUDO:
 			if (input == "nan" || input == "nanf")
 				return std::numeric_limits<double>::quiet_NaN();
-			if (input == "+inf" || input == "+inff")
+			else if (input == "+inf" || input == "+inff")
 				return std::numeric_limits<double>::infinity();
-			if (input == "-inf" || input == "-inff")
+			else if (input == "-inf" || input == "-inff")
 				return -std::numeric_limits<double>::infinity();
-
-		default:
+		else
 			throw std::invalid_argument("Invalid input");
+		
+		case INVALID:
+			case INVALID:
+				throw std::invalid_argument("Error: Input string is not a valid scalar literal.");
 	}
 }
 

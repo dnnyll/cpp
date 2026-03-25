@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:50:52 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/24 15:56:07 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 07:58:04 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // #include	<string>
 // #include	<cstdlib>
 // #include	<stdexcept>
-// #include	<limits>
+#include	<limits>
 
 void	printChar(double input)
 {
@@ -38,8 +38,21 @@ void	printChar(double input)
 
 void	printInt(double input)
 {
+	int	inputValue = static_cast<int>(input);
+
 	std::cout << "int: ";
 	
+	if (inputValue < std::numeric_limits<int>::min() || inputValue > std::numeric_limits<int>::max())
+	{
+		std::cout << "out of bounds" << std::endl;
+		return ;
+	}
+	if (!std::isprint(inputValue))
+	{
+		std::cout << "non displayable" << std::endl;
+	}
+	std::cout << input << std::endl;
+		
 }
 
 // void	printFloat(double input)
