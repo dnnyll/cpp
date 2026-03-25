@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:50:52 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/25 13:47:04 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 13:50:12 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	printChar(double input)
 		std::cout << "non displayable" << std::endl;
 		return ;
 	}
-	std::cout << c << std::endl; 
+	std::cout << ('\'') << c << ('\'') << std::endl; 
 }
 
 void	printInt(double input)
