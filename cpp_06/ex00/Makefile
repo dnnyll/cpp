@@ -17,7 +17,7 @@ OBJ_DIR			=		obj
 BIN_DIR			=		bin
 NAME			=		Casts
 CXX				=		c++
-CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -I$(INC_DIR)
+CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -pedantic-errors -I$(INC_DIR)
 
 # sources and objects
 SRCS			=		ParseInputType.cpp \

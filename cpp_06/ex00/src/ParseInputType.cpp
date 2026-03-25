@@ -6,15 +6,16 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:44:10 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/24 14:44:03 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 12:10:41 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../inc/ScalarConverter.hpp"
 #include	"../inc/ParseInputType.hpp"
-
 #include	<string>
 #include	<cctype>
+#include	<limits>
+#include	<cstdlib>
 
 bool	isChar(const std::string& input)
 {
@@ -45,9 +46,16 @@ bool	isInt(const std::string& input)
 			return (false);
 		i++;
 	}
-	return (true);
+	//	quick conversion for limits of int
+	//	avoids convert error, of limit int is no longer considered an int
+	double	inputValue = atof(input.c_str());
 
+		if (inputValue > std::numeric_limits<int>::max() ||
+			inputValue < std::numeric_limits<int>::min())
+			return (false);
+	return (true);
 }
+
 bool	isFloat(const std::string& input)
 {
 	size_t		i = 0;
@@ -108,15 +116,17 @@ bool	isDouble(const std::string& input)
 			return (false);
 		i++;
 	}
-
 	return (dotFound);
 }
 
 bool	isPseudoLiteral(const std::string& input)
 {
-	return (input == "nan"  || input == "nanf"  ||
-		input == "+inf" || input == "+inff" ||
-		input == "-inf" || input == "-inff");
+	return	(input == "nan" ||
+			input == "nanf" ||
+			input == "+inf" ||
+			input == "+inff" ||
+			input == "-inf" ||
+			input == "-inff");
 }
 
 InputType	detectType(const std::string& input)

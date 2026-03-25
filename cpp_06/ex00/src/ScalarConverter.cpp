@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:23:42 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/25 08:05:09 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 12:00:46 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ double	convertToDouble(const std::string& input, InputType type)
 			throw std::invalid_argument("Invalid input");
 		
 		case INVALID:
-			case INVALID:
-				throw std::invalid_argument("Error: Input string is not a valid scalar literal.");
+			throw std::invalid_argument("Error: Input string is not a valid scalar literal.");
 	}
 }
 
@@ -84,13 +83,54 @@ void	ScalarConverter::convert(const std::string& input)
 	
 	if (type == INVALID)
 	{
-		// invalidInput();
+		printInvalidInput();
 		return ;
 	}
-	
+	std::cout << "debug input: " << input << std::endl;
+	std::cout << "debug type: " << type << std::endl;
+
 	double	inputValue = convertToDouble(input, type);
+	std::cout << "debug inputValue: " << inputValue << std::endl;
+
 	printChar(inputValue);
-	// printInt(inputValue);
-	// printFloat(inputValue);
+	printInt(inputValue);
+	printFloat(inputValue);
 	// printDouble(inputValue);
 }
+
+// void	ScalarConverter::convert(const std::string& input)
+// {
+// 	InputType type = detectType(input);
+
+// 	switch (type)
+// 	{
+// 		case CHAR:
+// 		case INT:
+// 		case FLOAT:
+// 		case DOUBLE:
+// 		{
+// 			double value = convertToDouble(input, type);
+// 			printChar(value);
+// 			printInt(value);
+// 			// printFloat(value);
+// 			// printDouble(value);
+// 			break ;
+// 		}
+
+// 		case PSEUDO:
+// 		{
+// 			double value = convertToDouble(input, type);
+// 			printChar(value);   // will print "impossible"
+// 			printInt(value);    // will print "impossible"
+// 			// printFloat(value);  // nanf / +inff / -inff
+// 			// printDouble(value); // nan / +inf / -inf
+// 			break;
+// 		}
+
+// 		case INVALID:
+// 		default:
+// 			// invalidInput();
+// 			std::cout << "Error: invalid input\n";
+// 			break;
+// 	}
+// }
