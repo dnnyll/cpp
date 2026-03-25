@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:50:52 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/25 13:45:28 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 13:47:04 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,7 @@ void	printFloat(double input)
 		std::cout << "-inff" << std::endl;
 		return ;
 	}
-	if ((input) == -0.0)
-	{
-		std::cout << "0.0f" << std::endl;
-		return ;
-	}
+
 	float	f = static_cast<float>(input);
 	
 	std::cout << f;
@@ -106,11 +102,6 @@ void	printDouble(double input)
 	if ((input) == -std::numeric_limits<double>::infinity())
 	{
 		std::cout << "-inf" << std::endl;
-		return ;
-	}
-	if ((input) == -0.0)
-	{
-		std::cout << "0.0" << std::endl;
 		return ;
 	}
 	
