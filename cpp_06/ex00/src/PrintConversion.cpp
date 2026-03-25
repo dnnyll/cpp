@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:50:52 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/25 11:58:19 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 13:45:28 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	printChar(double input)
 void	printInt(double input)
 {
 	std::cout << "int: ";
-	std::cout << "debug: " << input << std::endl;
 	if (std::isnan(input) ||
 		input > std::numeric_limits<int>::max() ||
 		input < std::numeric_limits<int>::min())
@@ -75,6 +74,11 @@ void	printFloat(double input)
 		std::cout << "-inff" << std::endl;
 		return ;
 	}
+	if ((input) == -0.0)
+	{
+		std::cout << "0.0f" << std::endl;
+		return ;
+	}
 	float	f = static_cast<float>(input);
 	
 	std::cout << f;
@@ -85,10 +89,34 @@ void	printFloat(double input)
 	std::cout << "f" << std::endl;
 }
 
-// void	printFloat(double input)
-// {
-// 	if (std::isnan(input))
-// 	{
-// 		std::cout << "nan"
-// 	}
-// }
+void	printDouble(double input)
+{
+	std::cout << "double: ";
+
+	if (std::isnan(input))
+	{
+		std::cout << "nan" << std::endl;
+		return ;
+	}
+	if (input == std::numeric_limits<double>::infinity())
+	{
+		std::cout << "+inf" << std::endl;
+		return ;
+	}
+	if ((input) == -std::numeric_limits<double>::infinity())
+	{
+		std::cout << "-inf" << std::endl;
+		return ;
+	}
+	if ((input) == -0.0)
+	{
+		std::cout << "0.0" << std::endl;
+		return ;
+	}
+	
+	std::cout << input;
+
+	if (input == static_cast<long>(input))
+		std::cout << ".0" << std::endl;
+
+}

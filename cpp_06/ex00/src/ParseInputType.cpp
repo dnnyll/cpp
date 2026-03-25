@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:44:10 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/25 12:10:41 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/25 13:41:00 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,16 @@ bool	isDouble(const std::string& input)
 			if (dotFound)
 				return (false);
 			dotFound = true;
+			if (!std::isdigit(input[i + 1]))
+				return (false);
 		}
 		else if (!std::isdigit(input[i]))
 			return (false);
 		i++;
 	}
+	// std::cout << "debug: " << input[i] << std::endl;
+	// if((dotFound == true) && !std::isdigit(input[i]))
+	// 	return (false);
 	return (dotFound);
 }
 
