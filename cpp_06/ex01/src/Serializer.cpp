@@ -6,13 +6,12 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 07:47:53 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/26 08:02:39 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/26 09:26:23 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../inc/Serializer.hpp"
 #include	<iostream>
-#include	<cstdint>
 
 //	default constructor
 Serializer::Serializer()
@@ -41,18 +40,13 @@ Serializer::~Serializer()
 	std::cout << "[Serializer]\tdestructor called" << std::endl;
 }
 
-Casting: Use reinterpret_cast for these conversions. It is the C++ standard way to cast between pointers and integers.
-Example: reinterpret_cast<uintptr_t>(ptr)
-Example: reinterpret_cast<Serializer*>(raw)
-
 //	takes a memory address(pointer) -> converts to a raw number
-static	uintptr_t serialize(Serializer* ptr)
+uintptr_t	Serializer::serialize(Data* ptr)
 {
-	
+	return (reinterpret_cast<uintptr_t>(ptr));
 }
 //	takes a raw number -> converts to a memory address(pointer)
-
-static	Serializer* deserialize(uintptr_t raw)
+Data*	Serializer::deserialize(uintptr_t raw)
 {
-	
+	return(reinterpret_cast<Data*>(raw));
 }

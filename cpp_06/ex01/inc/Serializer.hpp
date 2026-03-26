@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serialize.hpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,23 +13,23 @@
 #ifndef		SERIALIZE_HPP
 # define	SERIALIZE_HPP
 
-class	Serialize
+#include	"../inc/Data.hpp"
+#include	<stdint.h> 
+
+class	Serializer
 {
 	private:
 	
 	//OCF
-	Serialize();
-	Serialize(const Serialize &copy);
-	Serialize	&operator=(const Serialize &source);
-	~Serialize();
+	Serializer();
+	Serializer(const Serializer &copy);
+	Serializer	&operator=(const Serializer &source);
+	~Serializer();
 
 	public:
 
 	static	uintptr_t serialize(Data* ptr);
 	static	Data* deserialize(uintptr_t raw);
 };
-
-
-
 
 #endif

@@ -20,10 +20,8 @@ CXX				=		c++
 CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98 -pedantic-errors -I$(INC_DIR)
 
 # sources and objects
-SRCS			=		ParseInputType.cpp \
-						PrintConversion.cpp \
-						ScalarConverter.cpp \
-						main.cpp
+SRCS			=		main.cpp \
+						Serializer.cpp 
 
 OBJS			=		$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 

@@ -6,30 +6,16 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:39:26 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/26 07:51:34 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/26 09:37:02 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		DATA_HPP
 # define	DATA_HPP
 
-class	Data
+struct	Data
 {
-	private:
-	
-	//OCF
-	Data();
-	Data(const Data &copy);
-	Data	&operator=(const Data &source);
-	~Data();
-
-	public:
-
-	int	convertee;
-	
+	int		intValue;
 };
-
-
-
 
 #endif
