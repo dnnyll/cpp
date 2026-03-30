@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 08:50:34 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/27 11:02:28 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/30 08:32:32 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ class	Array
 	Array(const Array &source);
 	Array	&operator=(const Array &source);
 	~Array();
+
+	T*	getArray();
+
 };
 
 #include	"../src/Array.tpp"

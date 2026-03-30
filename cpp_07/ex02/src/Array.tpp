@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:05:55 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/27 11:05:34 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/30 08:31:36 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,10 @@ Array<T>::~Array()
 {
 	std::cout << "[Array]\tdestructor called" << std::endl;
 	delete[]	_array;
+}
+
+template<typename T>
+T*	Array<T>::getArray()
+{
+	return _array;
 }
