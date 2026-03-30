@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 08:50:34 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/30 08:32:32 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/30 10:37:39 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,27 @@ class	Array
 	
 	public:
 	
+	//	OCF
 	Array();
+	Array(unsigned int n);
 	Array(const Array &source);
 	Array	&operator=(const Array &source);
 	~Array();
 
+	//	methods
 	T*	getArray();
+	unsigned int	getSize() const;
+	const T& operator[](unsigned int inputIndex) const;
+	T& operator[](unsigned int inputIndex);
 
+	class	OutBoundsException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return "Error :Index out of bounds";
+			}
+	};
 };
 
 #include	"../src/Array.tpp"

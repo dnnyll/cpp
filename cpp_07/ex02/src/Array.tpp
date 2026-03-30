@@ -6,17 +6,26 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:05:55 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/30 08:31:36 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/30 10:37:28 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../inc/Array.hpp"
 
-//	constructor
+//	default constructor
 template<typename T>
 Array<T>::Array() : _array(0), _size(0)
 {
 	std::cout << "[Array]\tdefault constructor called" << std::endl;
+}
+
+//	size constructor
+template<typename T>
+Array<T>::Array(unsigned int n): _array(0), _size(n)
+{
+	std::cout << "[Array]\tsize constructor called" << std::endl;
+	if (_size > 0)
+		_array = new T[_size];
 }
 
 //	copy constructor
@@ -73,5 +82,29 @@ Array<T>::~Array()
 template<typename T>
 T*	Array<T>::getArray()
 {
-	return _array;
+	return (_array);
+}
+
+template<typename T>
+unsigned int	Array<T>::getSize() const
+{
+	return (_size);
+}
+
+//	read only operator[]
+template<typename T>
+const T& Array<T>::operator[](unsigned int inputIndex) const
+{
+	if (inputIndex >= _size)
+		throw OutBoundsException();
+	return (_array[inputIndex]);
+}
+
+//	read and write operator[]
+template<typename T>
+T& Array<T>::operator[](unsigned int inputIndex)
+{
+	if (inputIndex >= _size)
+		throw OutBoundsException();
+	return (_array[inputIndex]);
 }
