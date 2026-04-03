@@ -1,14 +1,18 @@
-# modules
-MODULES = cpp_00 cpp_01 cpp_02 cpp_03 cpp_04 cpp_05 cpp_06 cpp_07 cpp_08 cpp_09
+# =========================
+# MODULES / DIRECTORIES
+# =========================
 
-# detect all exercises
+MODULES = cpp_00 cpp_01 cpp_02 cpp_03 cpp_04 cpp_05 cpp_06 cpp_07 cpp_08 cpp_09
 SUBDIRS := $(foreach mod,$(MODULES),$(wildcard $(mod)/ex*))
 
-# ===== BUILD =====
+# =========================
+# BUILD
+# =========================
 
 all:
 	@for dir in $(SUBDIRS); do \
-		$(MAKE) -C $$dir; \
+		echo "Building $$dir"; \
+		$(MAKE) -C $$dir || true; \
 	done
 
 clean:
@@ -26,22 +30,36 @@ fclean:
 
 re:
 	@for dir in $(SUBDIRS); do \
+		echo "Rebuilding $$dir"; \
 		$(MAKE) -C $$dir re || true; \
 	done
 
-# ===== GIT =====
+# =========================
+# GIT
+# =========================
 
-# usage: make push COMMSG="your message"
 push: fclean
 	@DATE=$$(date "+%Y-%m-%d %Hh%Mm%S"); \
+	printf "Commit message > "; \
+	read MSG; \
+	MSG=$${MSG:-update}; \
 	git add -A; \
-	git commit -m "$$DATE $(COMMSG)"; \
+	git commit -m "$$DATE $$MSG" || echo "Nothing to commit"; \
 	git push
 
 fetch:
 	git fetch
 	git pull
 
-# ===== PHONY =====
+# =========================
+# PHONY
+# =========================
 
 .PHONY: all clean fclean re push fetch
+
+#make          # build everything
+#make clean    # clean object files
+#make fclean   # remove obj/ and bin/ directories
+#make re       # rebuild everything
+#make push     # interactive git commit + push
+#make fetch    # git fetch + pull
