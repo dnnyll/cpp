@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:05:55 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/30 10:37:28 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/30 11:55:37 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Array<T>::Array(const Array<T> &copy) : _array(0), _size(copy._size)
 	if(_size > 0)
 	{
 		_array = new T[_size];
-		int	i = 0;
+		unsigned int	i = 0;
 		while (_size > i)
 		{
 			_array[i] = copy._array[i];
@@ -58,7 +58,7 @@ Array<T>& Array<T>::operator=(const Array<T>& source)
 		if (_size > 0)
 		{
 			_array = new T[_size];
-			int	i = 0;
+			unsigned int	i = 0;
 			while (_size > i)
 			{
 				_array[i] = source._array[i];
@@ -79,12 +79,14 @@ Array<T>::~Array()
 	delete[]	_array;
 }
 
+//	get array content
 template<typename T>
 T*	Array<T>::getArray()
 {
 	return (_array);
 }
 
+//	get array size
 template<typename T>
 unsigned int	Array<T>::getSize() const
 {

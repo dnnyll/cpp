@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 10:49:21 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/18 13:40:32 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/30 12:36:31 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main()
 		std::cout << b1 << std::endl;
 
 		Bureaucrat	b2("Bob", 151);	//	throw GradeTooLowException
+		std::cout << b2 <<std::endl;
 	}
 	catch (std::exception &e)
 	{

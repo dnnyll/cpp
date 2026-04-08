@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 08:50:34 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/30 10:37:39 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/30 11:55:01 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ class	Array
 		public:
 			virtual const char* what() const throw()
 			{
-				return "Error :Index out of bounds";
+				return ("error :index out of bounds");
 			}
 	};
 };

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 10:49:21 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/20 13:46:35 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/31 12:48:15 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	main()
 	{
 		try
 		{
-			Bureaucrat	b1("Coy", 30);
+			Bureaucrat	b1("Coy", 146);
 			ShrubberyCreationForm a ("home");
 		
-			b1.incrementGrade();
 			b1.executeForm(a);
 			b1.signForm(a);
-			b1.executeForm(a);
+			b1.incrementGrade();
+			b1.signForm(a);
 		}
 		catch(const std::exception& e)
 		{
@@ -44,6 +44,7 @@ int	main()
 		{
 			Bureaucrat	b2("Coy", 45);
 			RobotomyRequestForm b ("drill");
+
 			b2.signForm(b);
 			b2.executeForm(b);
 		}
@@ -70,6 +71,7 @@ int	main()
 		{
 			Bureaucrat	b3("Coy", 1);
 			PresidentialPardonForm c ("Coy");
+
 			b3.signForm(c);
 			b3.executeForm(c);
 		}

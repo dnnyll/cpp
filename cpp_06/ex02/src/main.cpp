@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 10:32:15 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/26 12:03:10 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/03/26 13:43:59 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include	<iostream>
 #include	<cstdlib>
 #include	<ctime>
+
 
 //	declaring global functions 
 Base*	generate(void);
