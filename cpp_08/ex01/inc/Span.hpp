@@ -1,28 +1,42 @@
-#ifndef		SPAN_HPP
-# define	SPAN_HPP
+#ifndef SPAN_HPP
+# define SPAN_HPP
 
-#include	<iostream>
-#include	<string>
-#include	<vector>
+#include <iostream>
+#include <vector>
+#include <stdexcept>
 
 class	Span
 {
-	private:
+private:
+	unsigned int		_N;
+	std::vector<int>	_numbers;
 
-		unsigned int		_N;
-		unsigned int		_size;
-		std::vector<int>	_numbers;
+public:
+	Span(unsigned int N);
+	Span(const Span& copy);
+	Span& operator=(const Span& copy);
+	~Span();
 
-	public:
+	void addNumber(int value);
 
-		Span(unsigned int value);
-		Span(const Span& copy);
-		Span& operator=(const Span& copy);
-		~Span();
+	template <typename Iterator>
+	void addNumbers(Iterator begin, Iterator end);
 
-		void	addNumber(int value);
-		shorttestSpan();
-		longestestSpan();
+	int shortestSpan();
+	int longestSpan();
+};
 
+template	<typename Iterator>
+void Span::addNumbers(Iterator begin, Iterator end)
+{
+	while (begin != end)
+	{
+		if (this->_numbers.size() >= this->_N)
+			throw std::runtime_error("size overflow");
+
+		this->_numbers.push_back(*begin);
+		++begin;
+	}
 }
+
 #endif

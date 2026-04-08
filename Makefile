@@ -39,12 +39,12 @@ re:
 # =========================
 
 push: fclean
-	@DATE=$$(date "+%Y-%m-%d %Hh%Mm%S"); \
-	printf "Commit message > "; \
+	@DATE=$$(date "+%Y-%m-%d %Hh%Mm%S -"); \
+	printf "enter commit message > "; \
 	read MSG; \
 	MSG=$${MSG:-update}; \
 	git add -A; \
-	git commit -m "$$DATE $$MSG" || echo "Nothing to commit"; \
+	git commit -m "$$DATE $$MSG" || echo "nothing to commit"; \
 	git push
 
 fetch:

@@ -1,9 +1,4 @@
 #include	"../inc/Span.hpp"
-#include	<iostream>
-#include	<vector>
-#include	<list>
-#include	<deque>
-#include	<stdexcept>
 
 int main()
 {
