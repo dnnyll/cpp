@@ -17,13 +17,13 @@ public:
 	Span& operator=(const Span& copy);
 	~Span();
 
-	void addNumber(int value);
+	void	addNumber(int value);
 
 	template <typename Iterator>
-	void addNumbers(Iterator begin, Iterator end);
+	void	addNumbers(Iterator begin, Iterator end);
 
-	int shortestSpan();
-	int longestSpan();
+	int	shortestSpan();
+	int	longestSpan();
 };
 
 template	<typename Iterator>

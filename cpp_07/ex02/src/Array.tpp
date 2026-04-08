@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:05:55 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/30 11:55:37 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/08 14:31:02 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ Array<T>& Array<T>::operator=(const Array<T>& source)
 		else
 			_array = NULL;
 	}
-	return *this;
+	return (*this);
 }
 
 //	destructor
