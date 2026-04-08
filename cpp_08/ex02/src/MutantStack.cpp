@@ -1,2 +1,0 @@
-#include	"../inc/MutantStack.hpp"
-
