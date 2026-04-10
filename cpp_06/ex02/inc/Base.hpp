@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 09:58:14 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/26 11:37:42 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:11:03 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ class	Base
 {
 	public:
 
-	virtual ~Base();
+		Base();
+		virtual	~Base();
 };
 
 #endif

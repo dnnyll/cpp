@@ -6,12 +6,17 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 15:01:56 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/26 15:22:54 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/10 11:00:14 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../inc/TemplateOperations.hpp"
 #include	"iostream"
+
+/*
+	::swap(...) looks for swap in the global namespace only
+	this avoid using std::swap for example.
+*/
 
 int	main()
 {
@@ -34,6 +39,7 @@ int	main()
 		::max(a, b);	
 		std::cout << "max(a, b) =\t" << ::max(a, b) << std::endl;
 		std::cout << std::endl;
+
 		char	c;
 		char	h;
 		
@@ -51,7 +57,7 @@ int	main()
 		std::cout << "max(c, h) =\t" << ::max(c, h) << std::endl;
 		std::cout<< "\n==========================================\n" << std::endl;
 	}
-	
+
 	{
 		std::cout<< "subject's tests" << std::endl;
 
@@ -67,7 +73,6 @@ int	main()
 		std::cout << "c = " << c << ", d = " << d << std::endl;
 		std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
 		std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
-
 	}
 	return (0);
 }

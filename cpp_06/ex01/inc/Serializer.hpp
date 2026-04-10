@@ -20,16 +20,17 @@ class	Serializer
 {
 	private:
 	
-	//OCF
-	Serializer();
-	Serializer(const Serializer &copy);
-	Serializer	&operator=(const Serializer &source);
-	~Serializer();
+		//	OCF
+		Serializer();
+		Serializer(const Serializer &copy);
+		Serializer	&operator=(const Serializer &source);
+		~Serializer();
 
 	public:
 
-	static	uintptr_t serialize(Data* ptr);
-	static	Data* deserialize(uintptr_t raw);
+		//	methods
+		static	uintptr_t serialize(Data* ptr);
+		static	Data* deserialize(uintptr_t raw);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 14:53:27 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/26 15:14:39 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:54:36 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	swap(T &a, T &b)
 	a = b;
 	b = temp;
 }
+
 template<typename T>
 T	min(T &a, T &b)
 {
@@ -35,6 +36,7 @@ T	min(T &a, T &b)
 		return (b);
 
 }
+
 template<typename T>
 T	max(T &a, T &b)
 {
