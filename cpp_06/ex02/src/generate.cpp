@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 10:22:15 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/26 12:03:31 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/10 08:12:48 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include	"../inc/C.hpp"
 #include	<cstdlib>
 
-Base* generate(void)
+Base*	generate(void)
 {
 	int	decide = rand() % 3;
 

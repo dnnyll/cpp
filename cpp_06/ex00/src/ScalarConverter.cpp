@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:23:42 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/03/25 13:32:22 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/10 07:50:15 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ double	convertToDouble(const std::string& input, InputType type)
 				return std::numeric_limits<double>::infinity();
 			else if (input == "-inf" || input == "-inff")
 				return -std::numeric_limits<double>::infinity();
-		else
-			throw std::invalid_argument("Invalid input");
+			throw std::invalid_argument("invalid pseudo literal");
 		
 		case INVALID:
-			throw std::invalid_argument("Error: Input string is not a valid scalar literal.");
+			throw std::invalid_argument("error: Input string is not a valid scalar literal.");
 	}
+	throw std::invalid_argument("unreacheable");
 }
 
 void	ScalarConverter::convert(const std::string& input)
