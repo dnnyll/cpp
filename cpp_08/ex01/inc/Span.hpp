@@ -24,6 +24,7 @@ public:
 
 	int	shortestSpan();
 	int	longestSpan();
+
 };
 
 template	<typename Iterator>

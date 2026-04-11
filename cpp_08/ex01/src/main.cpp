@@ -21,6 +21,7 @@ int	main()
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
+
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
@@ -35,8 +36,8 @@ int	main()
 		Span	rangeTest(size);
 		rangeTest.addNumbers(vect.begin(), vect.end());
 
-		rangeTest.shortestSpan();
-		rangeTest.longestSpan();
+		std::cout << rangeTest.shortestSpan() << std::endl;
+		std::cout << rangeTest.longestSpan() << std::endl;
 	}
 	{
 		std::cout << "\n_________add range overflow test" << std::endl;
@@ -54,26 +55,34 @@ int	main()
 		}
 	}
 	{
-		#define	N_VALUES	0
-
-		std::cout << "\n_________random large test" << std::endl;
-
-
-		Span	giantTest = N_VALUES;
-		int		start;
-		int		i;
-
-		start = get_time();
-		i = 0;
-		std::srand(start);
-		while (i < N_VALUES)
+		try
 		{
-			giantTest.addNumber(std::rand());
-			i++;
+			#define	N_VALUES	1001
+
+			std::cout << "\n_________random large test" << std::endl;
+
+
+			Span	giantTest = N_VALUES;
+			int		start;
+			int		i;
+
+			start = get_time();
+			i = 0;
+			std::srand(start);
+			while (i < N_VALUES)
+			{
+				giantTest.addNumber(std::rand());
+				i++;
+			}
+			start = get_time();
+
+			std::cout << giantTest.shortestSpan() << std::endl;
+			std::cout << giantTest.longestSpan() << std::endl;
 		}
-		start = get_time();
-		// giantTest.shortestSpan();
-		giantTest.longestSpan();
+		catch (const std::exception& e) 
+		{
+			std::cerr << "error:\t" << e.what() << '\n';
+		}
 	}
 	return (0);
 }

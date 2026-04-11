@@ -41,97 +41,25 @@ void	Span::addNumber(int value)
 	this->_numbers.push_back(value);
 }
 
-// int	Span::shortestSpan()
-// {
-// 	if (this->_numbers.size() < 2)
-// 		throw std::runtime_error("error: Span contains less than 2 elements");
-
-// 	std::vector<int> copy = this->_numbers;
-
-// 	//	debug unsorted values
-// 	std::cout << "unsorted values: ";
-// 	for (size_t i = 0; i < copy.size(); ++i)
-// 		std::cout << copy[i] << " ";
-// 	std::cout << std::endl;
-
-// 	std::sort(copy.begin(), copy.end());
-
-// 	//	debug sorted values
-// 	std::cout << "sorted values:   ";
-// 	for (size_t i = 0; i < copy.size(); ++i)
-// 		std::cout << copy[i] << " ";
-// 	std::cout << std::endl;
-
-// 	int minSpan = copy[1] - copy[0];
-// 	std::cout << "initial min: " << minSpan << std::endl;
-
-// 	size_t	i = 1;
-
-// 	while (i < copy.size())
-// 	{
-// 		int	diff = copy[i] - copy[i - 1];
-
-// 		//	debug comparison
-// 		std::cout << "comparing: " << copy[i - 1]
-// 				<< " and " << copy[i]
-// 				<< " -> diff = " << diff << std::endl;
-
-// 		if (diff < minSpan)
-// 		{
-// 			std::cout << "new min found: " << diff << std::endl;
-// 			minSpan = diff;
-// 		}
-// 		++i;
-// 	}
-
-// 	std::cout << "final result longest span: " << span
-// 		<< " (max: " << maxVal
-// 		<< ", min: " << minVal << ")" << std::endl;
-
-// 	return (minSpan);
-// }
-
 int	Span::shortestSpan()
 {
 	if (this->_numbers.size() < 2)
 		throw std::runtime_error("error: Span contains less than 2 elements");
 
 	std::vector<int> copy = this->_numbers;
-
-	// debug unsorted values
-	std::cout << "unsorted values: ";
-	for (size_t i = 0; i < copy.size(); ++i)
-		std::cout << copy[i] << " ";
-	std::cout << std::endl;
-
-	// Essential: Sort to find differences between neighbors
 	std::sort(copy.begin(), copy.end());
 
-	std::cout << "sorted values: ";
-	for (size_t i = 0; i < copy.size(); ++i)
-		std::cout << copy[i] << " ";
-	std::cout << std::endl;
+	int		minSpan = copy[1] - copy[0];
+	size_t	i = 1;
 
-	int minSpan = copy[1] - copy[0];
-
-	size_t i = 1;
 	while (i < copy.size() - 1)
 	{
-		int currentSpan = copy[i + 1] - copy[i];
+		int	currentSpan = copy[i + 1] - copy[i];
 		
-		std::cout << "checking pair (" << copy[i] << ", " << copy[i+1] << "): diff " << currentSpan << std::endl;
-
 		if (currentSpan < minSpan)
-		{
 			minSpan = currentSpan;
-			std::cout << "new min span found: " << minSpan << std::endl;
-		}
 		++i;
 	}
-
-	std::cout << "\nfinal result shortest span: " << minSpan << std::endl;
-	std::cout << std::endl;
-
 	return (minSpan);
 }
 
@@ -142,39 +70,21 @@ int	Span::longestSpan()
 
 	std::vector<int> copy = this->_numbers;
 
-	// debug unsorted values
-	std::cout << "unsorted values: ";
-	for (size_t i = 0; i < copy.size(); ++i)
-		std::cout << copy[i] << " ";
-	std::cout << std::endl;
-
 	int	minVal = copy[0];
 	int	maxVal = copy[0];
 
 	size_t	i = 1;
 	while (i < copy.size())
 	{
-		std::cout << "checking: " << copy[i] << std::endl;
-
 		if (copy[i] < minVal)
-		{
 			minVal = copy[i];
-			std::cout << "new min found: " << minVal << std::endl;
-		}
 
 		if (copy[i] > maxVal)
-		{
 			maxVal = copy[i];
-			std::cout << "new max found: " << maxVal << std::endl;
-		}
 		++i;
 	}
 
-	int	span = maxVal - minVal;
+	int	maxSpan = maxVal - minVal;
 
-	std::cout << "\nfinal result longest span: " << span
-			<< " (max: " << maxVal
-			<< ", min: " << minVal << ")\n" << std::endl;
-
-	return (span);
+	return (maxSpan);
 }
