@@ -6,7 +6,7 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 08:50:34 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/04/08 14:30:33 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/11 11:13:34 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,16 @@ class	Array
 	class	OutBoundsException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
+			virtual const char*	what() const throw()
 			{
 				return ("error :index out of bounds");
 			}
 	};
 };
 
+//	this file is meant to be #included, not compiled directly(stand-alone)
+//	compiler reads the class declaration → knows what Array<T> is
+//	then reads the method implementations → can attach them to the class it just learned about
 #include	"../src/Array.tpp"
 
 #endif

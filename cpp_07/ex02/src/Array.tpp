@@ -6,11 +6,9 @@
 /*   By: daniefe2 <daniefe2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:05:55 by daniefe2          #+#    #+#             */
-/*   Updated: 2026/04/08 14:31:02 by daniefe2         ###   ########.fr       */
+/*   Updated: 2026/04/11 11:11:39 by daniefe2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include	"../inc/Array.hpp"
 
 //	default constructor
 template<typename T>
