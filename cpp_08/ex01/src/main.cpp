@@ -57,7 +57,7 @@ int	main()
 	{
 		try
 		{
-			#define	N_VALUES	1001
+			#define	N_VALUES	10001
 
 			std::cout << "\n_________random large test" << std::endl;
 
