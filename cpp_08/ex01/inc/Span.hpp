@@ -1,9 +1,9 @@
-#ifndef SPAN_HPP
-# define SPAN_HPP
+#ifndef		SPAN_HPP
+# define	SPAN_HPP
 
-#include <iostream>
-#include <vector>
-#include <stdexcept>
+#include	<iostream>
+#include	<vector>
+#include	<stdexcept>
 
 class	Span
 {
@@ -27,17 +27,16 @@ public:
 
 };
 
-template	<typename Iterator>
+//	std::distance calcul num of iter between input elements
+template <typename Iterator>
 void Span::addNumbers(Iterator begin, Iterator end)
 {
-	while (begin != end)
-	{
-		if (this->_numbers.size() >= this->_N)
-			throw std::runtime_error("size overflow");
+	size_t	distance = std::distance(begin, end);
 
-		this->_numbers.push_back(*begin);
-		++begin;
-	}
+	if (this->_numbers.size() + distance > this->_N)
+		throw std::runtime_error("size overflow");
+
+	this->_numbers.insert(this->_numbers.end(), begin, end);
 }
 
 #endif

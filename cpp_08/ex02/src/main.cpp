@@ -54,8 +54,10 @@ int	main()
 		std::cout << "printing top element" << std::endl;
 		std::cout << stackA.top() << std::endl;
 		std::cout << "\nsetting begin and end iterators" << std::endl;
+		
 		MutantStack<int>::iterator it = stackA.begin();
 		MutantStack<int>::iterator ite = stackA.end();
+
 		std::cout << "iterating x2 ++" << std::endl;
 		++it;
 		++it;
@@ -77,76 +79,88 @@ int	main()
 		}
 		std::cout << "_________" << std::endl;
 	}
-{
-	std::cout << "\n_________copy test" << std::endl;
-	
-	MutantStack<int> originalStack;
-	originalStack.push(1);
-	originalStack.push(2);
-	originalStack.push(3);
-
-	std::cout << "Original stack:" << std::endl;
-	for (MutantStack<int>::iterator it = originalStack.begin(); it != originalStack.end(); ++it)
-		std::cout << *it << std::endl;
-
-	// Copy constructor
-	MutantStack<int> copyStack = originalStack;
-
-	// Modify copy
-	copyStack.pop();
-	copyStack.push(42);
-
-	std::cout << "\nModified copyStack:" << std::endl;
-	MutantStack<int>::iterator it1 = copyStack.begin();
-	MutantStack<int>::iterator ite1 = copyStack.end();
-	while (it1 != ite1)
 	{
-		std::cout << *it1 << std::endl;
-		++it1;
+		std::cout << "\n_________copy test" << std::endl;
+		
+		MutantStack<int> originalStack;
+		originalStack.push(1);
+		originalStack.push(2);
+		originalStack.push(3);
+
+		std::cout << "original stack:" << std::endl;
+
+		MutantStack<int>::iterator it = originalStack.begin();
+		MutantStack<int>::iterator ite = originalStack.end();
+		while (it != ite)
+		{ 
+			std::cout << *it << std::endl;
+			++it;
+		}
+
+		MutantStack<int> copyStack = originalStack;
+
+		copyStack.pop();
+		copyStack.push(42);
+
+		std::cout << "\nmodified copyStack:" << std::endl;
+
+		MutantStack<int>::iterator it1 = copyStack.begin();
+		MutantStack<int>::iterator ite1 = copyStack.end();
+
+		while (it1 != ite1)
+		{
+			std::cout << *it1 << std::endl;
+			++it1;
+		}
+
+		std::cout << "\noriginal stack after modifying copy:" << std::endl;
+
+		MutantStack<int>::iterator it2 = originalStack.begin();
+		MutantStack<int>::iterator ite2 = originalStack.end();
+
+		while (it2 != ite2)
+		{
+			std::cout << *it2 << std::endl;
+			++it2;
+		}
+
+		std::cout << "\n_________copy assign test" << std::endl;
+
+		MutantStack<int> anotherStack;
+		anotherStack = originalStack;
+
+		anotherStack.pop();
+		anotherStack.push(99);
+
+		std::cout << "modified anotherStack:" << std::endl;
+
+		MutantStack<int>::iterator it3 = anotherStack.begin();
+		MutantStack<int>::iterator ite3 = anotherStack.end();
+
+		while (it3 != ite3)
+		{
+			std::cout << *it3 << std::endl;
+			++it3;
+		}
+
+		std::cout << "\noriginal stack after assignment modification:" << std::endl;
+
+		MutantStack<int>::iterator it4 = originalStack.begin();
+		MutantStack<int>::iterator ite4 = originalStack.end();
+
+		while (it4 != ite4)
+		{
+			std::cout << *it4 << std::endl;
+			++it4;
+		}
 	}
-
-	std::cout << "\nOriginal stack after modifying copy:" << std::endl;
-	MutantStack<int>::iterator it2 = originalStack.begin();
-	MutantStack<int>::iterator ite2 = originalStack.end();
-	while (it2 != ite2)
-	{
-		std::cout << *it2 << std::endl;
-		++it2;
-	}
-
-	std::cout << "\n_________copy assign test" << std::endl;
-
-	MutantStack<int> anotherStack;
-	anotherStack = originalStack;
-
-	// Modify assigned copy
-	anotherStack.pop();
-	anotherStack.push(99);
-
-	std::cout << "Modified anotherStack:" << std::endl;
-	MutantStack<int>::iterator it3 = anotherStack.begin();
-	MutantStack<int>::iterator ite3 = anotherStack.end();
-	while (it3 != ite3)
-	{
-		std::cout << *it3 << std::endl;
-		++it3;
-	}
-
-	std::cout << "\nOriginal stack after assignment modification:" << std::endl;
-	MutantStack<int>::iterator it4 = originalStack.begin();
-	MutantStack<int>::iterator ite4 = originalStack.end();
-	while (it4 != ite4)
-	{
-		std::cout << *it4 << std::endl;
-		++it4;
-	}
-}
 	{
 		std::cout << "\n_________test empty stack" << std::endl;
 
-		MutantStack<int>	*testA = new MutantStack<int>();
-		testA->pop();
-		testA->top();
+		MutantStack<int>	emptyStack;
+
+		if (emptyStack.empty())
+			std::cout << "stack is empty" << std::endl;
 	}
 	{
 		#define	N_VALUES	10001
@@ -174,8 +188,10 @@ int	main()
 		ls.push_back(9999);
 		ls.push_back(101);
 		ls.push_back(0);
+
 		std::list<int>::iterator it = ls.begin();
 		std::list<int>::iterator ite = ls.end();
+
 		while (it != ite)
 		{
 			std::cout << *it << std::endl;

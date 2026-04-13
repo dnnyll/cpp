@@ -1,6 +1,7 @@
 #include	"../inc/Span.hpp"
 #include	<iostream>
 #include	<algorithm>
+#include	<limits>
 
 Span::Span(unsigned int _N) : _N(_N)
 {
@@ -41,50 +42,44 @@ void	Span::addNumber(int value)
 	this->_numbers.push_back(value);
 }
 
+/*
+	copies our _numbers vector
+	sorts it
+	computes minimal difference between elements and replaces the value in minSpan
+*/
 int	Span::shortestSpan()
 {
 	if (this->_numbers.size() < 2)
-		throw std::runtime_error("error: Span contains less than 2 elements");
+		throw std::runtime_error("error: span contains less than 2 elements");
 
 	std::vector<int> copy = this->_numbers;
 	std::sort(copy.begin(), copy.end());
 
-	int		minSpan = copy[1] - copy[0];
-	size_t	i = 1;
+	int		minSpan = std::numeric_limits<int>::max();
+	size_t	i = 0;
 
 	while (i < copy.size() - 1)
 	{
-		int	currentSpan = copy[i + 1] - copy[i];
-		
-		if (currentSpan < minSpan)
-			minSpan = currentSpan;
+		minSpan = std::min(minSpan, copy[i + 1] - copy[i]);
 		++i;
 	}
 	return (minSpan);
 }
 
+/*
+	std:min/max_element 
+		takes the 2 iterators begin/end
+		goes through every element between them
+		returns an iterator pointing to the smallest value found
+*/
 int	Span::longestSpan()
 {
 	if (this->_numbers.size() < 2)
-		throw std::runtime_error("error: Span contains less than 2 elements");
+		throw std::runtime_error("error: span contains less than 2 elements");
 
-	std::vector<int> copy = this->_numbers;
-
-	int	minVal = copy[0];
-	int	maxVal = copy[0];
-
-	size_t	i = 1;
-	while (i < copy.size())
-	{
-		if (copy[i] < minVal)
-			minVal = copy[i];
-
-		if (copy[i] > maxVal)
-			maxVal = copy[i];
-		++i;
-	}
-
-	int	maxSpan = maxVal - minVal;
-
-	return (maxSpan);
+	int	minVal = *std::min_element(this->_numbers.begin(), this->_numbers.end());
+	int	maxVal = *std::max_element(this->_numbers.begin(), this->_numbers.end());
+	return (maxVal - minVal);
 }
+
+

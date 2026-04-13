@@ -15,7 +15,8 @@ int	main()
 	{
 		std::cout << "\n_________default main test" << std::endl;
 
-		Span sp = Span(5);
+		Span	sp = Span(5);
+		
 		sp.addNumber(6);
 		sp.addNumber(3);
 		sp.addNumber(17);
