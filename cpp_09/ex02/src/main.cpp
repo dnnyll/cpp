@@ -1,5 +1,5 @@
 #include	<iostream>
-#include	"../inc/RPN.hpp"
+#include	"../inc/PmergeMe.hpp"
 
 int	main(int argc, char **argv)
 {
@@ -7,16 +7,25 @@ int	main(int argc, char **argv)
 	std::cout << "[MAIN]\t\tcalled." << std::endl;
 	#endif
 
-	if(argc != 2)
+	int	i;
+
+	if(argc < 2)
 	{
 		std::cerr << "Error: amount number of arguments." << std::endl;
 		return (1);
 	}
+	
+	PmergeMe	pmergeme;
+	i = 1;
 
-	RPN	rpn;
-
-	if (rpn.parseInput(argv[1]))
-		std::cout << rpn.getResult() << std::endl;
-
+	while (i < argc)
+	{
+		if (!pmergeme.parseInput(argv[i]))
+		{
+			std::cerr << "Error: wrong input." << std::endl;
+			return (1);
+		}
+		i++;
+	}
 	return (0);
 }
