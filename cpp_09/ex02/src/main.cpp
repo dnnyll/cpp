@@ -7,8 +7,6 @@ int	main(int argc, char **argv)
 	std::cout << "[MAIN]\t\tcalled." << std::endl;
 	#endif
 
-	int	i;
-
 	if(argc < 2)
 	{
 		std::cerr << "Error: amount number of arguments." << std::endl;
@@ -16,6 +14,8 @@ int	main(int argc, char **argv)
 	}
 	
 	PmergeMe	pmergeme;
+	int	i;
+
 	i = 1;
 
 	while (i < argc)
@@ -27,5 +27,12 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
+
+	if(!pmergeme.sortData())
+	{
+		std::cerr << "Error: sorting anomaly found." << std::endl;
+		return (1);
+	}
+	
 	return (0);
 }

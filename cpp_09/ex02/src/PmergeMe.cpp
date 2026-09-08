@@ -3,6 +3,8 @@
 #include	<cstdlib>
 #include	<cerrno>
 #include	<climits>
+#include	<vector>
+#include	<deque>
 #include	"../inc/PmergeMe.hpp"
 
 PmergeMe::PmergeMe()
@@ -93,3 +95,103 @@ bool	PmergeMe::parseInput(const std::string &inputStr)
 	std::cout << std::endl;
 	return (true);
 }
+
+std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
+{
+	int		straggler;
+	bool	hasStraggler;
+	size_t	i;
+
+	straggler = -1;
+	hasStraggler = false;
+	i = 0;
+
+	if(inputData.size() <= 1)
+		return (inputData);
+	
+	std::vector<std::pair<int, int> > pairs = pairVector(inputData, straggler, hasStraggler);
+	
+	while (i < pairs.size())
+	{
+		std::cout << "pair: (" << pairs[i].first << ", " << pairs[i].second << ")" << std::endl;
+
+		if (hasStraggler)
+				std::cout << "straggler: " << straggler << std::endl;
+
+		i++;
+	}
+	
+	// next: extract "large" values, recurse, etc.
+	
+	return (inputData);
+}
+
+std::deque<int>		PmergeMe::sortDeque(std::deque<int> inputData)
+{
+	return(inputData);
+}
+
+bool	PmergeMe::sortData()
+{
+	_data = sortVector(_data);
+	return (true);
+}
+
+std::vector<std::pair<int, int> >	PmergeMe::pairVector(const std::vector<int> &input, int &straggler, bool &hasStraggler)
+{
+
+	std::vector<std::pair<int, int> >	pairs;
+	
+	int		i;
+	int		a;
+	int		b;
+	int		inputSize;
+
+	i = 0;
+	inputSize = input.size();
+
+	while (i + 1 < inputSize)
+	{
+		a = input[i];
+		b = input[i + 1];
+
+		if (a < b)
+			pairs.push_back(std::pair<int, int>(a, b));
+		else
+			pairs.push_back(std::pair<int, int>(b, a));
+
+		i += 2;
+	}
+
+	if (inputSize % 2 == 1)
+	{
+		std::cout << "hasStraggler = true" << std::endl;
+		straggler = input[inputSize - 1];
+		hasStraggler = true;
+	}
+	else
+	{
+		std::cout << "hasStraggler = false" << std::endl;
+		hasStraggler = false;
+	}
+	return (pairs);
+}
+
+// ┌───────────────────────────────────────────────────────────────┐
+// │ pairVector(input, straggler, hasStraggler)                       │
+// ├───────────────────────────────────────────────────────────────┤
+// │ - create empty vector<pair<int,int>> pairs                       │
+// │ - i = 0                                                            │
+// │ - while i + 1 < input.size():                                     │
+// │     a = input[i], b = input[i+1]                                  │
+// │     if a < b: pairs.push_back( (a, b) )   // (small, large)       │
+// │     else:     pairs.push_back( (b, a) )                           │
+// │     i += 2                                                         │
+// │ - if input.size() is odd:                                         │
+// │     straggler = input[input.size()-1]                             │
+// │     hasStraggler = true                                            │
+// │   else:                                                            │
+// │     hasStraggler = false                                           │
+// │ - return pairs                                                     │
+// └───────────────────────────────────────────────────────────────┘
+
