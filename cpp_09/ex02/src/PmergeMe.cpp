@@ -10,8 +10,6 @@ PmergeMe::PmergeMe()
 	#ifdef DEBUG
 	std::cout << "[CONSTRUCTOR]\tcalled." << std::endl;
 	#endif
-
-
 }
 
 PmergeMe::PmergeMe(const PmergeMe &src)
@@ -40,6 +38,22 @@ PmergeMe::~PmergeMe()
 	std::cout << "[DESTRUCTOR]\tcalled." << std::endl;
 	#endif
 }
+bool	PmergeMe::getDuplicate(const int input)
+{
+	std::vector<int>::iterator	it;
+	it = _data.begin();
+
+	while (it != _data.end())
+	{
+		if(*it == input)
+		{
+			std::cerr << "Error: duplicate found for:\t" << *it << "." <<std::endl;
+			return (true);
+		}
+		++it;
+	}
+	return (false);
+}
 
 bool	PmergeMe::parseInput(const std::string &inputStr)
 {
@@ -60,39 +74,22 @@ bool	PmergeMe::parseInput(const std::string &inputStr)
 		return (false);
 	}
 
+	if (getDuplicate(inputValue))
+		return (false);
+
 	_data.push_back(static_cast<int>(inputValue));
+
+	// print debug
+	// TO DO: move this away and/or add DEBUG flag
+	std::vector<int>::iterator	it;
 	
-	std::vector<int>::iterator it;
-	for (it = _data.begin(); it != _data.end(); ++it)
+	it = _data.begin();
+	
+	while (it != _data.end())
+	{
 		std::cout << *it << " ";
+		++it;
+	}
 	std::cout << std::endl;
 	return (true);
 }
-
-	// int	currentPosition;
-	// int	inputSize;
-
-	// currentPosition = 0;
-	// inputSize = inputStr.size();
-
-	// while (currentPosition < inputSize)
-	// {
-	// 	if (!std::isdigit(inputStr[currentPosition]))
-	// 	{
-	// 		std::cerr << "remove this: Error: non numerical input detected." << std::endl;
-	// 		return (false);
-	// 	}
-	// 	if (std::isdigit(inputStr[currentPosition]) && currentPosition < inputSize)
-	// 	{
-	// 		if (inputStr[std::isdigit(currentPosition + 1)])
-	// 		{
-	// 			currentPosition++;
-	// 		}
-
-	// 		std::cout << currentPosition << std::endl;
-	// 	}
-	// }
-	// // _data.push_back(atoi(c_str(inputStr));
-	// // std::cout << inputStr[currentPosition - '0'] << std::endl;
-	// return (true);
-// }

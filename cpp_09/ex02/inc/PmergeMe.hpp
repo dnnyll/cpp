@@ -26,6 +26,7 @@ class	PmergeMe
 
 		// int		getResult() const;
 		bool	parseInput(const std::string &inputStr);
+		bool	getDuplicate(const int input);
 		// convert to int
 		// check if isdigit
 		// check if it isn't duplicate
