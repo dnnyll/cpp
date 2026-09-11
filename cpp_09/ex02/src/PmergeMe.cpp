@@ -5,6 +5,7 @@
 #include	<climits>
 #include	<vector>
 #include	<deque>
+#include	<algorithm>
 #include	"../inc/PmergeMe.hpp"
 
 PmergeMe::PmergeMe()
@@ -96,6 +97,22 @@ bool	PmergeMe::parseInput(const std::string &inputStr)
 	return (true);
 }
 
+
+/*
+
+┌───────────────────────────────────────────────────────────────┐
+│ sortVector(inputData)                                         │
+├───────────────────────────────────────────────────────────────┤
+│ 1. base case (done)                                           │
+│ 2. pairs = pairVector(...)              (done)                │
+│ 3. largeValues = extract .second from each pair    <- NEXT    │
+│ 4. mainChain = sortVector(largeValues)  (recursive call)      │
+│ 5. ... (association tracking, insertion — later steps)        │
+└───────────────────────────────────────────────────────────────┘
+
+*/
+
+// recursion
 std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 {
 	int		straggler;
@@ -106,11 +123,12 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 	hasStraggler = false;
 	i = 0;
 
-	if(inputData.size() <= 1)
+	if (inputData.size() <= 1)
 		return (inputData);
-	
+
 	std::vector<std::pair<int, int> > pairs = pairVector(inputData, straggler, hasStraggler);
-	
+
+	//	print debug
 	while (i < pairs.size())
 	{
 		std::cout << "pair: (" << pairs[i].first << ", " << pairs[i].second << ")" << std::endl;
@@ -120,11 +138,163 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 
 		i++;
 	}
-	
-	// next: extract "large" values, recurse, etc.
-	
-	return (inputData);
+
+	// find and gather largerValues
+	std::vector<int>	largerValues;
+
+	i = 0;
+
+	while (i < pairs.size())
+	{
+		largerValues.push_back(pairs[i].second);
+		i++;
+	}
+
+	// this is the sorted vector of large values, then we need to insert smaller values in it
+	std::vector<int> mainChain = sortVector(largerValues);
+
+	// find and gather smallerValues
+	std::vector<std::pair<int, int> > smallerValues;
+
+	i = 0;
+
+	while (i < pairs.size())
+	{
+		std::vector<int>::iterator position = std::find(mainChain.begin(), mainChain.end(), pairs[i].second);
+
+		int index;
+
+		index = position - mainChain.begin();
+
+		smallerValues.push_back(std::pair<int, int>(pairs[i].first, index));
+		i++;
+	}
+
+	// find smaller value to insert in the chain
+	size_t	j;
+
+	j = 0;
+	while (j < smallerValues.size())
+	{
+		if (smallerValues[j].second == 0)
+			break ;
+		j++;
+	}
+
+	mainChain.insert(mainChain.begin(), smallerValues[j].first);
+	smallerValues.erase(smallerValues.begin() + j);
+
+	// mainChain shifted right by 1 after front insertion,
+	// so every stored index in smallerValues is now off by one — correct it
+	size_t	k;
+
+	k = 0;
+	while (k < smallerValues.size())
+	{
+		smallerValues[k].second += 1;
+		k++;
+	}
+
+	// apply jacobsthalOrder to the remaining smallerValues
+	std::vector<int> insertOrder = jacobsthalOrder(smallerValues.size());
+
+	// debug: state of mainChain and remaining smallerValues after front insertion
+	std::cout << "mainChain after front insert: ";
+	size_t	p;
+
+	p = 0;
+	while (p < mainChain.size())
+	{
+		std::cout << mainChain[p] << " ";
+		p++;
+	}
+	std::cout << std::endl;
+
+	std::cout << "smallerValues remaining: ";
+	p = 0;
+	while (p < smallerValues.size())
+	{
+		std::cout << "(" << smallerValues[p].first << "," << smallerValues[p].second << ") ";
+		p++;
+	}
+	std::cout << std::endl;
+
+	return (mainChain);
 }
+
+
+std::vector<int> PmergeMe::jacobsthalOrder(int sizeSmallerValues)
+{
+	std::vector<int>order;
+	std::vector<int>temp;	//holds index
+
+	temp.push_back(0);
+	temp.push_back(1);
+
+	int	sizeTemp;
+	int	next;
+
+	sizeTemp = temp.size();
+
+	while(sizeTemp - 1 < sizeSmallerValues)
+	{
+		next = temp[sizeTemp - 1] + 2 * temp[sizeTemp - 2];
+		temp.push_back(next);
+		sizeTemp = temp.size();
+	}
+
+	// debug print: generated Jackobsthal numbers
+	int	i;
+
+	i = 0;
+	
+	while (i < sizeTemp)
+	{
+		std::cout << temp[i] << " ";
+		std::cout << std::endl;
+		i++;
+	}
+
+	// build insertion of smallerValues with Jackobsthal 
+	int	previous;
+	int	current;
+	int	limit;
+	int	insertIndex;
+	int	j;
+
+	previous = temp[1];
+	j = 2;
+
+	while(previous < sizeSmallerValues && j < sizeTemp)
+	{
+		current = temp[j];
+
+		if (current < sizeSmallerValues)
+			limit = current;
+		else
+			limit = sizeSmallerValues;
+		
+		insertIndex = limit;
+		while (insertIndex > previous)
+		{
+			order.push_back(insertIndex);
+			insertIndex--;
+		}
+		previous = current;
+		j++;
+	}
+
+	return (order);
+}
+
+
+
+
+
+
+
+
+
 
 std::deque<int>		PmergeMe::sortDeque(std::deque<int> inputData)
 {
@@ -176,22 +346,3 @@ std::vector<std::pair<int, int> >	PmergeMe::pairVector(const std::vector<int> &i
 	}
 	return (pairs);
 }
-
-// ┌───────────────────────────────────────────────────────────────┐
-// │ pairVector(input, straggler, hasStraggler)                       │
-// ├───────────────────────────────────────────────────────────────┤
-// │ - create empty vector<pair<int,int>> pairs                       │
-// │ - i = 0                                                            │
-// │ - while i + 1 < input.size():                                     │
-// │     a = input[i], b = input[i+1]                                  │
-// │     if a < b: pairs.push_back( (a, b) )   // (small, large)       │
-// │     else:     pairs.push_back( (b, a) )                           │
-// │     i += 2                                                         │
-// │ - if input.size() is odd:                                         │
-// │     straggler = input[input.size()-1]                             │
-// │     hasStraggler = true                                            │
-// │   else:                                                            │
-// │     hasStraggler = false                                           │
-// │ - return pairs                                                     │
-// └───────────────────────────────────────────────────────────────┘
-

@@ -96,3 +96,29 @@ class	PmergeMe
 // │ 10. RETURN                                                          │
 // │     - chain is now fully sorted -> return it                        │
 // └───────────────────────────────────────────────────────────────┘
+
+// ┌───────────────────────────────────────────────────────────────┐
+// │ DONE                                                              │
+// ├───────────────────────────────────────────────────────────────┤
+// │ - parseInput: validates + stores ints in _data                   │
+// │ - getDuplicate: rejects duplicates                                │
+// │ - pairVector: pairs elements (small,large), sets straggler        │
+// │ - sortVector: recursion structure works (base case + recurse on   │
+// │   large values) — verified via debug prints                       │
+// ├───────────────────────────────────────────────────────────────┤
+// │ NOT DONE YET (this is why sortVector isn't sorting anything)      │
+// ├───────────────────────────────────────────────────────────────┤
+// │ - sortVector currently just returns the ORIGINAL unsorted         │
+// │   inputData at the end — mainChain is computed but never used    │
+// │ - association lookup (small -> large's index in mainChain)        │
+// │   is only a comment block, not implemented                        │
+// │ - insert first small at front                                     │
+// │ - Jacobsthal order generation                                     │
+// │ - binary insertion loop for remaining smalls                      │
+// │ - straggler insertion                                              │
+// │ - sortDeque is empty (just returns input) — whole algorithm       │
+// │   needs to be duplicated there once vector version works          │
+// │ - no timing code yet                                               │
+// │ - no "Before:"/"After:"/timing print statements per subject       │
+// │   format                                                            │
+// └───────────────────────────────────────────────────────────────┘
