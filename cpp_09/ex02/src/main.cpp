@@ -34,8 +34,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
-	std::vector<int> result = pmergeme.getSortedVector();
-	std::vector<int>::iterator it;
+	std::vector<int>			result = pmergeme.getSortedVector();
+	std::vector<int>::iterator	it;
 
 	it = result.begin();
 	

@@ -7,7 +7,6 @@
 #include	<deque>
 #include	<algorithm>
 #include	<ctime>
-// #include	<sys/time.h>
 #include	"../inc/PmergeMe.hpp"
 
 PmergeMe::PmergeMe()
@@ -43,8 +42,13 @@ PmergeMe::~PmergeMe()
 	std::cout << "[DESTRUCTOR]\tcalled." << std::endl;
 	#endif
 }
+
 bool	PmergeMe::getDuplicate(const int input)
 {
+	#ifdef DEBUG
+	std::cout << "[GET DUPLICATE]\tcalled." << std::endl;
+	#endif
+
 	std::vector<int>::iterator	it;
 	it = _data.begin();
 
@@ -62,6 +66,10 @@ bool	PmergeMe::getDuplicate(const int input)
 
 bool	PmergeMe::parseInput(const std::string &inputStr)
 {
+	#ifdef DEBUG
+	std::cout << "[PARSE INPUT]\tcalled." << std::endl;
+	#endif
+
 	char	*endPtr;
 	long	inputValue;
 
@@ -102,6 +110,10 @@ bool	PmergeMe::parseInput(const std::string &inputStr)
 // recursion vector
 std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 {
+	#ifdef DEBUG
+	std::cout << "[SORT VECTOR]\tcalled." << std::endl;
+	#endif
+
 	int		straggler;
 	bool	hasStraggler;
 	size_t	i;
@@ -230,6 +242,10 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 // recursion deque
 std::deque<int>	PmergeMe::sortDeque(std::deque<int> inputData)
 {
+	#ifdef DEBUG
+	std::cout << "[SORT DEQUE]\tcalled." << std::endl;
+	#endif
+
 	int		straggler;
 	bool	hasStraggler;
 	size_t	i;
@@ -357,6 +373,10 @@ std::deque<int>	PmergeMe::sortDeque(std::deque<int> inputData)
 
 std::vector<int> PmergeMe::jacobsthalOrder(int sizeSmallerValues)
 {
+	#ifdef DEBUG
+	std::cout << "[JACOBSTHAL ORDER]\tcalled." << std::endl;
+	#endif
+
 	std::vector<int>order;
 	std::vector<int>temp;
 
@@ -416,6 +436,10 @@ std::vector<int> PmergeMe::jacobsthalOrder(int sizeSmallerValues)
 
 void	PmergeMe::binaryInsertVector(std::vector<int> &chain, int value)
 {
+	#ifdef DEBUG
+	std::cout << "[BINARY INSERT VECTOR]\tcalled." << std::endl;
+	#endif
+
 	size_t	low;
 	size_t	high;
 	size_t	mid;
@@ -437,6 +461,10 @@ void	PmergeMe::binaryInsertVector(std::vector<int> &chain, int value)
 
 void	PmergeMe::binaryInsertDeque(std::deque<int> &chain, int value)
 {
+	#ifdef DEBUG
+	std::cout << "[BINARY INSERT DEQUE]\tcalled." << std::endl;
+	#endif
+
 	size_t	low;
 	size_t	high;
 	size_t	mid;
@@ -458,6 +486,10 @@ void	PmergeMe::binaryInsertDeque(std::deque<int> &chain, int value)
 
 bool	PmergeMe::sortData()
 {
+	#ifdef DEBUG
+	std::cout << "[SORT DATA]\tcalled." << std::endl;
+	#endif
+
 	clock_t	start;
 	clock_t	end;
 
@@ -514,6 +546,9 @@ bool	PmergeMe::sortData()
 
 std::vector<std::pair<int, int> >	PmergeMe::pairVector(const std::vector<int> &input, int &straggler, bool &hasStraggler)
 {
+	#ifdef DEBUG
+	std::cout << "[PAIR VECTOR]\tcalled." << std::endl;
+	#endif
 
 	std::vector<std::pair<int, int> >	pairs;
 	
@@ -554,6 +589,9 @@ std::vector<std::pair<int, int> >	PmergeMe::pairVector(const std::vector<int> &i
 
 std::deque<std::pair<int, int> >	PmergeMe::pairDeque(const std::deque<int> &input, int &straggler, bool &hasStraggler)
 {
+	#ifdef DEBUG
+	std::cout << "[PAIR DEQUE]\tcalled." << std::endl;
+	#endif
 
 	std::deque<std::pair<int, int> >	pairs;
 	
@@ -594,5 +632,9 @@ std::deque<std::pair<int, int> >	PmergeMe::pairDeque(const std::deque<int> &inpu
 
 std::vector<int> PmergeMe::getSortedVector() const
 {
+	#ifdef DEBUG
+	std::cout << "[GET SORTED VECTOR]\tcalled." << std::endl;
+	#endif
+
 	return (_data);
 }
