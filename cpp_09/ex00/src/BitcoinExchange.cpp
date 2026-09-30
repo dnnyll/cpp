@@ -5,13 +5,13 @@
 #include	<map>
 #include	"../inc/BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange()
+BitcoinExchange::BitcoinExchange() : _dbLoaded(false)
 {
 	#ifdef DEBUG
 	std::cout << "[CONSTRUCTOR]\tcalled." << std::endl;
 	#endif
 
-	loadDatabase("data.csv");
+	_dbLoaded = loadDatabase("data.csv");
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src)
@@ -41,46 +41,75 @@ BitcoinExchange::~BitcoinExchange()
 	#endif
 }
 
-// trims content removing shitespaces or tabs
-std::string	trim(const std::string &inputStr)
+//	trims content removing whitespaces, tabs and any CR/LF left by the line ending
+static	std::string	trim(const std::string &inputStr)
 {
-	size_t		start;
-	size_t		end;
-	std::string	trimedStr;
+	size_t	start;
+	size_t	end;
 
-	start = inputStr.find_first_not_of(" \t");
-	end = inputStr.find_last_not_of(" \t");
+	start = inputStr.find_first_not_of(" \t\r\n");
+	end = inputStr.find_last_not_of(" \t\r\n");
 
-	//	if string doesn't contain other characters than " " or "\t"
+	//	if string doesn't contain other characters than whitespace
 	if (start == std::string::npos)
 		return ("");
 
-	trimedStr = inputStr.substr(start, end - start + 1);
+	return (inputStr.substr(start, end - start + 1));
+}
 
-	return (trimedStr);
+//	verifies a value is written as a plain decimal number
+//	(guards against strtod extras: hex "0x10", exponents "1e2", "inf", "nan")
+static	bool	isPlainNumber(const std::string &valueStr)
+{
+	size_t	i;
+	size_t	dots;
+	bool	digitFound;
+
+	i = 0;
+	dots = 0;
+	digitFound = false;
+
+	if (i < valueStr.size() && (valueStr[i] == '+' || valueStr[i] == '-'))
+		i++;
+
+	while (i < valueStr.size())
+	{
+		if (isdigit(static_cast<unsigned char>(valueStr[i])))
+			digitFound = true;
+		else if (valueStr[i] == '.')
+			dots++;
+		else
+			return (false);
+		i++;
+	}
+	if (!digitFound || dots > 1)
+		return (false);
+	return (true);
 }
 
 
-// splits and stores key and value from the input string
+// splits, trims and stores key and value from the input string
+//	trimming here (not in the caller) keeps the invariant that every
+//	fragment is already normalized before any validation runs
 bool	BitcoinExchange::splitLine(const std::string &line, std::string &dateStr, std::string &valueStr)
 {
-		size_t	position;
+	size_t	position;
 
-		position = line.find('|');
+	position = line.find('|');
 
-		if(position == std::string::npos)
-		{
-			std::cerr << "Error: bad input => " << line << std::endl;
-			return (false);
-		}
-		dateStr = line.substr(0, position);
-		valueStr = line.substr(position + 1);
+	if(position == std::string::npos)
+	{
+		std::cerr << "Error: bad input => " << line << std::endl;
+		return (false);
+	}
+	dateStr = trim(line.substr(0, position));
+	valueStr = trim(line.substr(position + 1));
 
-		#ifdef DEBUG
-		std::cout << "[SPLITLINE]\t" << "date: [" << dateStr << "] value: [" << valueStr << "]" << std::endl;
-		#endif
+	#ifdef DEBUG
+	std::cout << "[SPLITLINE]\t" << "date: [" << dateStr << "] value: [" << valueStr << "]" << std::endl;
+	#endif
 
-		return (true);
+	return (true);
 }
 
 // converts date str into int and verifies if the date is in the calendar
@@ -127,7 +156,7 @@ bool	BitcoinExchange::validateDate(const std::string &dateStr)
 			i++;
 			continue ;
 		}
-		if (!isdigit(dateStr[i]))
+		if (!isdigit(static_cast<unsigned char>(dateStr[i])))
 			return (false);
 		i++;
 	}
@@ -137,13 +166,28 @@ bool	BitcoinExchange::validateDate(const std::string &dateStr)
 	return (true);
 }
 
-// verifies if the value str is well formulated and returns error if not
-bool	BitcoinExchange::validateValue(std::string &valueStr)
+// verifies the value str is a plain number in range and returns error if not
+bool	BitcoinExchange::validateValue(const std::string &valueStr)
 {
 	char	*lastChar;
-	double	value = std::strtod(valueStr.c_str(), &lastChar);
+	double	value;
+
+	if (!isPlainNumber(valueStr))
+	{
+		std::cerr << "Error: not a valid number." << std::endl;
+		return (false);
+	}
+
+	value = std::strtod(valueStr.c_str(), &lastChar);
 
 	if (*lastChar != '\0')
+	{
+		std::cerr << "Error: not a valid number." << std::endl;
+		return (false);
+	}
+	//	NaN compares false against everything, so it would slip past both
+	//	range checks below and print as "nan" - test it explicitly
+	if (value != value)
 	{
 		std::cerr << "Error: not a valid number." << std::endl;
 		return (false);
@@ -155,7 +199,7 @@ bool	BitcoinExchange::validateValue(std::string &valueStr)
 	}
 	if (value > 1000)
 	{
-		std::cerr << "Error: number is too large." << std::endl;
+		std::cerr << "Error: too large a number." << std::endl;
 		return (false);
 	}
 	return (true);
@@ -178,14 +222,14 @@ double	BitcoinExchange::getRate(const std::string &dateStr)
 }
 
 // loads the "data.csv" file that is our database for comparison
-void	BitcoinExchange::loadDatabase(const std::string &filename)
+bool	BitcoinExchange::loadDatabase(const std::string &filename)
 {
 	std::ifstream	file(filename.c_str());
 
 	if(!file.is_open())
 	{
 		std::cerr << "Error: could not open database file." << std::endl;
-		return ;
+		return (false);
 	}
 
 	std::string	line;
@@ -198,9 +242,18 @@ void	BitcoinExchange::loadDatabase(const std::string &filename)
 		if (position == std::string::npos)
 			continue ;
 
-		std::string	dateStr = line.substr(0, position);
-		std::string	rateStr = line.substr(position + 1);
-		
+		//	keys are trimmed exactly like the input side is, otherwise a
+		//	stray space ("2011-01-09 ,0.32") stores a key that can never
+		//	be matched and the lookup silently falls back to a stale rate
+		std::string	dateStr = trim(line.substr(0, position));
+		std::string	rateStr = trim(line.substr(position + 1));
+	
+		if (!validateDate(dateStr))
+		{
+			std::cerr << "Error: bad database entry => " << line << std::endl;
+			continue ;
+		}
+	
 		double	rate = std::strtod(rateStr.c_str(), NULL);
 	
 		_data[dateStr] = rate;
@@ -210,13 +263,24 @@ void	BitcoinExchange::loadDatabase(const std::string &filename)
 		#endif
 
 	}
+	if (_data.empty())
+	{
+		std::cerr << "Error: database is empty." << std::endl;
+		return (false);
+	}
 	#ifdef DEBUG
 	std::cerr << "[LOADDATABASE]\tentries loaded: " << _data.size() << std::endl;
 	#endif
+	return (true);
+}
+
+bool	BitcoinExchange::isDatabaseLoaded() const
+{
+	return (_dbLoaded);
 }
 
 //	opens inputfile and parses it
-void	BitcoinExchange::parseInputFile(const std::string& inputFilename)
+bool	BitcoinExchange::parseInputFile(const std::string& inputFilename)
 {
 	//	opens the file, ifstream can't read strings so c_str converts the string to const char*
 	std::ifstream	file(inputFilename.c_str());
@@ -224,7 +288,7 @@ void	BitcoinExchange::parseInputFile(const std::string& inputFilename)
 	if(!file.is_open())
 	{
 		std::cerr << "Error: could not open input file." << std::endl;
-		return ;
+		return (false);
 	}
 
 	std::string		line;
@@ -236,11 +300,9 @@ void	BitcoinExchange::parseInputFile(const std::string& inputFilename)
 		std::string	dateStr;
 		std::string	valueStr;
 
+		//	splitLine already trimmed both fragments
 		if(!splitLine(line, dateStr, valueStr))
 			continue ;
-		
-		dateStr = trim(dateStr);
-		valueStr = trim(valueStr);
 
 		#ifdef DEBUG
 		std::cout << "[PARSEINPUT]\t"<< "date: [" << dateStr << "] value: [" << valueStr << "]" << std::endl;
@@ -267,4 +329,5 @@ void	BitcoinExchange::parseInputFile(const std::string& inputFilename)
 			std::cerr << "Error: no earlier date available for date " << dateStr << std::endl;
 		}
 	}
+	return (true);
 }
