@@ -27,6 +27,7 @@ RPN &RPN::operator=(const RPN &input)
 
 	if (this != &input)
 		_data = input._data;
+
 	return (*this);
 }
 
@@ -97,6 +98,11 @@ bool	RPN::calculate(char op)
 			break ;
 
 		case '/':
+		if(valueA == 0 && valueB == 0)
+			{
+				std::cerr << "Error: cannot divide 0 by 0." << std::endl;
+				return (false);
+			}
 			result = valueA / valueB;
 			break ;
 		}
@@ -151,7 +157,7 @@ bool	RPN::parseInput(const std::string &inputLine)
 	//	final check if we have more than 1 value at the end of operations
 	if (_data.size() != 1)
 	{
-		std::cerr << "Error: malformed inputasdasd." << std::endl;
+		std::cerr << "Error: malformed input." << std::endl;
 		return (false);
 	}
 	return (true);
