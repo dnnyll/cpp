@@ -233,7 +233,9 @@ bool	BitcoinExchange::loadDatabase(const std::string &filename)
 	}
 
 	std::string	line;
-	std::getline(file, line);	// skip headerline ("data" | "exchange value")
+
+	// to skip headerline ("data" | "exchange value")
+	std::getline(file, line);
 
 	while (std::getline(file, line))
 	{
@@ -242,9 +244,6 @@ bool	BitcoinExchange::loadDatabase(const std::string &filename)
 		if (position == std::string::npos)
 			continue ;
 
-		//	keys are trimmed exactly like the input side is, otherwise a
-		//	stray space ("2011-01-09 ,0.32") stores a key that can never
-		//	be matched and the lookup silently falls back to a stale rate
 		std::string	dateStr = trim(line.substr(0, position));
 		std::string	rateStr = trim(line.substr(position + 1));
 	
@@ -271,6 +270,7 @@ bool	BitcoinExchange::loadDatabase(const std::string &filename)
 	#ifdef DEBUG
 	std::cerr << "[LOADDATABASE]\tentries loaded: " << _data.size() << std::endl;
 	#endif
+	
 	return (true);
 }
 
@@ -292,7 +292,7 @@ bool	BitcoinExchange::parseInputFile(const std::string& inputFilename)
 	}
 
 	std::string		line;
-	// skip headerline ("date" | "value")
+	// to skip headerline ("date" | "value")
 	std::getline(file, line);
 
 	while (std::getline(file, line))

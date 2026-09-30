@@ -12,6 +12,7 @@ int	main(int argc, char **argv)
 
 	if (!btc.isDatabaseLoaded())
 		return (1);
+	
 	if (!btc.parseInputFile(argv[1]))
 		return (1);
 
