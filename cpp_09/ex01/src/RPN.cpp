@@ -1,6 +1,7 @@
 #include	<string>
 #include	<iostream>
 #include	<cstdlib>
+#include	<cctype>
 #include	"../inc/RPN.hpp"
 
 RPN::RPN()
@@ -98,6 +99,7 @@ bool	RPN::calculate(char op)
 			break ;
 
 		case '/':
+		// exception for dividing 0 by 0
 		if(valueA == 0 && valueB == 0)
 			{
 				std::cerr << "Error: cannot divide 0 by 0." << std::endl;

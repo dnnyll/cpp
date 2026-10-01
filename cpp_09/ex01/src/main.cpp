@@ -15,8 +15,10 @@ int	main(int argc, char **argv)
 
 	RPN	rpn;
 
-	if (rpn.parseInput(argv[1]))
-		std::cout << rpn.getResult() << std::endl;
+	if (!rpn.parseInput(argv[1]))
+		return (1);
+
+	std::cout << rpn.getResult() << std::endl;
 
 	return (0);
 }
