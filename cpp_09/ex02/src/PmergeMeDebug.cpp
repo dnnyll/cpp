@@ -192,6 +192,8 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 
 	i = 0;
 
+	// locate every larger value in the sorted main chain, to detect which
+	// small value can skip the search and be front-inserted for free
 	while (i < pairs.size())
 	{
 		std::vector<int>::iterator position = std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].second);
@@ -222,17 +224,9 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 		smallerValues.erase(smallerValues.begin() + firstSmall);
 	}
 
-	// mainChain shifted right by 1 after front insertion,
-	// so every stored index in smallerValues is now off by one — correct it
-	size_t	k;
-
-	k = 0;
-
-	while (k < smallerValues.size())
-	{
-		++smallerValues[k].second;
-		k++;
-	}
+	// no re-indexing is needed here: binaryInsertVector re-searches the whole
+	// chain for every value, so the stored ranks only ever served the
+	// front-insert test above and are never used to position an insert
 
 	// apply jacobsthalOrder to the remaining smallerValues
 	std::vector<int> insertOrder;
@@ -257,7 +251,7 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 	p = 0;
 	while (p < smallerValues.size())
 	{
-		std::cout << "(" << smallerValues[p].first << "," << smallerValues[p].second << ") ";
+		std::cout << smallerValues[p].first << " ";
 		p++;
 	}
 	std::cout << std::endl;
@@ -335,6 +329,8 @@ std::deque<int>	PmergeMe::sortDeque(std::deque<int> inputData)
 
 	i = 0;
 
+	// locate every larger value in the sorted main chain, to detect which
+	// small value can skip the search and be front-inserted for free
 	while (i < pairs.size())
 	{
 		std::deque<int>::iterator position = std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].second);
@@ -365,17 +361,9 @@ std::deque<int>	PmergeMe::sortDeque(std::deque<int> inputData)
 		smallerValues.erase(smallerValues.begin() + firstSmall);
 	}
 
-	// mainChain shifted right by 1 after front insertion,
-	// so every stored index in smallerValues is now off by one — correct it
-	size_t	k;
-
-	k = 0;
-
-	while (k < smallerValues.size())
-	{
-		++smallerValues[k].second;
-		k++;
-	}
+	// no re-indexing is needed here: binaryInsertDeque re-searches the whole
+	// chain for every value, so the stored ranks only ever served the
+	// front-insert test above and are never used to position an insert
 
 	// apply jacobsthalOrder to the remaining smallerValues
 	std::vector<int> insertOrder = jacobsthalOrder(smallerValues.size());
@@ -398,7 +386,7 @@ std::deque<int>	PmergeMe::sortDeque(std::deque<int> inputData)
 	p = 0;
 	while (p < smallerValues.size())
 	{
-		std::cout << "(" << smallerValues[p].first << "," << smallerValues[p].second << ") ";
+		std::cout << smallerValues[p].first << " ";
 		p++;
 	}
 	std::cout << std::endl;

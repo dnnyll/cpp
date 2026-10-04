@@ -69,38 +69,52 @@ sortVector([5, 3, 9, 1, 7, 2, 8])
 |     mainChain = [5, 7, 9]
 |
 +- step3  RANK each small in mainChain             std::lower_bound
-|        3 -> first idx where >=3  = 0
-|        1 -> first idx where >=1  = 0  ... wait, on the FULL chain:
-|        3->0   1->2   2->1        pending = [(3,0) (1,2) (2,1)]
+|        the rank is computed ONLY to detect which value can skip the search
+|        3 -> index 0    1 -> index 2    2 -> index 1
+|        pending = [(3,0) (1,2) (2,1)]
 |
 +- step4  FRONT-INSERT SHORTCUT    the (x, 0) needs no search
 |     mainChain.insert(begin(), 3)
 |     [3, 5, 7, 9]              pending = [(1,2) (2,1)]
 |
-+- step5  SHIFT RANKS +1           [!] the bugliest line in the project
-|     [(1,2) (2,1)]  --+1-->  [(1,3) (2,2)]
-|     because the chain grew at the front, every saved index is stale
-|
-+- step6  JACOBSTHAL ORDER for the 2 survivors
++- step5  JACOBSTHAL ORDER for the 2 survivors
 |     g = [0,1] -> [0,1,1,3]      order = [1, 2]   (1-based slots)
 |     slot 1 -> value 1 -> lower_bound -> index 0 -> [1, 3, 5, 7, 9]
 |     slot 2 -> value 2 -> lower_bound -> index 1 -> [1, 2, 3, 5, 7, 9]
 |
-+- step7  STRAGGLER LAST, exactly like everything else
++- step6  STRAGGLER LAST, exactly like everything else
         binaryInsert(8) -> index 5 -> [1, 2, 3, 5, 7, 8, 9]   [ok]
 
 
-4. STEP 5 VISUALISED - WHY THE SHIFT IS MANDATORY
+4. WHY THERE IS NO INDEX SHIFT
 --------------------------------------------------------------------------------
-before front-insert     pending ranks point at:
-  mainChain [5, 7, 9]    1 -> index 2   2 -> index 1
-        ^ insert 3 here
-after front-insert
-  mainChain [3, 5, 7, 9] 1 -> index 3   2 -> index 2
-                         \-- both moved right by one --/
+Step 3 stores a rank for each small value, and step 4 grows the chain by one at
+the front. The textbook Ford-Johnson then bumps every stored rank by +1,
+because in a textbook implementation the remembered rank is what positions the
+insert:
 
-Without the +1, `1` would be inserted at index 2 of `[3,5,7,9]` -> *after* the 7.
-Wrong output. This is the single easiest thing to break.
+  before front-insert     pending ranks point at:
+    mainChain [5, 7, 9]    1 -> index 2   2 -> index 1
+          ^ insert 3 here
+  after front-insert
+    mainChain [3, 5, 7, 9] 1 -> index 3   2 -> index 2
+                           \-- both moved right by one --/
+
+THIS CODE DOES NOT DO THAT, AND MUST NOT. binaryInsertVector is handed only the
+VALUE, never the stored rank, and re-searches the whole chain from scratch:
+
+  binaryInsertVector(mainChain, smallerValues[index].first);
+                                              ^^^^^^ .first only
+                                              (.second is never passed)
+
+So the rank is dead the moment the front-insert test has consumed it. The +1
+loop existed in this codebase but was unreachable code: it wrote a field nobody
+read. It has been removed. Note the same applies to the front-insert itself -
+it is a pure optimisation, and dropping it entirely would still give correct
+output, just slower.
+
+The general lesson: a stored index is only safe to reuse if nothing re-derives
+the position. Once every insert re-searches, the index is pure overhead.
 
 
 5. JACOBSTHAL NUMBERS
@@ -125,15 +139,17 @@ section 7.
 --------------------------------------------------------------------------------
 chain = [1, 3, 5, 7, 9]      insert 2
 
-  lo=0        mid=2              lo=3        mid=4
-  +-----------+-----------+      +-----------+---+---+
-  1     3     5     7     9      1     3     5   7 9
-                  ^ 5 >= 2, go left
-                                    ^ 7 >= 2, go left
-  lo=3 hi=4, mid=3: 7 >= 2 -> hi=3.  lo==hi -> position 3...
+  lo=0 hi=5, mid=2 -> chain[2]=5, 5 >= 2 so hi=2
+  lo=0 hi=2, mid=1 -> chain[1]=3, 3 >= 2 so hi=1
+  lo=0 hi=1, mid=0 -> chain[0]=1, 1 <  2 so lo=1
+  lo==hi -> position 1
 
-  (for value 2 the real answer is index 1; the point is: one search, one insert)
-  final: chain.insert(pos, value)    <- never std::sort, never a loop-scan
+  3 comparisons, then ONE insert. Never std::sort, never a linear scan.
+  chain.insert(chain.begin() + 1, 2);   ->  [1, 2, 3, 5, 7, 9]
+
+  Note low starts at 0 and high at chain.size() on every single call - the
+  search is never narrowed using a remembered position. That is exactly why
+  the stored rank in step 3 turned out to be dead.
 
 For the deque it's the identical search plus std::deque::insert - which is why
 the two timings are comparable.
@@ -159,12 +175,13 @@ WHAT TO ACTUALLY SAY WHEN YOU EXPLAIN IT
 It pairs the numbers up and normalises each pair so the smaller one comes
 first. Then it recurses only on the larger halves, which halves the problem
 each time, so the recursion is only log-deep and the small elements never get
-compared with each other. Coming back up, it finds each small value's final
-position in the sorted chain with a binary search, front-inserts any value
-that belongs at position 0 as a free shortcut, shifts the saved positions by
-one, and binary-inserts the rest - in Jacobsthal order - followed by the
-leftover straggler. It's run twice, once per container, and both are timed.
-The deque goes first because the vector sort consumes the unsorted input.
+compared with each other. Coming back up, it binary-searches each small value
+to find where it belongs, front-inserts any value that belongs at position 0 as
+a free shortcut, then binary-inserts the rest - in Jacobsthal order - followed
+by the leftover straggler. Every insert re-searches the chain from scratch, so
+nothing has to be re-indexed when the chain grows. It's run twice, once per
+container, and both are timed. The deque goes first because the vector sort
+consumes the unsorted input.
 
 Two things NOT to claim: that Jacobsthal makes it faster (it doesn't here), and
 that it's a stable or in-place sort (it isn't - it copies and allocates).

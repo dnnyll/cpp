@@ -120,7 +120,8 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 
 	i = 0;
 
-	// locate every larger value in the sorted main chain to know its rank
+	// locate every larger value in the sorted main chain, to detect which
+	// small value can skip the search and be front-inserted for free
 	while (i < pairs.size())
 	{
 		std::vector<int>::iterator position =
@@ -147,15 +148,6 @@ std::vector<int>	PmergeMe::sortVector(std::vector<int> inputData)
 		mainChain.insert(
 			mainChain.begin(), smallerValues[firstSmall].first);
 		smallerValues.erase(smallerValues.begin() + firstSmall);
-	}
-
-	// the chain shifted right by one, so every stored rank is now off by one
-	i = 0;
-
-	while (i < smallerValues.size())
-	{
-		++smallerValues[i].second;
-		++i;
 	}
 
 	std::vector<int> insertOrder =
@@ -206,7 +198,8 @@ std::deque<int>	PmergeMe::sortDeque(std::deque<int> inputData)
 
 	i = 0;
 
-	// locate every larger value in the sorted main chain to know its rank
+	// locate every larger value in the sorted main chain, to detect which
+	// small value can skip the search and be front-inserted for free
 	while (i < pairs.size())
 	{
 		std::deque<int>::iterator position =
@@ -233,15 +226,6 @@ std::deque<int>	PmergeMe::sortDeque(std::deque<int> inputData)
 		mainChain.insert(
 			mainChain.begin(), smallerValues[firstSmall].first);
 		smallerValues.erase(smallerValues.begin() + firstSmall);
-	}
-
-	// the chain shifted right by one, so every stored rank is now off by one
-	i = 0;
-
-	while (i < smallerValues.size())
-	{
-		++smallerValues[i].second;
-		++i;
 	}
 
 	std::vector<int> insertOrder =

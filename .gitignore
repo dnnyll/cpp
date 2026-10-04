@@ -1,0 +1,15 @@
+# build output
+bin/
+obj/
+
+# object and dependency files
+*.o
+*.d
+
+# convenience symlinks to the built binaries
+RPN
+PmergeMe
+
+# editor / OS noise
+*.swp
+.DS_Store
