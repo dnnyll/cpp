@@ -14,6 +14,7 @@ int	main(int argc, char **argv)
 	}
 	
 	PmergeMe	pmergeme;
+	
 	int	i;
 
 	i = 1;

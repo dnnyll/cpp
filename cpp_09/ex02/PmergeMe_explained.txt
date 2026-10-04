@@ -1,0 +1,170 @@
+================================================================================
+ PmergeMe (cpp_09/ex02) - HOW IT WORKS
+================================================================================
+
+
+1. THE WHOLE PIPELINE
+--------------------------------------------------------------------------------
+  argv  "3" "5" "9" "7" "4"
+    |
+    v
++------------------------+
+| parseInput(str)        |  strtol whole-string?  ERANGE?  >0?  dup?
+|   +-- getDuplicate()   |  linear scan of _data
++------------------------+
+    |  _data = [3, 5, 9, 7, 4]
+    v
++------------------------+
+| sortData()             |
++------------------------+
+    |
+    |-- DEQUE FIRST -------------------------------+
+    |   _algoData.assign(_data)   <- copy INSIDE   |  why first:
+    |   sortDeque(_algoData)        the timer      |  _data is destroyed
+    |   -> time                                    |  by the vector sort
+    |                                              |
+    +-- VECTOR SECOND -----------------------------+
+        sortVector(_data)   <- by-value copy is the
+        -> time                   equivalent cost
+    |
+    v
+  5 printed lines
+
+
+2. RECURSION TREE - ONLY THE *LARGER* HALF RECURSES
+--------------------------------------------------------------------------------
+n=15  [38, 3, 9, 81, 47, 12, 5, 71, 66, 2, 29, 44, 18, 91, 53]
+       pairs (3,38)(9,81)(12,47)(5,71)(2,66)(29,44)(18,91)  straggler=53
+       v recurse on the 7 LARGER values only
+  n=7   [38, 81, 47, 71, 66, 44, 91]
+         pairs (38,81)(47,71)(44,66)  straggler=91
+         v recurse on the 3 LARGER values only
+    n=3   [81, 71, 66]
+           pairs (71,81)  straggler=66
+           v recurse on the 1 LARGER value only
+          \- base [81]
+           ^ returns [66, 71, 81]
+         ^ returns [38, 44, 47, 66, 71, 81, 91]
+       ^ returns [2, 3, 5, 9, 12, 18, 29, 38, 44, 47, 53, 66, 71, 81, 91]
+
+15 -> 7 -> 3 -> 1.  Halves every time, so O(log n) depth. Smalls never recurse
+and never get compared to each other - that's where the win comes from.
+
+
+3. ONE CALL, ANNOTATED
+   ([5, 3, 9, 1, 7, 2, 8], output verified against the real `make trace` build)
+--------------------------------------------------------------------------------
+sortVector([5, 3, 9, 1, 7, 2, 8])
+|
++- step1  PAIR                                    pairVector()
+|     input   5  3  9  1  7  2  8
+|     -------------------------------------------  swap each so small <= large
+|     pairs  (3,5) (1,9) (2,7)      straggler = 8   <- odd count
+|     smalls [3, 1, 2]     larges [5, 9, 7]
+|
++- step2  RECURSE on larges only   -> [5, 7, 9]
+|     (inner call: pair (5,9), straggler 7,
+|      recurse [9] -> [9], front-insert 5 -> [5,9],
+|      straggler 7 -> [5,7,9])
+|     mainChain = [5, 7, 9]
+|
++- step3  RANK each small in mainChain             std::lower_bound
+|        3 -> first idx where >=3  = 0
+|        1 -> first idx where >=1  = 0  ... wait, on the FULL chain:
+|        3->0   1->2   2->1        pending = [(3,0) (1,2) (2,1)]
+|
++- step4  FRONT-INSERT SHORTCUT    the (x, 0) needs no search
+|     mainChain.insert(begin(), 3)
+|     [3, 5, 7, 9]              pending = [(1,2) (2,1)]
+|
++- step5  SHIFT RANKS +1           [!] the bugliest line in the project
+|     [(1,2) (2,1)]  --+1-->  [(1,3) (2,2)]
+|     because the chain grew at the front, every saved index is stale
+|
++- step6  JACOBSTHAL ORDER for the 2 survivors
+|     g = [0,1] -> [0,1,1,3]      order = [1, 2]   (1-based slots)
+|     slot 1 -> value 1 -> lower_bound -> index 0 -> [1, 3, 5, 7, 9]
+|     slot 2 -> value 2 -> lower_bound -> index 1 -> [1, 2, 3, 5, 7, 9]
+|
++- step7  STRAGGLER LAST, exactly like everything else
+        binaryInsert(8) -> index 5 -> [1, 2, 3, 5, 7, 8, 9]   [ok]
+
+
+4. STEP 5 VISUALISED - WHY THE SHIFT IS MANDATORY
+--------------------------------------------------------------------------------
+before front-insert     pending ranks point at:
+  mainChain [5, 7, 9]    1 -> index 2   2 -> index 1
+        ^ insert 3 here
+after front-insert
+  mainChain [3, 5, 7, 9] 1 -> index 3   2 -> index 2
+                         \-- both moved right by one --/
+
+Without the +1, `1` would be inserted at index 2 of `[3,5,7,9]` -> *after* the 7.
+Wrong output. This is the single easiest thing to break.
+
+
+5. JACOBSTHAL NUMBERS
+--------------------------------------------------------------------------------
+g(0)=0  g(1)=1  g(k) = g(k-1) + 2*g(k-2)
+      0, 1, 1, 3, 5, 11, 21, 43, 85, ...
+
+n = 16  ->  insertion order (1-based slots):
+          1, 3, 2, 5, 4, 11, 10, 9, 8, 7, 6, 16, 15, 14, 13, 12
+          | | | |  |  |   |-------||-------|  |------|------|
+            fill 1st, then straddle it, then straddle again,
+            doubling the contiguous block each round
+
+The *intent*: once slot 1 is placed, slot 3 is inserted somewhere near it, so
+slot 2's search window is squeezed between them. Repeat, and each new element
+only ever searches a tiny window. That intent only pays off if the search is
+bounded by those neighbours - this code doesn't, hence the cost analysis in
+section 7.
+
+
+6. binaryInsertVector - LOCATE, THEN ONE SINGLE INSERT
+--------------------------------------------------------------------------------
+chain = [1, 3, 5, 7, 9]      insert 2
+
+  lo=0        mid=2              lo=3        mid=4
+  +-----------+-----------+      +-----------+---+---+
+  1     3     5     7     9      1     3     5   7 9
+                  ^ 5 >= 2, go left
+                                    ^ 7 >= 2, go left
+  lo=3 hi=4, mid=3: 7 >= 2 -> hi=3.  lo==hi -> position 3...
+
+  (for value 2 the real answer is index 1; the point is: one search, one insert)
+  final: chain.insert(pos, value)    <- never std::sort, never a loop-scan
+
+For the deque it's the identical search plus std::deque::insert - which is why
+the two timings are comparable.
+
+
+7. HONEST COST SUMMARY
+--------------------------------------------------------------------------------
++-----------------------------------------------+
+| Recursion depth      O(log n) - verified 15->7->3->1
+| Comparisons/level    one lower_bound per small value = O(log n)
+| Total comparisons    O(n log n), measured ~ n*log2(3n),
+|                      *independent of insertion order*
+| Element moves        const + inversions, NOT minimised by
+|                      Jacobsthal order here
+| Straggler            always last, O(log n)
+| Duplicate check      O(n^2) in parsing - the one real
+|                      weakness, still deferred
++-----------------------------------------------+
+
+
+WHAT TO ACTUALLY SAY WHEN YOU EXPLAIN IT
+--------------------------------------------------------------------------------
+It pairs the numbers up and normalises each pair so the smaller one comes
+first. Then it recurses only on the larger halves, which halves the problem
+each time, so the recursion is only log-deep and the small elements never get
+compared with each other. Coming back up, it finds each small value's final
+position in the sorted chain with a binary search, front-inserts any value
+that belongs at position 0 as a free shortcut, shifts the saved positions by
+one, and binary-inserts the rest - in Jacobsthal order - followed by the
+leftover straggler. It's run twice, once per container, and both are timed.
+The deque goes first because the vector sort consumes the unsorted input.
+
+Two things NOT to claim: that Jacobsthal makes it faster (it doesn't here), and
+that it's a stable or in-place sort (it isn't - it copies and allocates).
