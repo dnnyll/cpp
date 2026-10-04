@@ -11,6 +11,8 @@
 
 PmergeMe::PmergeMe()
 {
+	_timeVector = 0.0;
+	_timeDeque = 0.0;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &src)
@@ -18,7 +20,7 @@ PmergeMe::PmergeMe(const PmergeMe &src)
 	*this = src;
 }
 
-PmergeMe &PmergeMe::operator=(const PmergeMe &input)
+PmergeMe	&PmergeMe::operator=(const PmergeMe &input)
 {
 	if (this != &input)
 	{
@@ -34,7 +36,7 @@ PmergeMe::~PmergeMe()
 {
 }
 
-bool PmergeMe::getDuplicate(const int input)
+bool	PmergeMe::getDuplicate(const int input)
 {
 	std::vector<int>::iterator it = _data.begin();
 
@@ -50,10 +52,10 @@ bool PmergeMe::getDuplicate(const int input)
 	return (false);
 }
 
-bool PmergeMe::parseInput(const std::string &inputStr)
+bool	PmergeMe::parseInput(const std::string &inputStr)
 {
-	char *endPtr;
-	long inputValue;
+	char	*endPtr;
+	long	inputValue;
 
 	errno = 0;
 	inputValue = std::strtol(inputStr.c_str(), &endPtr, 10);
@@ -64,7 +66,7 @@ bool PmergeMe::parseInput(const std::string &inputStr)
 		return (false);
 	}
 
-	if (errno == ERANGE || inputValue > INT_MAX || inputValue < 0)
+	if (errno == ERANGE || inputValue > INT_MAX || inputValue <= 0)
 	{
 		std::cerr << "Error" << std::endl;
 		return (false);
@@ -74,6 +76,7 @@ bool PmergeMe::parseInput(const std::string &inputStr)
 		return (false);
 
 	_data.push_back(static_cast<int>(inputValue));
+
 	return (true);
 }
 
@@ -99,7 +102,7 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> inputData)
 	for (size_t i = 0; i < pairs.size(); ++i)
 	{
 		std::vector<int>::iterator position =
-			std::find(mainChain.begin(), mainChain.end(), pairs[i].second);
+			std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].second);
 
 		int index = position - mainChain.begin();
 		smallerValues.push_back(
@@ -162,7 +165,7 @@ std::deque<int> PmergeMe::sortDeque(std::deque<int> inputData)
 	for (size_t i = 0; i < pairs.size(); ++i)
 	{
 		std::deque<int>::iterator position =
-			std::find(mainChain.begin(), mainChain.end(), pairs[i].second);
+			std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].second);
 
 		int index = position - mainChain.begin();
 		smallerValues.push_back(
@@ -275,51 +278,62 @@ void PmergeMe::binaryInsertDeque(
 	chain.insert(chain.begin() + low, value);
 }
 
-bool PmergeMe::sortData()
+void PmergeMe::sortData()
 {
 	clock_t start;
 	clock_t end;
 
-	std::cout << "Before: ";
+	std::cout << "Before:\t\t";
 	for (size_t i = 0; i < _data.size(); ++i)
 		std::cout << _data[i] << " ";
 	std::cout << std::endl;
+	
+	
+	// CHANGED (point 4): the deque is filled and sorted BEFORE the vector, while
+	// _data still holds the original unsorted sequence. Filling it after the vector
+	// sort would hand the deque an already-sorted input and make the two timings
+	// incomparable. The fill stays inside the deque timer so its data management is
+	// counted, matching the by-value copy the vector pays inside sortVector.
+	start = clock();
 
 	_algoData.assign(_data.begin(), _data.end());
+
+	_algoData = sortDeque(_algoData);
+	
+	end = clock();
+	
+	_timeDeque = static_cast<double>(end - start)
+		/ CLOCKS_PER_SEC * 1000000.0;
 
 	start = clock();
 	_data = sortVector(_data);
 	end = clock();
-
+	
 	_timeVector = static_cast<double>(end - start)
 		/ CLOCKS_PER_SEC * 1000000.0;
 
-	start = clock();
-	_algoData = sortDeque(_algoData);
-	end = clock();
-
-	_timeDeque = static_cast<double>(end - start)
-		/ CLOCKS_PER_SEC * 1000000.0;
-
-	std::cout << "After: ";
+	std::cout << "After (vector):\t";
 	for (size_t i = 0; i < _data.size(); ++i)
 		std::cout << _data[i] << " ";
 	std::cout << std::endl;
 
+	std::cout << "After (deque):\t";
+	for (size_t i = 0; i < _algoData.size(); ++i)
+		std::cout << _algoData[i] << " ";
+	std::cout << std::endl;
+
 	std::cout << "Time to process a range of "
 		<< _data.size()
-		<< " elements with std::vector<int> : "
+		<< " elements with std::vector<int>:\t"
 		<< _timeVector << " us" << std::endl;
 
 	std::cout << "Time to process a range of "
 		<< _algoData.size()
-		<< " elements with std::deque<int> : "
+		<< " elements with std::deque<int>:\t"
 		<< _timeDeque << " us" << std::endl;
-
-	return (true);
 }
 
-std::vector<std::pair<int, int> > PmergeMe::pairVector(
+std::vector<std::pair<int, int> >	PmergeMe::pairVector(
 	const std::vector<int> &input,
 	int &straggler,
 	bool &hasStraggler)
@@ -330,8 +344,8 @@ std::vector<std::pair<int, int> > PmergeMe::pairVector(
 
 	while (i + 1 < input.size())
 	{
-		int a = input[i];
-		int b = input[i + 1];
+		int	a = input[i];
+		int	b = input[i + 1];
 
 		if (a < b)
 			pairs.push_back(std::pair<int, int>(a, b));
@@ -387,9 +401,4 @@ std::deque<std::pair<int, int> > PmergeMe::pairDeque(
 	}
 
 	return (pairs);
-}
-
-std::vector<int> PmergeMe::getSortedVector() const
-{
-	return (_data);
 }

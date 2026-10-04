@@ -22,29 +22,12 @@ int	main(int argc, char **argv)
 	{
 		if (!pmergeme.parseInput(argv[i]))
 		{
-			std::cerr << "Error: wrong input." << std::endl;
 			return (1);
 		}
 		i++;
 	}
 
-	if(!pmergeme.sortData())
-	{
-		std::cerr << "Error: sorting anomaly found." << std::endl;
-		return (1);
-	}
+	pmergeme.sortData();
 
-	std::vector<int>			result;
-	// std::vector<int>::iterator	it;
-
-	result = pmergeme.getSortedVector();
-	// it = result.begin();
-	
-	// while (it != result.end())
-	// {
-	// 	std::cout << *it << " ";
-	// 	++it;
-	// }
-	// std::cout << std::endl;
 	return (0);
 }

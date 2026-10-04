@@ -4,6 +4,7 @@
 #include	<string>
 #include	<vector>
 #include	<deque>
+#include	<utility>
 
 class	PmergeMe
 {
@@ -12,7 +13,6 @@ class	PmergeMe
 	private:
 		std::vector<int>					_data;
 		std::deque<int>						_algoData;
-		std::vector<std::pair<int, int> >	_pairs;
 
 		double								_timeVector;
 		double								_timeDeque;
@@ -28,12 +28,11 @@ class	PmergeMe
 
 		bool								parseInput(const std::string &inputStr);
 		bool								getDuplicate(const int input);
-		bool								sortData();
+		void								sortData();
 		std::vector<int>					sortVector(std::vector<int> input);
 		std::vector<std::pair<int, int> >	pairVector(const std::vector<int> &input, int &straggler, bool &hasStraggler);
 		void								binaryInsertVector(std::vector<int> &chain, int value);
 		std::vector<int>					jacobsthalOrder(int n);
-		std::vector<int>					getSortedVector() const;
 		std::deque<int>						sortDeque(std::deque<int> input);
 		std::deque<std::pair<int, int> >	pairDeque(const std::deque<int> &input, int &straggler, bool &hasStraggler);
 		void								binaryInsertDeque(std::deque<int> &chain, int value);
